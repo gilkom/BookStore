@@ -1,4 +1,4 @@
-package gilko.marcin.BookStore;
+package gilko.marcin.bookstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
