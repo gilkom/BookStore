@@ -1,9 +1,11 @@
 package gilko.marcin.bookstore.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import gilko.marcin.bookstore.model.Kategoria;
+import gilko.marcin.bookstore.model.Bk_kategoria;
 
-public interface KategoriaRepository extends JpaRepository<Kategoria, Long> {
+@Repository
+public interface KategoriaRepository extends JpaRepository<Bk_kategoria, Long> {
 
 }

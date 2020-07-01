@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gilko.marcin.bookstore.model.Kategoria;
+import gilko.marcin.bookstore.model.Bk_kategoria;
 import gilko.marcin.bookstore.repository.KategoriaRepository;
 
 @Service
@@ -15,18 +15,18 @@ public class KategoriaService {
 	@Autowired
 	private KategoriaRepository repo;
 	
-	public List<Kategoria> list(){
+	public List<Bk_kategoria> list(){
 		return repo.findAll();
 	}
 	
-	public void save(Kategoria kategoria) {
+	public void save(Bk_kategoria kategoria) {
 	}
 	
-	public Kategoria get(int id) {
+	public Bk_kategoria get(int id) {
 		return null;
 	}
 	
-	public void update(Kategoria kategoria) {
+	public void update(Bk_kategoria kategoria) {
 		
 	}
 	

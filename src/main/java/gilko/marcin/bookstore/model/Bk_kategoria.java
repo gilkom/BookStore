@@ -1,21 +1,22 @@
 package gilko.marcin.bookstore.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-public class Kategoria {
+public class Bk_kategoria {
 	private int id;
 	private String name;
 	private String description;
 	
-	public Kategoria() {
+	public Bk_kategoria() {
 	}
-	public Kategoria(int id, String name, String description) {
+	public Bk_kategoria(int id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
-	
+	@Id
 	public int getId() {
 		return id;
 	}
