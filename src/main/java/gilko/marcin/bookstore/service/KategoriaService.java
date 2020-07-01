@@ -13,10 +13,10 @@ import gilko.marcin.bookstore.repository.KategoriaRepository;
 @Transactional
 public class KategoriaService {
 	@Autowired
-	private KategoriaRepository rep;
+	private KategoriaRepository repo;
 	
 	public List<Kategoria> list(){
-		return null;
+		return repo.findAll();
 	}
 	
 	public void save(Kategoria kategoria) {

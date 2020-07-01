@@ -1,5 +1,8 @@
 package gilko.marcin.bookstore.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Kategoria {
 	private int id;
 	private String name;
