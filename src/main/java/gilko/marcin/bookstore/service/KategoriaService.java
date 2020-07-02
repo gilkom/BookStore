@@ -20,6 +20,7 @@ public class KategoriaService {
 	}
 	
 	public void save(Bk_kategoria kategoria) {
+		repo.save(kategoria);
 	}
 	
 	public Bk_kategoria get(int id) {

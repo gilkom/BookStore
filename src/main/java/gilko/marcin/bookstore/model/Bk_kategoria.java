@@ -10,14 +10,14 @@ import javax.persistence.Table;
 public class Bk_kategoria {
 
 	private int id;
-	private String nazwa_kategorii;
+	private String name;
 	private String description;
 	
 	public Bk_kategoria() {
 	}
-	public Bk_kategoria(int id, String nazwa_kategorii, String description) {
+	public Bk_kategoria(int id, String name, String description) {
 		this.id = id;
-		this.nazwa_kategorii = nazwa_kategorii;
+		this.name= name;
 		this.description = description;
 	}
 	@Id
@@ -31,10 +31,10 @@ public class Bk_kategoria {
 	}
 	@Column(name = "NAZWA_KATEGORII")
 	public String getName() {
-		return nazwa_kategorii;
+		return name;
 	}
-	public void setName(String nazwa_kategorii) {
-		this.nazwa_kategorii = nazwa_kategorii;
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Column(name = "OPIS_KATEGORII")
 	public String getDescription() {

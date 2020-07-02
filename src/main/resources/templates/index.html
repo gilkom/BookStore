@@ -8,7 +8,7 @@
 <body>
 <div align="center">
     <h1>Kategorie</h1>
-    <a href="/new">Dodaj kategorie</a>
+    <a href="/new_kategoria">Dodaj kategorie</a>
     <br/><br/>
     <table border="1" cellpadding="10">
         <thead>
@@ -21,7 +21,7 @@
         <tbody>
             <tr th:each="kategoria : ${listKategoria}">
                 <td th:text="${kategoria.id}">ID</td>
-                <td th:text="${kategoria.nazwa_kategorii}">Nazwa</td>
+                <td th:text="${kategoria.name}">Nazwa</td>
                 <td th:text="${kategoria.description}">Opis</td>
                 <td>
                     <a th:href="/@{'/edit/' + ${kategoria.id}}">Edytuj</a>
