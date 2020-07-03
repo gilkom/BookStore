@@ -24,9 +24,9 @@
                 <td th:text="${kategoria.name}">Nazwa</td>
                 <td th:text="${kategoria.description}">Opis</td>
                 <td>
-                    <a th:href="/@{'/edit/' + ${kategoria.id}}">Edytuj</a>
+                    <a th:href="@{'/edit/' + ${kategoria.id}}">Edytuj</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="/@{'/delete/' + ${kategoria.id}}">Usun</a>
+                    <a th:href="@{'/delete/' + ${kategoria.id}}">Usun</a>
                 </td>
             </tr>
         </tbody>
