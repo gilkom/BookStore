@@ -7,26 +7,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "BK_KATEGORIA")
-public class Bk_kategoria {
+public class Kategoria {
 
-	private int id;
+	private Long id;
 	private String name;
 	private String description;
 	
-	public Bk_kategoria() {
+	public Kategoria() {
 	}
-	public Bk_kategoria(int id, String name, String description) {
+	public Kategoria(Long id, String name, String description) {
 		this.id = id;
 		this.name= name;
 		this.description = description;
 	}
 	@Id
 	@Column(name = "ID_KATEGORII")
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	@Column(name = "NAZWA_KATEGORII")

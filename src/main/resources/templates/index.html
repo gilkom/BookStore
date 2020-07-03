@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <head>
 <meta charset="utf-8"/>
 <title>Book Store Application</title>
 </head>
 <body>
+<section>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Kategorie</h1>
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link fas fa-home fa-2x icon-silver" th:href="@{/}"></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Kategorie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Uzytkownicy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Ksiazki</a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
+	</div>
+</section>
+
+
+
+
 <div align="center">
-    <h1>Kategorie</h1>
-    <a href="/new_kategoria">Dodaj kategorie</a>
+    <a href="/nowa_kategoria">Dodaj kategorie</a>
     <br/><br/>
-    <table border="1" cellpadding="10">
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nazwa kategorii</th>
                 <th>Opis kategorii</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +53,17 @@
                 <td th:text="${kategoria.name}">Nazwa</td>
                 <td th:text="${kategoria.description}">Opis</td>
                 <td>
-                    <a th:href="@{'/edit/' + ${kategoria.id}}">Edytuj</a>
+                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}">Edytuj</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/delete/' + ${kategoria.id}}">Usun</a>
+                    <a th:href="@{'/usun_kategorie/' + ${kategoria.id}}">Usun</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>  
+
+<div class="text-center">
+	<p>Ksiegarnia Internetowa - BookStore </p>
+</div>
 </body>
 </html>
