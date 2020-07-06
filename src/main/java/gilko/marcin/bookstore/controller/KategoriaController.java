@@ -20,11 +20,11 @@ public class KategoriaController {
 	@Autowired
 	private KategoriaService service;
 	
-	@RequestMapping("/")
+	@RequestMapping("/lista_kategorii")
 	public String listaKategorii(Model model) {
 		List<Kategoria> listKategoria = service.list();
 		model.addAttribute("listKategoria", listKategoria);
-		return "index";
+		return "lista_kategorii";
 	}
 	@RequestMapping("/nowa_kategoria")
 	public String dodajKategorie(Model model) {
@@ -36,7 +36,7 @@ public class KategoriaController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String zapiszKategorie(@ModelAttribute("kategoria") Kategoria kategoria) {
 		service.save(kategoria);
-		return "redirect:/";
+		return "redirect:/lista_kategorii";
 	}
 	
 	@RequestMapping("/edytuj_kategorie/{id}")
@@ -49,7 +49,7 @@ public class KategoriaController {
 	@RequestMapping("usun_kategorie/{id}")
 	public String usunKategorie(@PathVariable(name="id")Long id) {
 		service.delete(id);
-		return "redirect:/";
+		return "redirect:/lista_kategorii";
 	}
 	
 }

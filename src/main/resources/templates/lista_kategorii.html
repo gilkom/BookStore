@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
 <head>
 <meta charset="utf-8"/>
 <title>Book Store Application</title>
@@ -40,13 +41,39 @@
 		</div>
 
 </section>
-
 &nbsp;&nbsp;&nbsp;
+
 <div class="container">
-	<h4>Strona glowna</h4>
+	<h4>Kategorie</h4>
 </div>
 
-
+<div class="container" align="center">
+    <a href="/nowa_kategoria">Dodaj kategorie</a>
+    <br/><br/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa kategorii</th>
+                <th>Opis kategorii</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="kategoria : ${listKategoria}">
+                <td th:text="${kategoria.id}">ID</td>
+                <td th:text="${kategoria.name}">Nazwa</td>
+                <td th:text="${kategoria.description}">Opis</td>
+                <td>
+                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}">Edytuj</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/usun_kategorie/' + ${kategoria.id}}">Usun</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  
+&nbsp;&nbsp;&nbsp;
 <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
