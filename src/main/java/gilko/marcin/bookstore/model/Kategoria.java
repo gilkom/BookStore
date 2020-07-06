@@ -2,14 +2,19 @@ package gilko.marcin.bookstore.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "BK_KATEGORIA")
 public class Kategoria {
-
 	private Long id;
+	@NotBlank(message="Nazwa jest obowiazkowa!")
+	@Size(min=2, max=30)
 	private String name;
 	private String description;
 	
@@ -22,6 +27,7 @@ public class Kategoria {
 	}
 	@Id
 	@Column(name = "ID_KATEGORII")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}

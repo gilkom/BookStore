@@ -2,9 +2,12 @@ package gilko.marcin.bookstore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.service.KategoriaService;
 
 @Controller
+
 public class KategoriaController {
 
 	@Autowired
@@ -33,10 +37,23 @@ public class KategoriaController {
 		
 		return "nowa_kategoria";
 	}
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String zapiszKategorie(@ModelAttribute("kategoria") Kategoria kategoria) {
+	@RequestMapping(value = "/nowa_kategoria/save", method = RequestMethod.POST)
+	public String zapiszNowaKategorie(@Valid @ModelAttribute("kategoria") Kategoria kategoria, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "nowa_kategoria";
+		}else {
 		service.save(kategoria);
 		return "redirect:/lista_kategorii";
+		}
+	}
+	@RequestMapping(value = "/edytuj_kategorie/save", method = RequestMethod.POST)
+	public String zapiszEdytowanaKategorie(@Valid @ModelAttribute("kategoria") Kategoria kategoria, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "edytuj_kategorie";
+		}else {
+		service.save(kategoria);
+		return "redirect:/lista_kategorii";
+		}
 	}
 	
 	@RequestMapping("/edytuj_kategorie/{id}")

@@ -48,7 +48,7 @@
 </div>
 
 <div class="container" align="center">
-    <a href="/nowa_kategoria">Dodaj kategorie</a>
+    <a href="/nowa_kategoria" class="btn btn-dark">Dodaj kategorię</a>
     <br/><br/>
     <table class="table">
         <thead>
@@ -65,9 +65,13 @@
                 <td th:text="${kategoria.name}">Nazwa</td>
                 <td th:text="${kategoria.description}">Opis</td>
                 <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}">Edytuj</a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/usun_kategorie/' + ${kategoria.id}}">Usun</a>
+                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+
+                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id}}"
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
+                    		
+                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    </form>
                 </td>
             </tr>
         </tbody>

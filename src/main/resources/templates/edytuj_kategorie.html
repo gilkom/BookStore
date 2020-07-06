@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <head>
 <meta charset="utf-8" />
-<title>Edytuj Kategorie</title>
+<title>Edytuj Kategorię</title>
 </head>
 <body>
-    <div align="center">
-        <h1>Edytuj Kategorie</h1>
+
+<section>
+	<div class="container-sm">
+		<div class="jumbotron">
+				<h1>Ksiegarnia internetowa</h1>
+		</div>
+	</div>
+		<div class="container">	
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Strona glowna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Wydawnictwa</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Autorzy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Koszyk</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Kontakt</a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
+
+</section>
+&nbsp;&nbsp;&nbsp;
+
+
+    <div class="container" align="center">
+        <h4>Edytuj Kategorię</h4>
         <br />
-        <form action="#" th:action="@{/save}" th:object="${kategoria}"
+        <form action="#" th:action="@{/edytuj_kategorie/save}" th:object="${kategoria}"
             method="post">
  
             <table class="table">
@@ -20,15 +58,23 @@
                 <tr>
                     <td>Nazwa Kategorii:</td>
                     <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</td>
                 </tr>
                 <tr>
                     <td>Opis Kategorii:</td>
                     <td><input type="text" th:field="*{description}" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button type="submit">Save</button> </td>
+                    <td>
+                    	<button class = "btn btn-dark" type="submit">Save</button> 
+                    	<a href="/lista_kategorii" class="btn btn-dark">Cofnij</a>
+                    </td>
                 </tr>
             </table>
         </form>
     </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
+	<p>Ksiegarnia Internetowa - BookStore </p>
+</div>
 </body>
