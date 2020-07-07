@@ -18,7 +18,6 @@ import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.service.KategoriaService;
 
 @Controller
-
 public class KategoriaController {
 
 	@Autowired
