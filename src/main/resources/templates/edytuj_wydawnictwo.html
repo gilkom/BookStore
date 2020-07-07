@@ -8,7 +8,7 @@
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Edytuj Kategorię</title>
+<title>Edytuj Wydawnictwo</title>
 </head>
 <body>
 
@@ -50,36 +50,36 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_kategorii">Lista kategorii</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii/edytuj_kategorie">Edytuj kategorie</li>
+		    <li class="breadcrumb-item"><a href="/lista_wydawnictw">Lista wydawnictw</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_wydawnictwo/edytuj_wydawnictwo">Edytuj wydawnictwo</li>
 		  </ol>
 		</nav>
-	<h3>Edytuj Kategorię</h3>
+	<h3>Edytuj Wydawnictwo</h3>
 </div>
 
     <div class="container" align="center">
         <br />
-        <form action="#" th:action="@{/edytuj_kategorie/save}" th:object="${kategoria}"
+        <form action="#" th:action="@{/edytuj_wydawnictwo/save}" th:object="${wydawnictwo}"
             method="post">
  
             <table class="table">
                 <tr>
-                    <td>Id Kategorii:</td>
+                    <td>Id Wydawnictwa:</td>
                     <td><input type="text" th:field="*{id}" readonly="readonly" /></td>
                 </tr>
                 <tr>
-                    <td>Nazwa Kategorii:</td>
+                    <td>Nazwa Wydawnictwa:</td>
                     <td><input type="text" th:field="*{name}" /></td>
                     <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</td>
                 </tr>
                 <tr>
-                    <td>Opis Kategorii:</td>
+                    <td>Opis Wydawnictwa:</td>
                     <td><input type="text" th:field="*{description}" /></td>
                 </tr>
                 <tr>
                     <td>
                     	<button class = "btn btn-dark" type="submit">Zapisz</button> 
-                    	<a href="/lista_kategorii" class="btn btn-dark">Cofnij</a>
+                    	<a href="/lista_wydawnictw" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>

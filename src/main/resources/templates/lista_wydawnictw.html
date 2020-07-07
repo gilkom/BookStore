@@ -49,37 +49,37 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii">Lista kategorii</li>
+		    <li class="breadcrumb-item active" aria-current="/lista_wydawnictw">Lista wydawnictw</li>
 		  </ol>
 		</nav>
-	<h3>Kategorie</h3>
+	<h3>Wydawnictwa</h3>
 </div>
 
 <div class="container" align="center">
-    <a href="/nowa_kategoria" class="btn btn-dark">Dodaj kategorię</a>
+    <a href="/nowe_wydawnictwo" class="btn btn-dark">Dodaj wydawnictwo</a>
     
     <br/><br/>
     <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nazwa kategorii</th>
-                <th>Opis kategorii</th>
+                <th>Nazwa wydawnictwa</th>
+                <th>Opis wydawnictwa</th>
                 <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="kategoria : ${listKategoria}">
-                <td th:text="${kategoria.id}">ID</td>
-                <td th:text="${kategoria.name}">Nazwa</td>
-                <td th:text="${kategoria.description}">Opis</td>
+            <tr th:each="wydawnictwo : ${listWydawnictwo}">
+                <td th:text="${wydawnictwo.id}">ID</td>
+                <td th:text="${wydawnictwo.name}">Nazwa</td>
+                <td th:text="${wydawnictwo.description}">Opis</td>
                 <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_wydawnictwo/' + ${wydawnictwo.id}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
+                     <form method="get" action="@{/lista_wydawnictw/usun_wydawnictwo/' + ${wydawnictwo.id}}"
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć o wydawnictwo?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_wydawnictwo/' + ${wydawnictwo.id}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

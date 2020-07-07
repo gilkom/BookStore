@@ -27,7 +27,7 @@ public class WydawnictwoController {
 	public String listaWydawnictw(Model model) {
 		List<Wydawnictwo> listWydawnictwo = service.list();
 		model.addAttribute("listWydawnictwo", listWydawnictwo);
-		return "lista_wydawnictwo";
+		return "lista_wydawnictw";
 	}
 	@RequestMapping("/nowe_wydawnictwo")
 	public String dodajWydawnictwo(Model model) {
@@ -55,7 +55,7 @@ public class WydawnictwoController {
 		}
 	}
 	
-	@RequestMapping("/edytuj_wydawnictwo{id}")
+	@RequestMapping("/edytuj_wydawnictwo/{id}")
 	public ModelAndView edytujWydawnictwo(@PathVariable(name="id")Long id) {
 		ModelAndView mav = new ModelAndView("edytuj_wydawnictwo");
 		Wydawnictwo wydawnictwo = service.get(id);
