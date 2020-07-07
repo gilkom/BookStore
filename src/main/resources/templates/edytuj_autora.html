@@ -8,7 +8,7 @@
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Nowa Kategoria</title>
+<title>Edytuj autora</title>
 </head>
 <body>
 
@@ -50,33 +50,41 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_kategorii">Lista kategorii</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii/dodaj_kategorie">Dodaj kategorie</li>
+		    <li class="breadcrumb-item"><a href="/lista_autorow">Lista autorów</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_autorow/edytuj_autora">Edytuj autora</li>
 		  </ol>
 		</nav>
-	<h3>Dodaj nową kategorię</h3>
+	<h3>Edytuj autora</h3>
 </div>
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/nowa_kategoria/save}" th:object="${kategoria}" method="post">
+        <form action="#" th:action="@{/edytuj_autora/save}" th:object="${autor}" method="post">
   
             <table class="table">
                 <tr>
-                    <td>Nazwa:</td>
-                    <td><input type="text" th:field="*{name}" /></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</td>
+                    <td>Id Autora:</td>
+                    <td><input type="text" th:field="*{id}"  readonly="readonly"/></td>
+                </tr>
+                <tr>
+                    <td>Imię:</td>
+                    <td><input type="text" th:field="*{imie}" /></td>
+                    <td th:if="${#fields.hasErrors('imie')}" th:errors="*{imie}">NameError</td>
+                </tr>  
+				<tr>
+                    <td>Nazwisko:</td>
+                    <td><input type="text" th:field="*{nazwisko}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwisko')}" th:errors="*{nazwisko}">NameError</td>
                 </tr>
                 <tr>
                     <td>Opis:</td>
-                    <td><input type="text" th:field="*{description}" /></td>
-                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">NameError</td>
-                </tr>  
-                                      
+                    <td><input type="text" th:field="*{opis}" /></td>
+                    <td th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}">NameError</td>
+                </tr>                                      
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/lista_kategorii" class="btn btn-dark">Cofnij</a>
+                    	<a href="/lista_autorow" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>

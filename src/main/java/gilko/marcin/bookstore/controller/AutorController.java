@@ -47,7 +47,7 @@ public class AutorController {
 		}
 	}
 	
-	@RequestMapping(value="/edyturj_autora/save", method=RequestMethod.POST)
+	@RequestMapping(value="/edytuj_autora/save", method=RequestMethod.POST)
 	public String zapiszEdytowanegoAutora(@Valid @ModelAttribute("autor") Autor autor, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "edytuj_autora";
