@@ -2,7 +2,11 @@ package gilko.marcin.bookstore.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +38,9 @@ public class Ksiazka {
 		this.opis = opis;
 		this.id_wydawnictwa = id_wydawnictwa;
 	}
-	
+	@Id
+	@Column(name="ID_KSIAZKI")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -42,7 +48,7 @@ public class Ksiazka {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@Column(name="TYTUL_KSIAZKI")
 	public String getTytul() {
 		return tytul;
 	}
@@ -50,7 +56,7 @@ public class Ksiazka {
 	public void setTytul(String tytul) {
 		this.tytul = tytul;
 	}
-
+	@Column(name="ORYGINALNY_TYTUL_KSIAZKI")
 	public String getOrg_tytul() {
 		return org_tytul;
 	}
@@ -58,7 +64,7 @@ public class Ksiazka {
 	public void setOrg_tytul(String org_tytul) {
 		this.org_tytul = org_tytul;
 	}
-
+	@Column(name="ISBN")
 	public String getIsbn() {
 		return isbn;
 	}
@@ -66,7 +72,7 @@ public class Ksiazka {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-
+	@Column(name="ILOSC_KSIAZEK")
 	public int getIlosc() {
 		return ilosc;
 	}
@@ -74,7 +80,7 @@ public class Ksiazka {
 	public void setIlosc(int ilosc) {
 		this.ilosc = ilosc;
 	}
-
+	@Column(name="ROK_WYDANIA_KSIAZKI")
 	public Date getRok() {
 		return rok;
 	}
@@ -82,7 +88,7 @@ public class Ksiazka {
 	public void setRok(Date rok) {
 		this.rok = rok;
 	}
-
+	@Column(name="LICZBA_STRON_KSIAZKI")
 	public int getStrony() {
 		return strony;
 	}
@@ -90,7 +96,7 @@ public class Ksiazka {
 	public void setStrony(int strony) {
 		this.strony = strony;
 	}
-
+	@Column(name="OPRAWA_KSIAZKI")
 	public String getOprawa() {
 		return oprawa;
 	}
@@ -98,7 +104,7 @@ public class Ksiazka {
 	public void setOprawa(String oprawa) {
 		this.oprawa = oprawa;
 	}
-
+	@Column(name="OPIS_KSIAZKI")
 	public String getOpis() {
 		return opis;
 	}
@@ -106,7 +112,7 @@ public class Ksiazka {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-
+	@Column(name="ID_WYDAWNICTWA")
 	public Long getId_wydawnictwa() {
 		return id_wydawnictwa;
 	}
