@@ -1,12 +1,14 @@
 package gilko.marcin.bookstore.model;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,15 +19,17 @@ public class Ksiazka {
 	private String org_tytul;
 	private String isbn;
 	private int ilosc;
-	private Date rok;
+	private int rok;
 	private int strony;
 	private String oprawa;
 	private String opis;
 	private Long id_wydawnictwa;
 	
+	private Set<Kategoria> kategoria = new HashSet<Kategoria>();
+	
 	public Ksiazka() {}
 	
-	public Ksiazka(Long id, String tytul, String org_tytul, String isbn, int ilosc, Date rok, int strony,
+	public Ksiazka(Long id, String tytul, String org_tytul, String isbn, int ilosc, int rok, int strony,
 					String oprawa, String opis, Long id_wydawnictwa) {
 		this.id = id;
 		this.tytul = tytul;
@@ -38,6 +42,11 @@ public class Ksiazka {
 		this.opis = opis;
 		this.id_wydawnictwa = id_wydawnictwa;
 	}
+	
+	public void addKategoria(Kategoria kategoria) {
+		this.kategoria.add(kategoria);
+	}
+	
 	@Id
 	@Column(name="ID_KSIAZKI")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,11 +90,11 @@ public class Ksiazka {
 		this.ilosc = ilosc;
 	}
 	@Column(name="ROK_WYDANIA_KSIAZKI")
-	public Date getRok() {
+	public int getRok() {
 		return rok;
 	}
 
-	public void setRok(Date rok) {
+	public void setRok(int rok) {
 		this.rok = rok;
 	}
 	@Column(name="LICZBA_STRON_KSIAZKI")
@@ -119,6 +128,15 @@ public class Ksiazka {
 
 	public void setId_wydawnictwa(Long id_wydawnictwa) {
 		this.id_wydawnictwa = id_wydawnictwa;
+	}
+	
+	@ManyToMany(mappedBy = "ksiazka")
+	public Set<Kategoria> getKategoria(){
+		return kategoria;
+	}
+	
+	public void setKategoria(Set<Kategoria> kategoria) {
+		this.kategoria = kategoria;
 	}
 	
 }

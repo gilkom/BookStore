@@ -1,10 +1,17 @@
 package gilko.marcin.bookstore.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,6 +25,8 @@ public class Kategoria {
 	private String name;
 	private String description;
 	
+	private Set<Ksiazka> ksiazka = new HashSet<Ksiazka>();
+	
 	public Kategoria() {
 	}
 	public Kategoria(Long id, String name, String description) {
@@ -25,6 +34,11 @@ public class Kategoria {
 		this.name= name;
 		this.description = description;
 	}
+	
+	public void addKsiazka(Ksiazka ksiazka) {
+		this.ksiazka.add(ksiazka);
+	}
+	
 	@Id
 	@Column(name = "ID_KATEGORII")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,5 +62,19 @@ public class Kategoria {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "BK_KATEGORIA_KSIAZKI",
+			joinColumns = @JoinColumn(name = "ID_KSIAZKI"),
+			inverseJoinColumns = @JoinColumn(name = "ID_KATEGORII")
+	)
+	public Set<Ksiazka> getKsiazka(){
+		return ksiazka;
+	}
+	
+	public void setKsiazka(Set<Ksiazka> ksiazka) {
+		this.ksiazka = ksiazka;
 	}
 }
