@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.model.Ksiazka;
+import gilko.marcin.bookstore.service.KategoriaService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 
 @Controller
@@ -22,6 +24,8 @@ public class KsiazkaController {
 
 	@Autowired
 	private KsiazkaService service;
+	@Autowired
+	private KategoriaService katService;
 	
 	@RequestMapping("/lista_ksiazek")
 	public String listaKsiazek(Model model) {
@@ -33,16 +37,24 @@ public class KsiazkaController {
 	@RequestMapping("/nowa_ksiazka")
 	public String dodajKsiazke(Model model) {
 		Ksiazka ksiazka = new Ksiazka();
+
 		model.addAttribute("ksiazka", ksiazka);
+
+		List<Kategoria> listKategoria = katService.list();
+		model.addAttribute("listKategoria", listKategoria);
 		return "nowa_ksiazka";
 	}
 	
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
-	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka, BindingResult bindingResult) {
+	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka, Kategoria kategoria, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
+			//ksiazka.addKategoria(kategoria);
+			ksiazka.getKategoria().add(kategoria);
+			kategoria.getKsiazka().add(ksiazka);
 			service.save(ksiazka);
+			//katService.save(kategoria);
 			return "redirect:/lista_ksiazek";
 		}
 	}

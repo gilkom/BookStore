@@ -65,66 +65,77 @@
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/nowa_ksiazka/save}" th:object="${ksiazka}" method="post">
+        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post">
   
             <table class="table">
                 <tr>
                     <td>Tytuł:</td>
-                    <td><input type="text" th:field="*{tytul}" /></td>
-                    <td th:if="${#fields.hasErrors('tytul')}" th:errors="*{tytul}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.tytul}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.tytul')}" th:errors="${ksiazka.tytul}">NameError</td>
                 </tr>
                 <tr>
                     <td>Oryginalny tytuł:</td>
-                    <td><input type="text" th:field="*{org_tytul}" /></td>
-                    <td th:if="${#fields.hasErrors('org_tytul')}" th:errors="*{org_tytul}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.org_tytul}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.org_tytul')}" th:errors="${ksiazka.org_tytul}">NameError</td>
                 </tr>
                 <tr>
                     <td>ISBN:</td>
-                    <td><input type="text" th:field="*{isbn}" /></td>
-                    <td th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.isbn}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.isbn')}" th:errors="${ksiazka.isbn}">NameError</td>
                 </tr>
                 <tr>
                     <td>Ilość książek:</td>
-                    <td><input type="text" th:field="*{ilosc}" /></td>
-                    <td th:if="${#fields.hasErrors('ilosc')}" th:errors="*{ilosc}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.ilosc}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.ilosc')}" th:errors="${ksiazka.ilosc}">NameError</td>
                 </tr>
                 <tr>
                 
                     <td>Rok wydania książki:</td>
                     
                     	<td>
-                    		<input type="text" th:field="*{rok}" />
+                    		<input type="text" th:field="${ksiazka.rok}" />
                     	</td>
-                    	<td th:if="${#fields.hasErrors('rok')}" th:errors="*{rok}">NameError</td>
+                    	<td th:if="${#fields.hasErrors('ksiazka.rok')}" th:errors="${ksiazka.rok}">NameError</td>
                     
                 </tr>
                 <tr>
                     <td>Liczba stron:</td>
-                    <td><input type="text" th:field="*{strony}" /></td>
-                    <td th:if="${#fields.hasErrors('strony')}" th:errors="*{strony}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.strony}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.strony')}" th:errors="${ksiazka.strony}">NameError</td>
                 </tr>
                 <tr>
                     <td>Oprawa:</td>
-                    <td><input type="text" th:field="*{oprawa}" /></td>
-                    <td th:if="${#fields.hasErrors('oprawa')}" th:errors="*{oprawa}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.oprawa}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.oprawa')}" th:errors="${ksiazka.oprawa}">NameError</td>
                 </tr>
                 <tr>
                     <td>Opis:</td>
-                    <td><input type="text" th:field="*{opis}" /></td>
-                    <td th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.opis}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.opis')}" th:errors="${ksiazka.opis}">NameError</td>
                 </tr>
                 <tr>
                     <td>Id wydawnictwa:</td>
-                    <td><input type="text" th:field="*{id_wydawnictwa}" /></td>
-                    <td th:if="${#fields.hasErrors('id_wydawnictwa')}" th:errors="*{id_wydawnictwa}">NameError</td>
+                    <td><input type="text" th:field="${ksiazka.id_wydawnictwa}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.id_wydawnictwa')}" th:errors="${ksiazka.id_wydawnictwa}">NameError</td>
                 </tr>  
-                                      
+                <tr>
+                	<td>Kategoria:</td>
+                	<td>
+                		<select class="form-control" th:field ="${listKategoria}">
+                		<option value = "0">Wybierz kategorię</option>
+                		<option th:each="kategoria : ${listKategoria}" th:value ="${kategoria.id}" th:text ="${kategoria.name}"></option>
+                		</select>
+                	</td>
+                	
+                </tr>
+    
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
                     	<a href="/lista_ksiazek" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
+
             </table>
         </form>
     </div>

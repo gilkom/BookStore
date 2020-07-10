@@ -64,12 +64,7 @@ public class Kategoria {
 		this.description = description;
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "BK_KATEGORIA_KSIAZKI",
-			joinColumns = @JoinColumn(name = "ID_KSIAZKI"),
-			inverseJoinColumns = @JoinColumn(name = "ID_KATEGORII")
-	)
+	@ManyToMany(mappedBy="kategoria")
 	public Set<Ksiazka> getKsiazka(){
 		return ksiazka;
 	}
