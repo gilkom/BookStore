@@ -73,16 +73,16 @@
         </thead>
         <tbody>
             <tr th:each="kategoria : ${listKategoria}">
-                <td th:text="${kategoria.id}">ID</td>
-                <td th:text="${kategoria.name}">Nazwa</td>
-                <td th:text="${kategoria.description}">Opis</td>
+                <td th:text="${kategoria.id_kategorii}">ID</td>
+                <td th:text="${kategoria.nazwa_kategorii}">Nazwa</td>
+                <td th:text="${kategoria.opis_kategorii}">Opis</td>
                 <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id}}"
+                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id_kategorii}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

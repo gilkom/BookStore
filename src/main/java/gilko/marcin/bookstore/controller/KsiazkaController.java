@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.service.KategoriaService;
@@ -46,13 +47,20 @@ public class KsiazkaController {
 	}
 	
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
-	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka, Kategoria kategoria, BindingResult bindingResult) {
+	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,@Valid @ModelAttribute("listKategoria") Kategoria kategoria, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
-			//ksiazka.addKategoria(kategoria);
-			ksiazka.getKategoria().add(kategoria);
-			kategoria.getKsiazka().add(ksiazka);
+			Kategoria katt = new Kategoria(null, "bla", "blabla");
+			//this.kategorie.add(kategoria);
+
+			System.out.println("Kurde:" + kategoria.getId_kategorii() +kategoria.getNazwa_kategorii() + kategoria.getOpis_kategorii());
+			System.out.println("Kurde2:" + ksiazka.getId() +ksiazka.getTytul() + ksiazka.getOpis());
+			ksiazka.addKategoria(katt);
+			//Autor autor = new Autor();
+			//ksiazka.getKategoria().add(kategoria);
+			//ksiazka.getAutor().add(autor);
+			//kategoria.getKsiazka().add(ksiazka);
 			service.save(ksiazka);
 			//katService.save(kategoria);
 			return "redirect:/lista_ksiazek";

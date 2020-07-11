@@ -1,10 +1,16 @@
 package gilko.marcin.bookstore.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -21,6 +27,7 @@ public class Autor {
 	private String nazwisko;
 	private String opis;
 	
+	
 	public Autor() {
 		
 	}
@@ -30,6 +37,8 @@ public class Autor {
 		this.nazwisko = nazwisko;
 		this.opis = opis;
 	}
+	
+	
 	@Id
 	@Column(name = "ID_AUTORA")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +69,6 @@ public class Autor {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
+
 	
 }
