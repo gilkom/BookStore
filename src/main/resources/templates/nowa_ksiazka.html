@@ -121,7 +121,7 @@
                 <tr>
                 	<td>Kategoria:</td>
                 	<td>
-                		<select class="form-control" th:field ="${listKategoria}" multiple="multiple">
+                		<select class="form-control" th:field ="${listKategoria}" >
                 		<option value = "0">Wybierz kategorię</option>
                 		<option th:each="kategoria : ${listKategoria}" th:value ="${kategoria.id_kategorii}" th:text ="${kategoria.nazwa_kategorii}"></option>
                 		</select>
