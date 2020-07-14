@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import gilko.marcin.bookstore.model.Autor;
@@ -47,16 +48,26 @@ public class KsiazkaController {
 	}
 	
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
-	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,@Valid @ModelAttribute("listKategoria") Kategoria kategoria, BindingResult bindingResult) {
+	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+									@RequestParam(value= "katy", required = false) Long[] katy, @Valid @ModelAttribute("listKategoria") Kategoria kategoria, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
-			Kategoria katt = new Kategoria(null, "bla", "blabla");
+			//Kategoria katt = new Kategoria(null, "bla", "blabla");
 			//this.kategorie.add(kategoria);
 
 			System.out.println("Kurde:" + kategoria.getId_kategorii() +kategoria.getNazwa_kategorii() + kategoria.getOpis_kategorii());
-			System.out.println("Kurde2:" + ksiazka.getId() +ksiazka.getTytul() + ksiazka.getOpis());
-			ksiazka.addKategoria(katt);
+			System.out.println("Kurde2:" + ksiazka.getId() +ksiazka.getTytul() + ksiazka.getOpis() + ksiazka.getKategoria());
+			System.out.println("Kurde2NO: " + katy.toString());
+			for(int i =0; i < katy.length; i++) {
+				System.out.println(katy[i]);
+				System.out.println(katService.get(katy[i]));
+				Kategoria kateg = katService.get(katy[i]);
+				ksiazka.addKategoria(kateg);
+				ksiazka.addKategoria(katService.get(katy[i]));
+				System.out.println(katy[i]);
+			}
+			//ksiazka.addKategoria(katt);
 			//Autor autor = new Autor();
 			//ksiazka.getKategoria().add(kategoria);
 			//ksiazka.getAutor().add(autor);

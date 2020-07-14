@@ -68,5 +68,8 @@ public class Kategoria {
 	public void setKsiazka(Set<Ksiazka> ksiazka) {
 		this.ksiazki = ksiazka;
 		}
-
+	@Override
+	public String toString() {
+		return "id_kategorii: " + id_kategorii + ",nazwa_kategorii: " + nazwa_kategorii;
+	}
 }

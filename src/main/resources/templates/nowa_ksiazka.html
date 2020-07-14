@@ -120,11 +120,12 @@
                 </tr>  
                 <tr>
                 	<td>Kategoria:</td>
+
                 	<td>
-                		<select class="form-control" th:field ="${listKategoria}" >
-                		<option value = "0">Wybierz kategorię</option>
-                		<option th:each="kategoria : ${listKategoria}" th:value ="${kategoria.id_kategorii}" th:text ="${kategoria.nazwa_kategorii}"></option>
-                		</select>
+                		<th:block th:each="kategoria : ${listKategoria}">
+                			<input type="checkbox" name="katy" th:value="${kategoria.id_kategorii}"/>
+                			<label th:text="${kategoria.nazwa_kategorii}"></label>
+                		</th:block>
                 	</td>
                 	
                 </tr>
