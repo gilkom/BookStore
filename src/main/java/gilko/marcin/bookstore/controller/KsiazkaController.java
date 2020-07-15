@@ -18,8 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.model.Ksiazka;
+import gilko.marcin.bookstore.model.Wydawnictwo;
+import gilko.marcin.bookstore.service.AutorService;
 import gilko.marcin.bookstore.service.KategoriaService;
 import gilko.marcin.bookstore.service.KsiazkaService;
+import gilko.marcin.bookstore.service.WydawnictwoService;
 
 @Controller
 public class KsiazkaController {
@@ -28,6 +31,10 @@ public class KsiazkaController {
 	private KsiazkaService service;
 	@Autowired
 	private KategoriaService katService;
+	@Autowired
+	private AutorService autService;
+	@Autowired
+	private WydawnictwoService wydService;
 	
 	@RequestMapping("/lista_ksiazek")
 	public String listaKsiazek(Model model) {
@@ -39,41 +46,35 @@ public class KsiazkaController {
 	@RequestMapping("/nowa_ksiazka")
 	public String dodajKsiazke(Model model) {
 		Ksiazka ksiazka = new Ksiazka();
-
 		model.addAttribute("ksiazka", ksiazka);
 
 		List<Kategoria> listKategoria = katService.list();
 		model.addAttribute("listKategoria", listKategoria);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		model.addAttribute("listWydawnictwo", listWydawnictwo);
+		
+		List<Autor> listAutor = autService.list();
+		model.addAttribute("listAutor", listAutor);
+		
 		return "nowa_ksiazka";
 	}
 	
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
-									@RequestParam(value= "katy", required = false) Long[] katy, @Valid @ModelAttribute("listKategoria") Kategoria kategoria, BindingResult bindingResult) {
+									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
+									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow, 
+									BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
-			//Kategoria katt = new Kategoria(null, "bla", "blabla");
-			//this.kategorie.add(kategoria);
-
-			System.out.println("Kurde:" + kategoria.getId_kategorii() +kategoria.getNazwa_kategorii() + kategoria.getOpis_kategorii());
-			System.out.println("Kurde2:" + ksiazka.getId() +ksiazka.getTytul() + ksiazka.getOpis() + ksiazka.getKategoria());
-			System.out.println("Kurde2NO: " + katy.toString());
-			for(int i =0; i < katy.length; i++) {
-				System.out.println(katy[i]);
-				System.out.println(katService.get(katy[i]));
-				Kategoria kateg = katService.get(katy[i]);
-				ksiazka.addKategoria(kateg);
-				ksiazka.addKategoria(katService.get(katy[i]));
-				System.out.println(katy[i]);
+			for(int i =0; i < listaIdKategorii.length; i++) {
+				ksiazka.addKategoria(katService.get(listaIdKategorii[i]));
 			}
-			//ksiazka.addKategoria(katt);
-			//Autor autor = new Autor();
-			//ksiazka.getKategoria().add(kategoria);
-			//ksiazka.getAutor().add(autor);
-			//kategoria.getKsiazka().add(ksiazka);
+			for(int j = 0; j < listaIdAutorow.length; j++) {
+				ksiazka.addAutor(autService.get(listaIdAutorow[j]));
+			}
 			service.save(ksiazka);
-			//katService.save(kategoria);
 			return "redirect:/lista_ksiazek";
 		}
 	}
@@ -93,6 +94,17 @@ public class KsiazkaController {
 		ModelAndView mav = new ModelAndView("edytuj_ksiazke");
 		Ksiazka ksiazka = service.get(id);
 		mav.addObject("ksiazka", ksiazka);
+		
+		System.out.println("kategoria: " + ksiazka.getKategoria());
+		
+		List<Kategoria> listKategoria = katService.list();
+		mav.addObject("listKategoria", listKategoria);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		mav.addObject("listWydawnictwo", listWydawnictwo);
+		
+		List<Autor> listAutor = autService.list();
+		mav.addObject("listAutor", listAutor);
 		return mav;
 	}
 	

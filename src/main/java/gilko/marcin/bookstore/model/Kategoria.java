@@ -19,8 +19,8 @@ public class Kategoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_kategorii;
-	//@NotBlank(message="Nazwa jest obowiazkowa!")
-	//@Size(min=2, max=30)
+	@NotBlank(message="Nazwa jest obowiazkowa!")
+	@Size(min=2, max=30)
 	private String nazwa_kategorii;
 	private String opis_kategorii;
 	
@@ -37,9 +37,6 @@ public class Kategoria {
 	}
 	
 	
-	//@Id
-	//@Column(name = "ID_KATEGORII")
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId_kategorii() {
 		return id_kategorii;
 	}
@@ -47,14 +44,14 @@ public class Kategoria {
 	public void setId_kategorii(Long id) {
 		this.id_kategorii = id;
 	}
-	//@Column(name = "NAZWA_KATEGORII")
+
 	public String getNazwa_kategorii() {
 		return nazwa_kategorii;
 	}
 	public void setNazwa_kategorii(String name) {
 		this.nazwa_kategorii = name;
 	}
-	//@Column(name = "OPIS_KATEGORII")
+
 	public String getOpis_kategorii() {
 		return opis_kategorii;
 	}

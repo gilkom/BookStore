@@ -74,17 +74,17 @@
         </thead>
         <tbody>
             <tr th:each="autor : ${listAutor}">
-                <td th:text="${autor.id}">ID</td>
-                <td th:text="${autor.imie}">Imię</td>
-                <td th:text="${autor.nazwisko}">Nazwisko</td>
-                <td th:text="${autor.opis}">Opis</td>
+                <td th:text="${autor.id_autora}">ID</td>
+                <td th:text="${autor.imie_autora}">Imię</td>
+                <td th:text="${autor.nazwisko_autora}">Nazwisko</td>
+                <td th:text="${autor.opis_autora}">Opis</td>
                 <td>
-                    <a th:href="@{'/edytuj_autora/' + ${autor.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_autora/' + ${autor.id_autora}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_autorow/usun_autora/' + ${autor.id}}"
+                     <form method="get" action="@{/lista_autorow/usun_autora/' + ${autor.id_autora}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego autora?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_autora/' + ${autor.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_autora/' + ${autor.id_autora}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

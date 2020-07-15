@@ -55,7 +55,27 @@ public class Ksiazka {
 		this.kategorie.remove(kategoria);
 		kategoria.getKsiazka().remove(this);
 	}
-
+	
+	@ManyToMany(
+			cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+			)
+	@JoinTable(
+			name = "BK_AUTOR_KSIAZKI",
+			joinColumns = @JoinColumn(name = "ID_KSIAZKI"),
+			inverseJoinColumns = @JoinColumn(name = "ID_AUTORA")
+			)
+	private Set<Autor> autorzy = new HashSet<>();
+	
+	public void addAutor(Autor autor) {
+		this.autorzy.add(autor);
+		autor.getKsiazka().add(this);
+	}
+	
+	public void removeAutor(Autor autor) {
+		this.autorzy.remove(autor);
+		autor.getKsiazka().remove(this);
+	}
+	
 	
 	public Ksiazka() {}
 	
@@ -77,27 +97,27 @@ public class Ksiazka {
 	//@Id
 	//@Column(name="ID_KSIAZKI")
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
+	public Long getId_ksiazki() {
 		return id_ksiazki;
 	}
 
-	public void setId(Long id) {
+	public void setId_ksiazki(Long id) {
 		this.id_ksiazki = id;
 	}
 	//@Column(name="TYTUL_KSIAZKI")
-	public String getTytul() {
+	public String getTytul_ksiazki() {
 		return tytul_ksiazki;
 	}
 
-	public void setTytul(String tytul) {
+	public void setTytul_ksiazki(String tytul) {
 		this.tytul_ksiazki = tytul;
 	}
 	//@Column(name="ORYGINALNY_TYTUL_KSIAZKI")
-	public String getOrg_tytul() {
+	public String getOryginalny_tytul_ksiazki() {
 		return oryginalny_tytul_ksiazki;
 	}
 
-	public void setOrg_tytul(String org_tytul) {
+	public void setOryginalny_tytul_ksiazki(String org_tytul) {
 		this.oryginalny_tytul_ksiazki = org_tytul;
 	}
 	//@Column(name="ISBN")
@@ -109,43 +129,43 @@ public class Ksiazka {
 		this.isbn = isbn;
 	}
 	//@Column(name="ILOSC_KSIAZEK")
-	public int getIlosc() {
+	public int getIlosc_ksiazek() {
 		return ilosc_ksiazek;
 	}
 
-	public void setIlosc(int ilosc) {
+	public void setIlosc_ksiazek(int ilosc) {
 		this.ilosc_ksiazek = ilosc;
 	}
 	//@Column(name="ROK_WYDANIA_KSIAZKI")
-	public int getRok() {
+	public int getRok_wydania_ksiazki() {
 		return rok_wydania_ksiazki;
 	}
 
-	public void setRok(int rok) {
+	public void setRok_wydania_ksiazki(int rok) {
 		this.rok_wydania_ksiazki = rok;
 	}
 	//@Column(name="LICZBA_STRON_KSIAZKI")
-	public int getStrony() {
+	public int getLiczba_stron_ksiazki() {
 		return liczba_stron_ksiazki;
 	}
 
-	public void setStrony(int strony) {
+	public void setLiczba_stron_ksiazki(int strony) {
 		this.liczba_stron_ksiazki = strony;
 	}
 	//@Column(name="OPRAWA_KSIAZKI")
-	public String getOprawa() {
+	public String getOprawa_ksiazki() {
 		return oprawa_ksiazki;
 	}
 
-	public void setOprawa(String oprawa) {
+	public void setOprawa_ksiazki(String oprawa) {
 		this.oprawa_ksiazki = oprawa;
 	}
 	//@Column(name="OPIS_KSIAZKI")
-	public String getOpis() {
+	public String getOpis_ksiazki() {
 		return opis_ksiazki;
 	}
 
-	public void setOpis(String opis) {
+	public void setOpis_ksiazki(String opis) {
 		this.opis_ksiazki = opis;
 	}
 	//@Column(name="ID_WYDAWNICTWA")
@@ -162,6 +182,14 @@ public class Ksiazka {
 	}
 	public void setKategoria(Set<Kategoria> kategoria) {
 		this.kategorie = kategoria;
-		}
+	}
+	
+	public Set<Autor> getAutor(){
+		return autorzy;
+	}
+	
+	public void setAutor(Set<Autor> autor) {
+		this.autorzy = autor;
+	}
 	
 }

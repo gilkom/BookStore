@@ -67,18 +67,18 @@
             <table class="table">
                 <tr>
                     <td>Imię:</td>
-                    <td><input type="text" th:field="*{imie}" /></td>
-                    <td th:if="${#fields.hasErrors('imie')}" th:errors="*{imie}">NameError</td>
+                    <td><input type="text" th:field="*{imie_autora}" /></td>
+                    <td th:if="${#fields.hasErrors('imie_autora')}" th:errors="*{imie_autora}">NameError</td>
                 </tr>
                 <tr>
                     <td>Nazwisko:</td>
-                    <td><input type="text" th:field="*{nazwisko}" /></td>
-                    <td th:if="${#fields.hasErrors('nazwisko')}" th:errors="*{nazwisko}">NameError</td>
+                    <td><input type="text" th:field="*{nazwisko_autora}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwisko_autora')}" th:errors="*{nazwisko_autora}">NameError</td>
                 </tr>
                 <tr>
                     <td>Opis:</td>
-                    <td><input type="text" th:field="*{opis}" /></td>
-                    <td th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}">NameError</td>
+                    <td><input type="text" th:field="*{opis_autora}" /></td>
+                    <td th:if="${#fields.hasErrors('opis_autora')}" th:errors="*{opis_autora}">NameError</td>
                 </tr>  
                                       
                 <tr>

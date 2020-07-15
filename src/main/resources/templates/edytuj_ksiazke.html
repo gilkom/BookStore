@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-     <link href="multiselect.css" rel="stylesheet">
      
      <style>
 		h1 { text-shadow: 2px 2px black;}
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Nowa książka</title>
+<title>Edytuj Książkę</title>
 </head>
 <body>
 
@@ -55,33 +54,37 @@
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
 		    <li class="breadcrumb-item"><a href="/lista_ksiazek">Lista książek</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_ksiazek/dodaj_ksiazke">Dodaj książkę</li>
+		    <li class="breadcrumb-item active" aria-current="/lista_ksiazek/edytuj_ksiazke">Edytuj książkę</li>
 		  </ol>
 		</nav>
-	<h3>Dodaj nową książkę</h3>
+	<h3>Edytuj Kategorię</h3>
 </div>
 
     <div class="container" align="center">
-        <br/>
-        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post">
-  
+        <br />
+        <form action="#" th:action="@{/edytuj_ksiazke/save}" method="post">
+ 
             <table class="table">
                 <tr>
-                    <td>Tytuł:</td>
-                    <td><input type="text" th:field="${ksiazka.tytul_ksiazki}" /></td>
-                    <td th:if="${#fields.hasErrors('ksiazka.tytul_ksiazki')}" th:errors="${ksiazka.tytul_ksiazki}">NameError</td>
+                    <td>Id Książki:</td>
+                    <td><input type="text" th:field="${ksiazka.id_ksiazki}" readonly="readonly" /></td>
+                </tr>
+				<tr>
+                    <td>Tytuł książki:</td>
+                    <td><input type="text" th:field="${ksiazka.tytul_ksiazki}"/></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.tytul_ksiazki')}" th:errors="${ksiazka.tytul_ksizki}">NameError</td>
                 </tr>
                 <tr>
-                    <td>Oryginalny tytuł:</td>
+                   <td>Oryginalny tytuł:</td>
                     <td><input type="text" th:field="${ksiazka.oryginalny_tytul_ksiazki}" /></td>
-                    <td th:if="${#fields.hasErrors('ksiazka.oryginalny_tytul_ksiazki')}" th:errors="${ksiazka.oryginalny_tytul_ksiazki}">NameError</td>
+                    <td th:if="${#fields.hasErrors('ksiazka.oryginalny_tytul_ksiazki')}" th:errors="${ksiazka.oryginalny_tytul_ksizki}">NameError</td>
                 </tr>
                 <tr>
                     <td>ISBN:</td>
                     <td><input type="text" th:field="${ksiazka.isbn}" /></td>
                     <td th:if="${#fields.hasErrors('ksiazka.isbn')}" th:errors="${ksiazka.isbn}">NameError</td>
                 </tr>
-                <tr>
+               <tr>
                     <td>Ilość książek:</td>
                     <td><input type="text" th:field="${ksiazka.ilosc_ksiazek}" /></td>
                     <td th:if="${#fields.hasErrors('ksiazka.ilosc_ksiazek')}" th:errors="${ksiazka.ilosc_ksiazek}">NameError</td>
@@ -108,24 +111,19 @@
                 </tr>
                 <tr>
                     <td>Oprawa:</td>
-                    <td>
-                    	<input type="radio" th:field="${ksiazka.oprawa_ksiazki}" name="${ksiazka.oprawa_ksiazki}" value="Twarda"/>Twarda
-                    	<input type="radio" th:field="${ksiazka.oprawa_ksiazki}" name="${ksiazka.oprawa_ksiazki}" value="Miekka"/>Miękka
-                    </td>
+                   <td><input type="text" th:field="${ksiazka.oprawa_ksiazki}" /></td>
                     <td th:if="${#fields.hasErrors('ksiazka.oprawa_ksiazki')}" th:errors="${ksiazka.oprawa_ksiazki}">NameError</td>
                 </tr>
-                
-				<tr>
+                <tr>
                 	<td>Kategoria:</td>
                 	<td>
                 		<th:block th:each="kategoria : ${listKategoria}">
-                			<input type="checkbox" name="listaIdKategorii" th:value="${kategoria.id_kategorii}"/>
+                			<input type="checkbox" name="ksiazka.kategorie" th:value="${kategoria.id_kategorii}"/>
                 			<label th:text="${kategoria.nazwa_kategorii}"></label>
                 		</th:block>
                 	</td>
                 </tr> 
-
-				<tr>
+                <tr>
                 	<td>Autorzy:</td>
                 	<td>
                 		<select name="listaIdAutorow" multiple="multiple">
@@ -135,8 +133,7 @@
                 	</td>
                 
                 </tr>
-                
-                 <tr>
+                <tr>
                 	<td>Wydawnictwo:</td>
                 	<td>
                 		<select class="form-control" th:field="${ksiazka.id_wydawnictwa}">
@@ -146,13 +143,13 @@
                 		</select>
                 	</td>
                 </tr> 
+                
                 <tr>
-                    <td >
-                    	<button class = "btn btn-dark" type="submit">Zapisz</button>
+                    <td>
+                    	<button class = "btn btn-dark" type="submit">Zapisz</button> 
                     	<a href="/lista_ksiazek" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
-
             </table>
         </form>
     </div>
@@ -160,5 +157,4 @@
     <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
-
 </body>

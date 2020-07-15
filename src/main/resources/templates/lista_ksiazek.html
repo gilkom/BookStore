@@ -80,23 +80,23 @@
         </thead>
         <tbody>
             <tr th:each="ksiazka : ${listKsiazka}">
-                <td th:text="${ksiazka.id}">ID</td>
-                <td th:text="${ksiazka.tytul}">Tytuł</td>
-                <td th:text="${ksiazka.org_tytul}">Oryginalny tytuł</td>
+                <td th:text="${ksiazka.id_ksiazki}">ID</td>
+                <td th:text="${ksiazka.tytul_ksiazki}">Tytuł</td>
+                <td th:text="${ksiazka.oryginalny_tytul_ksiazki}">Oryginalny tytuł</td>
                 <td th:text="${ksiazka.isbn}">ISBN</td>
-                <td th:text="${ksiazka.ilosc}">Ilość książek</td>
-                <td th:text="${ksiazka.rok}">Rok wydania</td>
-                <td th:text="${ksiazka.strony}">Liczba stron</td>
-                <td th:text="${ksiazka.oprawa}">Oprawa</td>
-                <td th:text="${ksiazka.opis}">Opis</td>
+                <td th:text="${ksiazka.ilosc_ksiazek}">Ilość książek</td>
+                <td th:text="${ksiazka.rok_wydania_ksiazki}">Rok wydania</td>
+                <td th:text="${ksiazka.liczba_stron_ksiazki}">Liczba stron</td>
+                <td th:text="${ksiazka.oprawa_ksiazki}">Oprawa</td>
+                <td th:text="${ksiazka.opis_ksiazki}">Opis</td>
                 <td th:text="${ksiazka.id_wydawnictwa}">Id wydawnictwa</td>
                 <td>
-                    <a th:href="@{'/edytuj_ksiazke/' + ${ksiazka.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_ksiazek/usun_ksiazke/' + ${ksiazka.id}}"
+                     <form method="get" action="@{/lista_ksiazek/usun_ksiazke/' + ${ksiazka.id_ksiazki}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę książkę') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_ksiazke/' + ${ksiazka.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>
