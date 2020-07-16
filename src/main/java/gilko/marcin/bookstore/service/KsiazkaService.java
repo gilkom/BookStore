@@ -22,6 +22,7 @@ public class KsiazkaService {
 		return repo.findAll();
 	}
 	
+	
 	public void save(Ksiazka ksiazka) {
 		repo.save(ksiazka);
 	}

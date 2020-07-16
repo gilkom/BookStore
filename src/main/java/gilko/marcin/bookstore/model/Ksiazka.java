@@ -56,6 +56,7 @@ public class Ksiazka {
 		kategoria.getKsiazka().remove(this);
 	}
 	
+	
 	@ManyToMany(
 			cascade = {CascadeType.MERGE, CascadeType.PERSIST}
 			)

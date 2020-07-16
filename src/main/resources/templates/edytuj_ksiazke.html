@@ -57,7 +57,7 @@
 		    <li class="breadcrumb-item active" aria-current="/lista_ksiazek/edytuj_ksiazke">Edytuj książkę</li>
 		  </ol>
 		</nav>
-	<h3>Edytuj Kategorię</h3>
+	<h3>Edytuj Książkę</h3>
 </div>
 
     <div class="container" align="center">
@@ -117,22 +117,27 @@
                 <tr>
                 	<td>Kategoria:</td>
                 	<td>
-                		<th:block th:each="kategoria : ${listKategoria}">
-                			<input type="checkbox" name="ksiazka.kategorie" th:value="${kategoria.id_kategorii}"/>
+                		<th:block th:each="kategoria : ${zapisaneKategorie}">
+		
+                			<input type="checkbox" name="zapisaneKategorie" th:value="${kategoria.id_kategorii}" checked="checked" disabled="disabled"/>
+                			<input type="hidden" name="zapisaneKategorie" th:value="${kategoria.id_kategorii}"/>
                 			<label th:text="${kategoria.nazwa_kategorii}"></label>
                 		</th:block>
+                		<button class= "btn btn-dark" type="submit" style="float: right;" th:formaction="@{/edytuj_ksiazke/edytuj_kategorie_ksiazki}">Edytuj kategorie</button>
                 	</td>
                 </tr> 
-                <tr>
+ 				<tr>
                 	<td>Autorzy:</td>
                 	<td>
-                		<select name="listaIdAutorow" multiple="multiple">
-                			<option th:each="autor : ${listAutor}" 
-                			th:value="${autor.id_autora}" th:text="${autor.nazwisko_autora + ' ' + autor.imie_autora}"></option>
-                		</select>
+                		<th:block th:each="autor : ${zapisaniAutorzy}">
+		
+                			<input type="checkbox" name="zapisaniAutorzy" th:value="${autor.id_autora}" checked="checked" disabled="disabled"/>
+                			<input type="hidden" name="zapisaniAutorzy" th:value="${autor.id_autora}"/>
+                			<label th:text="${autor.nazwisko_autora + ' ' + autor.imie_autora}"></label>
+                		</th:block>
+                		<button class= "btn btn-dark" type="submit" style="float: right;" th:formaction="@{/edytuj_ksiazke/edytuj_autorow_ksiazki}">Edytuj autorów</button>
                 	</td>
-                
-                </tr>
+                </tr> 
                 <tr>
                 	<td>Wydawnictwo:</td>
                 	<td>

@@ -1,6 +1,7 @@
 package gilko.marcin.bookstore.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -40,9 +41,13 @@ public class KsiazkaController {
 	public String listaKsiazek(Model model) {
 		List<Ksiazka> listKsiazka = service.list();
 		model.addAttribute("listKsiazka", listKsiazka);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		model.addAttribute("listWydawnictwo", listWydawnictwo);
+		
 		return "lista_ksiazek";
 	}
-	
+	//-------Nowa Ksiazka----------------------
 	@RequestMapping("/nowa_ksiazka")
 	public String dodajKsiazke(Model model) {
 		Ksiazka ksiazka = new Ksiazka();
@@ -79,11 +84,22 @@ public class KsiazkaController {
 		}
 	}
 	
+	//-------Edytuj Ksiazke----------------------
+	
 	@RequestMapping(value="/edytuj_ksiazke/save", method=RequestMethod.POST)
-	public String zapiszEdytowanaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka, BindingResult bindingResult) {
+	public String zapiszEdytowanaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
+										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
+										BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "edytuj_ksiazke";
 		}else {
+			for(int i =0; i < zapisaneKategorie.length; i++) {
+				ksiazka.addKategoria(katService.get(zapisaneKategorie[i]));
+			}
+			for(int j= 0; j < zapisaniAutorzy.length; j++) {
+				ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
+			}
 			service.save(ksiazka);
 			return "redirect:/lista_ksiazek";
 		}
@@ -95,7 +111,11 @@ public class KsiazkaController {
 		Ksiazka ksiazka = service.get(id);
 		mav.addObject("ksiazka", ksiazka);
 		
-		System.out.println("kategoria: " + ksiazka.getKategoria());
+		Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
+		mav.addObject("zapisaneKategorie", zapisaneKategorie);
+		
+		Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
+		mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
 		
 		List<Kategoria> listKategoria = katService.list();
 		mav.addObject("listKategoria", listKategoria);
@@ -107,6 +127,142 @@ public class KsiazkaController {
 		mav.addObject("listAutor", listAutor);
 		return mav;
 	}
+	
+	//------------Edytuj Kategorie Ksiazki----------------------
+	
+	@RequestMapping(value="/edytuj_ksiazke/edytuj_kategorie_ksiazki", method=RequestMethod.POST)
+	public String edytujKategorieKsiazki(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
+										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
+										BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "edytuj_ksiazke";
+		}else {
+			for(int i =0; i < zapisaneKategorie.length; i++) {
+				ksiazka.addKategoria(katService.get(zapisaneKategorie[i]));
+			}
+			for(int j= 0; j < zapisaniAutorzy.length; j++) {
+				ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
+			}
+			service.save(ksiazka);
+			Long id =ksiazka.getId_ksiazki();
+			return "redirect:/edytuj_kategorie_ksiazki/" + id;
+		}
+	}
+
+	
+	@RequestMapping("/edytuj_kategorie_ksiazki/{id}")
+	public ModelAndView edytujKategorieKsiazki(@PathVariable(name="id") Long id) {
+		ModelAndView mav = new ModelAndView("edytuj_kategorie_ksiazki");
+		Ksiazka ksiazka = service.get(id);
+		mav.addObject("ksiazka", ksiazka);
+		
+		Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
+		mav.addObject("zapisaneKategorie", zapisaneKategorie);
+		
+		Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
+		mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
+		
+		List<Kategoria> listKategoria = katService.list();
+		mav.addObject("listKategoria", listKategoria);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		mav.addObject("listWydawnictwo", listWydawnictwo);
+		
+		List<Autor> listAutor = autService.list();
+		mav.addObject("listAutor", listAutor);
+		return mav;
+	}
+	
+	@RequestMapping(value="/edytuj_ksiazke/edytuj_kategorie_ksiazki/save", method=RequestMethod.POST)
+	public String zapiszEdytowanaKategorieKsiazki(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
+										@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii,
+										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
+										BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "edytuj_ksiazke";
+		}else {
+			for(int i =0; i < listaIdKategorii.length; i++) {
+				ksiazka.addKategoria(katService.get(listaIdKategorii[i]));
+			}
+			for(int j= 0; j < zapisaniAutorzy.length; j++) {
+				ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
+			}
+			service.save(ksiazka);
+			Long id =ksiazka.getId_ksiazki();
+			return "redirect:/edytuj_ksiazke/" + id;
+		}
+	}
+
+	//-----------Edytuj Autorow Ksiazki------------------
+	
+	
+		@RequestMapping(value="/edytuj_ksiazke/edytuj_autorow_ksiazki", method=RequestMethod.POST)
+		public String edytujAutorowKsiazki(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+											@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
+											@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
+											BindingResult bindingResult) {
+			if(bindingResult.hasErrors()) {
+				return "edytuj_ksiazke";
+			}else {
+				for(int i =0; i < zapisaneKategorie.length; i++) {
+					ksiazka.addKategoria(katService.get(zapisaneKategorie[i]));
+				}
+				for(int j= 0; j < zapisaniAutorzy.length; j++) {
+					ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
+				}
+				service.save(ksiazka);
+				Long id =ksiazka.getId_ksiazki();
+				return "redirect:/edytuj_autorow_ksiazki/" + id;
+			}
+		}
+
+		
+		@RequestMapping("/edytuj_autorow_ksiazki/{id}")
+		public ModelAndView edytujAutorowKsiazki(@PathVariable(name="id") Long id) {
+			ModelAndView mav = new ModelAndView("edytuj_autorow_ksiazki");
+			Ksiazka ksiazka = service.get(id);
+			mav.addObject("ksiazka", ksiazka);
+			
+			Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
+			mav.addObject("zapisaneKategorie", zapisaneKategorie);
+			
+			Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
+			mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
+			
+			List<Kategoria> listKategoria = katService.list();
+			mav.addObject("listKategoria", listKategoria);
+			
+			List<Wydawnictwo> listWydawnictwo = wydService.list();
+			mav.addObject("listWydawnictwo", listWydawnictwo);
+			
+			List<Autor> listAutor = autService.list();
+			mav.addObject("listAutor", listAutor);
+			return mav;
+		}
+		
+		@RequestMapping(value="/edytuj_ksiazke/edytuj_autorow_ksiazki/save", method=RequestMethod.POST)
+		public String zapiszEdytowanegoAutoraKsiazki(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+											@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
+											@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow,
+											@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
+											BindingResult bindingResult) {
+			if(bindingResult.hasErrors()) {
+				return "edytuj_ksiazke";
+			}else {
+				for(int i =0; i < zapisaneKategorie.length; i++) {
+					ksiazka.addKategoria(katService.get(zapisaneKategorie[i]));
+				}
+				for(int j= 0; j < listaIdAutorow.length; j++) {
+					ksiazka.addAutor(autService.get(listaIdAutorow[j]));
+				}
+				service.save(ksiazka);
+				Long id =ksiazka.getId_ksiazki();
+				return "redirect:/edytuj_ksiazke/" + id;
+			}
+		}
+	
 	
 	@RequestMapping("/usun_ksiazke/{id}")
 	public String usunKsiazke(@PathVariable(name="id")Long id) {

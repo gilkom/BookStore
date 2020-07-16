@@ -26,6 +26,7 @@ public class KategoriaService {
 	public Kategoria get(Long id) {
 		return repo.findById(id).get();
 	}
+
 	
 	public void update(Kategoria kategoria) {
 		
