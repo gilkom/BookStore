@@ -18,5 +18,26 @@ public class Rola {
 	@Size(min=2, max=20)
 	private String rola;
 	
-
+	public Rola() {
+		
+	}
+	public Rola(Long id_roli, String rola) {
+		this.id_roli = id_roli;
+		this.rola = rola;
+	}
+	
+	public Long getId_roli() {
+		return id_roli;
+	}
+	public void setId_roli(Long id_roli) {
+		this.id_roli = id_roli;
+	}
+	
+	public String getRola() {
+		return rola;
+	}
+	public void setRola(String rola) {
+		this.rola = rola;
+	}
+	
 }
