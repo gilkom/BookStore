@@ -62,23 +62,32 @@ public class KsiazkaController {
 		List<Autor> listAutor = autService.list();
 		model.addAttribute("listAutor", listAutor);
 		
+		Wydawnictwo wydawnictwo = new Wydawnictwo();
+		model.addAttribute("wydawnictwo", wydawnictwo);
+		
 		return "nowa_ksiazka";
 	}
 	
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
-									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow, 
+									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow,
+									//@RequestParam(value= "wydawnictwoKsiazki", required = false) Wydawnictwo wydawnictwoKsiazki,
 									BindingResult bindingResult) {
+		
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
+			System.out.println("-------------ksiazka----------" +ksiazka.getWydawnictwo());
+			
 			for(int i =0; i < listaIdKategorii.length; i++) {
 				ksiazka.addKategoria(katService.get(listaIdKategorii[i]));
 			}
 			for(int j = 0; j < listaIdAutorow.length; j++) {
 				ksiazka.addAutor(autService.get(listaIdAutorow[j]));
 			}
+			
+			//ksiazka.setWydawnictwo(wydService.get(wydawnictwoKsiazki.getId_wydawnictwa()));
 			service.save(ksiazka);
 			return "redirect:/lista_ksiazek";
 		}

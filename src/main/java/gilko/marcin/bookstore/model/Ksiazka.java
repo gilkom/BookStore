@@ -33,7 +33,15 @@ public class Ksiazka {
 	private int liczba_stron_ksiazki;
 	private String oprawa_ksiazki;
 	private String opis_ksiazki;
-	private Long id_wydawnictwa;
+	//private Long id_wydawnictwa;
+	
+	
+	@ManyToOne(
+			fetch = FetchType.LAZY, optional = false
+			)
+	@JoinColumn(name = "ID_WYDAWNICTWA", nullable = false)
+	private Wydawnictwo wydawnictwo;
+	
 	
 
 	@ManyToMany(
@@ -81,7 +89,7 @@ public class Ksiazka {
 	public Ksiazka() {}
 	
 	public Ksiazka(Long id, String tytul, String org_tytul, String isbn, int ilosc, int rok, int strony,
-					String oprawa, String opis, Long id_wydawnictwa) {
+					String oprawa, String opis /*, Long id_wydawnictwa*/) {
 		this.id_ksiazki = id;
 		this.tytul_ksiazki = tytul;
 		this.oryginalny_tytul_ksiazki = tytul;
@@ -91,13 +99,9 @@ public class Ksiazka {
 		this.liczba_stron_ksiazki = strony;
 		this.oprawa_ksiazki = oprawa;
 		this.opis_ksiazki = opis;
-		this.id_wydawnictwa = id_wydawnictwa;
+		//this.id_wydawnictwa = id_wydawnictwa;
 	}
 	
-	
-	//@Id
-	//@Column(name="ID_KSIAZKI")
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId_ksiazki() {
 		return id_ksiazki;
 	}
@@ -105,7 +109,7 @@ public class Ksiazka {
 	public void setId_ksiazki(Long id) {
 		this.id_ksiazki = id;
 	}
-	//@Column(name="TYTUL_KSIAZKI")
+
 	public String getTytul_ksiazki() {
 		return tytul_ksiazki;
 	}
@@ -113,7 +117,7 @@ public class Ksiazka {
 	public void setTytul_ksiazki(String tytul) {
 		this.tytul_ksiazki = tytul;
 	}
-	//@Column(name="ORYGINALNY_TYTUL_KSIAZKI")
+
 	public String getOryginalny_tytul_ksiazki() {
 		return oryginalny_tytul_ksiazki;
 	}
@@ -121,7 +125,7 @@ public class Ksiazka {
 	public void setOryginalny_tytul_ksiazki(String org_tytul) {
 		this.oryginalny_tytul_ksiazki = org_tytul;
 	}
-	//@Column(name="ISBN")
+
 	public String getIsbn() {
 		return isbn;
 	}
@@ -129,7 +133,7 @@ public class Ksiazka {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	//@Column(name="ILOSC_KSIAZEK")
+
 	public int getIlosc_ksiazek() {
 		return ilosc_ksiazek;
 	}
@@ -137,7 +141,7 @@ public class Ksiazka {
 	public void setIlosc_ksiazek(int ilosc) {
 		this.ilosc_ksiazek = ilosc;
 	}
-	//@Column(name="ROK_WYDANIA_KSIAZKI")
+
 	public int getRok_wydania_ksiazki() {
 		return rok_wydania_ksiazki;
 	}
@@ -145,7 +149,7 @@ public class Ksiazka {
 	public void setRok_wydania_ksiazki(int rok) {
 		this.rok_wydania_ksiazki = rok;
 	}
-	//@Column(name="LICZBA_STRON_KSIAZKI")
+
 	public int getLiczba_stron_ksiazki() {
 		return liczba_stron_ksiazki;
 	}
@@ -153,7 +157,7 @@ public class Ksiazka {
 	public void setLiczba_stron_ksiazki(int strony) {
 		this.liczba_stron_ksiazki = strony;
 	}
-	//@Column(name="OPRAWA_KSIAZKI")
+
 	public String getOprawa_ksiazki() {
 		return oprawa_ksiazki;
 	}
@@ -161,7 +165,7 @@ public class Ksiazka {
 	public void setOprawa_ksiazki(String oprawa) {
 		this.oprawa_ksiazki = oprawa;
 	}
-	//@Column(name="OPIS_KSIAZKI")
+
 	public String getOpis_ksiazki() {
 		return opis_ksiazki;
 	}
@@ -169,14 +173,17 @@ public class Ksiazka {
 	public void setOpis_ksiazki(String opis) {
 		this.opis_ksiazki = opis;
 	}
-	//@Column(name="ID_WYDAWNICTWA")
-	public Long getId_wydawnictwa() {
+
+	/*
+	  public Long getId_wydawnictwa() {
+	 
 		return id_wydawnictwa;
 	}
 
 	public void setId_wydawnictwa(Long id_wydawnictwa) {
 		this.id_wydawnictwa = id_wydawnictwa;
 	}
+	*/
 	
 	public Set<Kategoria> getKategoria(){
 		return kategorie;
@@ -191,6 +198,14 @@ public class Ksiazka {
 	
 	public void setAutor(Set<Autor> autor) {
 		this.autorzy = autor;
+	}
+	
+	public Wydawnictwo getWydawnictwo() {
+		return wydawnictwo;
+	}
+	
+	public void setWydawnictwo(Wydawnictwo wydawnictwo) {
+		this.wydawnictwo = wydawnictwo;
 	}
 	
 }

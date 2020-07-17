@@ -135,14 +135,14 @@
                 	</td>
                 
                 </tr>
-                
+
                  <tr>
                 	<td>Wydawnictwo:</td>
                 	<td>
-                		<select class="form-control" th:field="${ksiazka.id_wydawnictwa}">
+                		<select class="form-control" th:field="${ksiazka.wydawnictwo.id_wydawnictwa}">
                 			<option value="0">Wybierz wydawnictwo</option>
                 			<option th:each="wydawnictwo : ${listWydawnictwo}" 
-                				th:value="${wydawnictwo.id}" th:text="${wydawnictwo.name}"></option>
+                				th:value="${wydawnictwo.id_wydawnictwa}" th:text="${wydawnictwo.nazwa_wydawnictwa}"></option>
                 		</select>
                 	</td>
                 </tr> 

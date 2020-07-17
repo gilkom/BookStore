@@ -74,7 +74,7 @@
                 <th>Liczba stron</th>
                 <th>Oprawa</th>
                 <th>Opis</th>
-                <th>Id Wydawnictwa</th>
+                <th>Nazwa wydawnictwa</th>
                 <th>Akcje</th>
             </tr>
         </thead>
@@ -89,7 +89,7 @@
                 <td th:text="${ksiazka.liczba_stron_ksiazki}">Liczba stron</td>
                 <td th:text="${ksiazka.oprawa_ksiazki}">Oprawa</td>
                 <td th:text="${ksiazka.opis_ksiazki}">Opis</td>
-                <td th:text="${ksiazka.id_wydawnictwa}">Id wydawnictwa</td>
+                <td th:text="${ksiazka.wydawnictwo.nazwa_wydawnictwa}">Id wydawnictwa</td>
                 <td>
                     <a th:href="@{'/edytuj_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 

@@ -73,16 +73,16 @@
         </thead>
         <tbody>
             <tr th:each="wydawnictwo : ${listWydawnictwo}">
-                <td th:text="${wydawnictwo.id}">ID</td>
-                <td th:text="${wydawnictwo.name}">Nazwa</td>
-                <td th:text="${wydawnictwo.description}">Opis</td>
+                <td th:text="${wydawnictwo.id_wydawnictwa}">ID</td>
+                <td th:text="${wydawnictwo.nazwa_wydawnictwa}">Nazwa</td>
+                <td th:text="${wydawnictwo.opis_wydawnictwa}">Opis</td>
                 <td>
-                    <a th:href="@{'/edytuj_wydawnictwo/' + ${wydawnictwo.id}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_wydawnictwo/' + ${wydawnictwo.id_wydawnictwa}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_wydawnictw/usun_wydawnictwo/' + ${wydawnictwo.id}}"
+                     <form method="get" action="@{/lista_wydawnictw/usun_wydawnictwo/' + ${wydawnictwo.id_wydawnictwa}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć o wydawnictwo?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_wydawnictwo/' + ${wydawnictwo.id}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_wydawnictwo/' + ${wydawnictwo.id_wydawnictwa}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>
