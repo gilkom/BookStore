@@ -60,7 +60,7 @@ public class PracownikController {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_pracownika";
 		}else {
-			service.save(null);
+			service.save(pracownik);
 			return "redirect:/lista_pracownikow";
 		}
 	}

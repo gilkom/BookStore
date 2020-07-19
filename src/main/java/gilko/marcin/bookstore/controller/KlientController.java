@@ -60,7 +60,7 @@ public class KlientController {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_klienta";
 		}else {
-			service.save(null);
+			service.save(klient);
 			return "redirect:/lista_klientow";
 		}
 	}

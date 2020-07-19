@@ -8,7 +8,7 @@
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Nowy klient</title>
+<title>Edytuj klienta</title>
 </head>
 <body>
 
@@ -60,17 +60,21 @@
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
 		    <li class="breadcrumb-item"><a href="/lista_klientow">Lista klientów</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_klientow/dodaj_klienta">Dodaj klienta</li>
+		    <li class="breadcrumb-item active" aria-current="/lista_klientow/edytuj_klienta">Edytuj klienta</li>
 		  </ol>
 		</nav>
-	<h3>Dodaj nowego klienta</h3>
+	<h3>Edytuj klienta</h3>
 </div>
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/nowy_klient/save}" th:object="${klient}" method="post">
+        <form action="#" th:action="@{/edytuj_klienta/save}" th:object="${klient}" method="post">
   
             <table class="table">
+                <tr>
+                    <td>Id klienta:</td>
+                    <td><input type="text" th:field="*{id_klienta}"  readonly="readonly"/></td>
+                </tr>
                 <tr>
                     <td>Imię:</td>
                     <td><input type="text" th:field="*{imie_klienta}" /></td>
@@ -130,11 +134,11 @@
                     <td>Rola:</td>
                     <td><input type="text" th:field="*{rola}" /></td>
                     <td th:if="${#fields.hasErrors('rola')}" th:errors="*{rola}">NameError</td>
-                </tr>                    
+                </tr>                                     
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/lista_autorow" class="btn btn-dark">Cofnij</a>
+                    	<a href="/lista_klientow" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>

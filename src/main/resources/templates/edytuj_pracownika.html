@@ -8,7 +8,7 @@
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Nowy klient</title>
+<title>Edytuj pracownika</title>
 </head>
 <body>
 
@@ -59,62 +59,46 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_klientow">Lista klientów</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_klientow/dodaj_klienta">Dodaj klienta</li>
+		    <li class="breadcrumb-item"><a href="/lista_pracownikow">Lista pracowników</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_pracownikow/edytuj_pracownika">Edytuj pracownika</li>
 		  </ol>
 		</nav>
-	<h3>Dodaj nowego klienta</h3>
+	<h3>Edytuj pracownika</h3>
 </div>
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/nowy_klient/save}" th:object="${klient}" method="post">
+        <form action="#" th:action="@{/edytuj_pracownika/save}" th:object="${pracownik}" method="post">
   
             <table class="table">
                 <tr>
+                    <td>Id pracownika:</td>
+                    <td><input type="text" th:field="*{id_pracownika}"  readonly="readonly"/></td>
+                </tr>
+                <tr>
                     <td>Imię:</td>
-                    <td><input type="text" th:field="*{imie_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('imie_klienta')}" th:errors="*{imie_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{imie_pracownika}" /></td>
+                    <td th:if="${#fields.hasErrors('imie_pracownika')}" th:errors="*{imie_pracownika}">NameError</td>
                 </tr>
                 <tr>
                     <td>Nazwisko:</td>
-                    <td><input type="text" th:field="*{nazwisko_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('nazwisko_klienta')}" th:errors="*{nazwisko_klienta}">NameError</td>
-                </tr>
-                <tr>
-                    <td>Nazwa firmy:</td>
-                    <td><input type="text" th:field="*{nazwa_firmy}" /></td>
-                    <td th:if="${#fields.hasErrors('nazwa_firmy')}" th:errors="*{nazwa_firmy}">NameError</td>
-                </tr>  
-                 <tr>
-                    <td>Nip:</td>
-                    <td><input type="text" th:field="*{nip_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('nip_klienta')}" th:errors="*{nip_klienta}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Ulica:</td>
-                    <td><input type="text" th:field="*{ulica_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('ulica_klienta')}" th:errors="*{ulica_klienta}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Miasto:</td>
-                    <td><input type="text" th:field="*{miasto_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('miasto_klienta')}" th:errors="*{miasto_klienta}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Kod pocztowy:</td>
-                    <td><input type="text" th:field="*{kod_pocztowy_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('kod_pocztowy_klienta')}" th:errors="*{kod_pocztowy_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{nazwisko_pracownika}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwisko_pracownika')}" th:errors="*{nazwisko_pracownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Telefon:</td>
-                    <td><input type="text" th:field="*{telefon_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('telefon_klienta')}" th:errors="*{telefon_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{telefon_pracownika}" /></td>
+                    <td th:if="${#fields.hasErrors('telefon_pracownika')}" th:errors="*{telefon_pracownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Email:</td>
-                    <td><input type="text" th:field="*{email_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('email_klienta')}" th:errors="*{email_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{email_pracownika}" /></td>
+                    <td th:if="${#fields.hasErrors('email_pracownika')}" th:errors="*{email_pracownika}">NameError</td>
+                </tr>
+                <tr>
+                    <td>Login:</td>
+                    <td><input type="text" th:field="*{login_pracownika}" /></td>
+                    <td th:if="${#fields.hasErrors('login_pracownika')}" th:errors="*{login_pracownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Hasło:</td>
@@ -130,11 +114,11 @@
                     <td>Rola:</td>
                     <td><input type="text" th:field="*{rola}" /></td>
                     <td th:if="${#fields.hasErrors('rola')}" th:errors="*{rola}">NameError</td>
-                </tr>                    
+                </tr>                                     
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/lista_autorow" class="btn btn-dark">Cofnij</a>
+                    	<a href="/lista_pracownikow" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>
