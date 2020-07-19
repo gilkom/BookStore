@@ -6,32 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gilko.marcin.bookstore.model.Ksiazka;
-import gilko.marcin.bookstore.repository.KsiazkaRepository;
+import gilko.marcin.bookstore.model.Pracownik;
+import gilko.marcin.bookstore.repository.PracownikRepository;
 
 @Service
 @Transactional
-public class KsiazkaService {
+public class PracownikService {
 	@Autowired
-	private KsiazkaRepository repo;
+	private PracownikRepository repo;
 	
-	public List<Ksiazka> list(){
+	public List<Pracownik> list(){
 		return repo.findAll();
 	}
 	
-	
-	public void save(Ksiazka ksiazka) {
-		repo.save(ksiazka);
+	public void save(Pracownik pracownik) {
+		repo.save(pracownik);
 	}
 	
-	public Ksiazka get(Long id) {
+	public Pracownik get(Long id) {
 		return repo.findById(id).get();
 	}
 	
 	public void delete(Long id) {
 		repo.deleteById(id);
 	}
-	
-	
-
 }

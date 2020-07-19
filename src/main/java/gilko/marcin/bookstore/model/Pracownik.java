@@ -1,6 +1,5 @@
 package gilko.marcin.bookstore.model;
 
-import java.util.Date;
 
 import javax.persistence.*;
 
