@@ -1,6 +1,9 @@
 
 package gilko.marcin.bookstore.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +24,11 @@ public class Klient {
 	private String password;
 	private int blokada_konta;
 	private String rola;
+	
+	
+	@OneToMany(mappedBy = "primaryKey.klient",
+			cascade = CascadeType.ALL)
+	private Set<Opinia> opinie = new HashSet<Opinia>();
 	
 	
 	public Klient() {
@@ -122,6 +130,18 @@ public class Klient {
 	}
 	public void setRola(String rola) {
 		this.rola = rola;
+	}
+	
+	public Set<Opinia> getOpinia(){
+		return opinie;
+	}
+	
+	public void setOpinia(Set<Opinia> opinia) {
+		this.opinie = opinia;
+	}
+	
+	public void addOpinia(Opinia opinia) {
+		this.opinie.add(opinia);
 	}
 	
 }

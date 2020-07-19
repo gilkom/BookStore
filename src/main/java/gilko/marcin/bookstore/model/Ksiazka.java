@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -31,6 +32,7 @@ public class Ksiazka {
 	private String oprawa_ksiazki;
 	private String opis_ksiazki;
 	//private Long id_wydawnictwa;
+	
 	
 	
 	@ManyToOne(
@@ -81,6 +83,11 @@ public class Ksiazka {
 		this.autorzy.remove(autor);
 		autor.getKsiazka().remove(this);
 	}
+	
+	
+	@OneToMany(mappedBy = "primaryKey.ksiazka",
+			cascade = CascadeType.ALL)
+	private Set<Opinia> opinie = new HashSet<>();
 	
 	
 	public Ksiazka() {}
@@ -203,6 +210,18 @@ public class Ksiazka {
 	
 	public void setWydawnictwo(Wydawnictwo wydawnictwo) {
 		this.wydawnictwo = wydawnictwo;
+	}
+	
+	public Set<Opinia> getOpinia(){
+		return opinie;
+	}
+	
+	public void setOpinie(Set<Opinia> opinia) {
+		this.opinie = opinia;
+	}
+	
+	public void addOpinia(Opinia opinia) {
+		this.opinie.add(opinia);
 	}
 	
 }

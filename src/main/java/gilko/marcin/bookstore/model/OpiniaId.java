@@ -3,6 +3,7 @@ package gilko.marcin.bookstore.model;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
@@ -12,10 +13,11 @@ public class OpiniaId implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@ManyToOne(cascade = CascadeType.ALL)	
 	private Klient klient;
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Ksiazka ksiazka;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
 	public Klient getKlient() {
 		return klient;
 	}
@@ -24,7 +26,6 @@ public class OpiniaId implements Serializable{
 		this.klient = klient;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
 	public Ksiazka getKsiazka() {
 		return ksiazka;
 	}
