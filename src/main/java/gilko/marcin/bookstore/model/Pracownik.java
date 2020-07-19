@@ -17,7 +17,6 @@ public class Pracownik {
 	private String login_pracownika;
 	private String password;
 	private int blokada_konta;
-	private Date data_rejestracji;
 	private String rola;
 	
 	
@@ -26,7 +25,7 @@ public class Pracownik {
 	}
 	public Pracownik(Long id_pracownika, String imie_pracownika, String nazwisko_pracownika, 
 					String telefon_pracownika, String email_pracownika, String login_pracownika,
-					String password, int blokada_konta, Date data_rejestracji, String rola) {
+					String password, int blokada_konta, String rola) {
 		this.id_pracownika = id_pracownika;
 		this.imie_pracownika = imie_pracownika;
 		this.nazwisko_pracownika = nazwisko_pracownika;
@@ -35,7 +34,6 @@ public class Pracownik {
 		this.login_pracownika = login_pracownika;
 		this.password = password;
 		this.blokada_konta = blokada_konta;
-		this.data_rejestracji = data_rejestracji;
 		this.rola = rola;
 	}
 	
@@ -87,12 +85,6 @@ public class Pracownik {
 	}
 	public void setBlokada_konta(int blokada_konta) {
 		this.blokada_konta = blokada_konta;
-	}
-	public Date getData_rejestracji() {
-		return data_rejestracji;
-	}
-	public void setData_rejestracji(Date data_rejestracji) {
-		this.data_rejestracji = data_rejestracji;
 	}
 	public String getRola() {
 		return rola;
