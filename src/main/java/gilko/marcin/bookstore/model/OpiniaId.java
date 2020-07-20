@@ -18,6 +18,14 @@ public class OpiniaId implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Ksiazka ksiazka;
 	
+	public OpiniaId() {
+		
+	}
+	public OpiniaId(Klient klient, Ksiazka ksiazka) {
+		this.klient = klient;
+		this.ksiazka = ksiazka;
+	}
+	
 	public Klient getKlient() {
 		return klient;
 	}

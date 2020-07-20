@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import gilko.marcin.bookstore.model.Klient;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.OpiniaId;
@@ -59,9 +58,9 @@ public class OpiniaController {
 	@RequestMapping("/edytuj_opinie/{id_klienta}/{id_ksiazki}")
 	public ModelAndView edytujOpinie(@PathVariable(name="id_klienta") Long id_klienta, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
 		ModelAndView mav = new ModelAndView("edytuj_opinie");
-		Opinia opinia = new Opinia();
-		opinia.setKlient(klService.get(id_klienta));
-		opinia.setKsiazka(ksService.get(id_ksiazki));
+		OpiniaId opiniaId= new OpiniaId(klService.get(id_klienta), ksService.get(id_ksiazki));
+		Opinia opinia = opService.get(opiniaId);
+		
 		mav.addObject("opinia", opinia);
 		return mav;
 	}
@@ -79,10 +78,9 @@ public class OpiniaController {
 	
 	@RequestMapping("usun_opinie/{id_klienta}/{id_ksiazki}")
 	public String usunOpinie(@PathVariable(name="id_klienta") Long id_klienta, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
-		Opinia opinia = new Opinia();
+		OpiniaId opiniaId= new OpiniaId(klService.get(id_klienta), ksService.get(id_ksiazki));
+		Opinia opinia = opService.get(opiniaId);
 		
-		opinia.setKlient(klService.get(id_klienta));
-		opinia.setKsiazka(ksService.get(id_ksiazki));
 		opService.delete(opinia);
 		return "redirect:/lista_opinii";
 		

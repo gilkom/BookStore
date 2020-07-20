@@ -22,6 +22,15 @@ public class Opinia {
 	private int ocena;
 	private String komentarz;
 	
+	
+	public Opinia() {
+		
+	}
+	public Opinia(OpiniaId opiniaId, int ocena, String komentarz) {
+		this.primaryKey = opiniaId;
+		this.ocena = ocena;
+		this.komentarz = komentarz;
+	}
 	public OpiniaId getPrimaryKey() {
 		return primaryKey;
 	}
