@@ -88,12 +88,12 @@
                 <td th:text="${opinia.ocena}">Ocena</td>
                 <td th:text="${opinia.komentarz}">Komentarz</td>
                 <td>
-                    <a th:href="@{'/edytuj_opinie/' + ${opinia.primaryKey.klient.id_klienta}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_opinie/' + ${opinia.primaryKey.klient.id_klienta}+ '/'+ ${opinia.primaryKey.ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_opinii/usun_opinie/' + ${opinia.primaryKey.klient.id_klienta}}"
+                     <form method="get" action="@{/lista_opinii/usun_opinie/' + ${opinia.primaryKey.klient.id_klienta} +'/'+ ${opinia.primaryKey.ksiazka.id_ksiazki}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego autora?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_opinie/' + ${opinia.primaryKey.klient.id_klienta}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_opinie/' + ${opinia.primaryKey.klient.id_klienta} +'/'+ ${opinia.primaryKey.ksiazka.id_ksiazki}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

@@ -27,7 +27,7 @@ public class OpiniaService {
 		return repo.findById(id).get();
 	}
 	
-	public void delete(Long id) {
-		repo.deleteById(id);
+	public void delete(Opinia opinia) {
+		repo.delete(opinia);
 	}
 }
