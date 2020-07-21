@@ -2,9 +2,22 @@ package gilko.marcin.bookstore.model;
 
 
 
-import java.sql.Date;
 
-import javax.persistence.*;
+
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "BK_ZAMOWIENIE")
@@ -12,12 +25,15 @@ public class Zamowienie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_zamowienia;
+	@Type(type = "date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data_zamowienia;
 	private float wartosc_zamowienia;
 	private String status_zamowienia;
 	
 	@ManyToOne(
-			fetch = FetchType.LAZY, optional = false)
+			fetch = FetchType.LAZY
+			)
 	@JoinColumn(name = "ID_PRACOWNIKA", nullable = false)
 	private Pracownik pracownik;
 	

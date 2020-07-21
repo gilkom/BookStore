@@ -19,6 +19,7 @@ public class PracownikService {
 		return repo.findAll();
 	}
 	
+
 	public void save(Pracownik pracownik) {
 		repo.save(pracownik);
 	}

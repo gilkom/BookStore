@@ -1,6 +1,9 @@
 package gilko.marcin.bookstore.model;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +21,8 @@ public class Pracownik {
 	private int blokada_konta;
 	private String rola;
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pracownik")
+	private Set<Zamowienie> zamowienia = new HashSet<Zamowienie>();
 	
 	public Pracownik() {
 		

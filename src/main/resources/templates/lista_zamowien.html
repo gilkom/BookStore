@@ -2,10 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <style>
-		h1 { text-shadow: 2px 2px black;}
-	</style>
-      
+<style>
+	h1 { text-shadow: 2px 2px black;}
+</style>
 <head>
 <meta charset="utf-8"/>
 <title>Book Store Application</title>
@@ -59,13 +58,56 @@
 		</div>
 
 </section>
-
 &nbsp;&nbsp;&nbsp;
+
 <div class="container">
-	<h4>Strona glowna</h4>
+	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_zamowien">Lista zamówień</li>
+		  </ol>
+		</nav>
+	<h3>Zamówienia</h3>
 </div>
 
+<div class="container" align="center">
+    <a href="/nowe_zamowienie" class="btn btn-dark">Dodaj zamówienie</a>
+    
+    <br/><br/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data zamówienia</th>
+                <th>Wartość</th>
+                <th>Status</th>
+                <th>Id pracownika</th>
+                <th>Id klienta</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="zamowienie : ${listZamowienie}">
+                <td th:text="${zamowienie.id_zamowienia}"></td>
+                <td th:text="${zamowienie.data_zamowienia}"></td>
+                <td th:text="${zamowienie.wartosc_zamowienia}"></td>
+                <td th:text="${zamowienie.status_zamowienia}"></td>
+                <td th:text="${zamowienie.pracownik.id_pracownika}"></td>
+                <td th:text="${zamowienie.klient.id_klienta}"></td>
+                <td>
+                    <a th:href="@{'/edytuj_zamowienie/' + ${zamowienie.id_zamowienia}}" class="btn btn-warning btn-sm">Edytuj</a>
 
+                     <form method="get" action="@{/lista_zamowien/usun_zamowienie/' + ${zamowienie.id_zamowienia}}"
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć to zamówienie?') ? true : false;">
+                    		
+                    	<a th:href="@{'/usun_zamowienie/' + ${zamowienie.id_zamowienia}}" class="btn btn-danger btn-sm">Usun</a>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  
+&nbsp;&nbsp;&nbsp;
 <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
