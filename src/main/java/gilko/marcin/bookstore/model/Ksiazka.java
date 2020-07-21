@@ -93,7 +93,7 @@ public class Ksiazka {
 	public Ksiazka() {}
 	
 	public Ksiazka(Long id, String tytul, String org_tytul, String isbn, int ilosc, int rok, int strony,
-					String oprawa, String opis /*, Long id_wydawnictwa*/) {
+					String oprawa, String opis) {
 		this.id_ksiazki = id;
 		this.tytul_ksiazki = tytul;
 		this.oryginalny_tytul_ksiazki = tytul;
@@ -103,7 +103,6 @@ public class Ksiazka {
 		this.liczba_stron_ksiazki = strony;
 		this.oprawa_ksiazki = oprawa;
 		this.opis_ksiazki = opis;
-		//this.id_wydawnictwa = id_wydawnictwa;
 	}
 	
 	public Long getId_ksiazki() {
@@ -178,16 +177,6 @@ public class Ksiazka {
 		this.opis_ksiazki = opis;
 	}
 
-	/*
-	  public Long getId_wydawnictwa() {
-	 
-		return id_wydawnictwa;
-	}
-
-	public void setId_wydawnictwa(Long id_wydawnictwa) {
-		this.id_wydawnictwa = id_wydawnictwa;
-	}
-	*/
 	
 	public Set<Kategoria> getKategoria(){
 		return kategorie;
