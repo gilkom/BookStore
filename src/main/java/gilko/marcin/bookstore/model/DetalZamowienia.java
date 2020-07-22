@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 public class DetalZamowienia {
 	
 	@EmbeddedId
-	private DetalZamowieniaId primary_key = new DetalZamowieniaId();
+	private DetalZamowieniaId primaryKey = new DetalZamowieniaId();
 	
 	private float cena_zakupu;
 	private int ilosc_zamowiona;
@@ -26,42 +26,42 @@ public class DetalZamowienia {
 	
 	@ManyToOne(
 			fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_KSIAZKI", nullable = false)
+	@JoinColumn(name = "ID_KSIAZKI")
 	private Ksiazka ksiazka;
 	
 	public DetalZamowienia() {}
 	
 	public DetalZamowienia(DetalZamowieniaId detalZamowieniaId, float cena_zakupu, int ilosc_zamowiona,
 							float wartosc_pozycji) {
-		this.primary_key = detalZamowieniaId;
+		this.primaryKey = detalZamowieniaId;
 		this.setCena_zakupu(cena_zakupu);
 		this.setIlosc_zamowiona(ilosc_zamowiona);
 		this.setWartosc_pozycji(wartosc_pozycji);
 	}
 	
-	public DetalZamowieniaId getPrimary_key() {
-		return primary_key;
+	public DetalZamowieniaId getPrimaryKey() {
+		return primaryKey;
 	}
 	
-	public void setPrimary_key(DetalZamowieniaId detalZamowieniaId) {
-		this.primary_key = detalZamowieniaId;
+	public void setPrimaryKey(DetalZamowieniaId detalZamowieniaId) {
+		this.primaryKey = detalZamowieniaId;
 	}
 	
 	public Long getPozycja_zamowienia() {
-		return getPrimary_key().getPozycjaZamowienia();
+		return getPrimaryKey().getPozycja_zamowienia();
 	}
 	
 	public void setPozycja_zamowienia(Long pozycja_zamowienia) {
-		getPrimary_key().setPozycjaZamowienia(pozycja_zamowienia);
+		getPrimaryKey().setPozycja_zamowienia(pozycja_zamowienia);
 	}
 	
 	@Transient
 	public Zamowienie getZamowienie() {
-		return getPrimary_key().getZamowienie();
+		return getPrimaryKey().getZamowienie();
 	}
 	
 	public void setZamowienie(Zamowienie zamowienie) {
-		getPrimary_key().setZamowienie(zamowienie);
+		getPrimaryKey().setZamowienie(zamowienie);
 	}
 
 	public float getCena_zakupu() {
@@ -86,6 +86,14 @@ public class DetalZamowienia {
 
 	public void setWartosc_pozycji(float wartosc_pozycji) {
 		this.wartosc_pozycji = wartosc_pozycji;
+	}
+	
+	public Ksiazka getKsiazka() {
+		return ksiazka;
+	}
+	
+	public void setKsiazka(Ksiazka ksiazka) {
+		this.ksiazka = ksiazka;
 	}
 	
 	

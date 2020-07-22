@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
+<head>
+<meta charset="utf-8" />
+<title>Nowy detal zamówienia</title>
+</head>
+<body>
+
+<section>
+	<div class="container-sm">
+		<div class="jumbotron" style="background: url(images/bookcase-1869616_1920.jpg)">
+				<h1 style="color:white;">Ksiegarnia internetowa</h1>
+		</div>
+	</div>
+		<div class="container">	
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Strona glowna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Koszyk</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Kontakt</a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
+
+</section>
+&nbsp;&nbsp;&nbsp;
+<div class="container">
+	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
+		    <li class="breadcrumb-item"><a href="/lista_detali_zamowienia">Lista detali zamówienia</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_detali_zamowienia/nowy_detal_zamowienia">Dodaj detal_zamowienia</li>
+		  </ol>
+		</nav>
+	<h3>Dodaj nowy detal zamówienia</h3>
+</div>
+
+    <div class="container" align="center">
+        <br/>
+        <form action="#" th:action="@{/nowy_detal_zamowienia/save}" th:object="${detalZamowienia}" method="post">
+  
+            <table class="table">
+                <tr>
+                    <td>Id zamówienia:</td>
+                    <td><input type="text" th:field="*{primaryKey.zamowienie.id_zamowienia}" /></td>
+                    <td th:if="${#fields.hasErrors('primaryKey.zamowienie.id_zamowienia')}" th:errors="*{primaryKey.zamowienie.id_zamowienia}">NameError</td>
+                </tr>
+                <tr>
+                    <td>Pozycja zamówienia:</td>
+                    <td><input type="text" th:field="*{primaryKey.pozycja_zamowienia}" /></td>
+                    <td th:if="${#fields.hasErrors('primaryKey.pozycja_zamowienia')}" th:errors="*{primaryKey.pozycja_zamowienia}">NameError</td>
+                </tr>
+                <tr>
+                    <td>Id książki:</td>
+                    <td><input type="text" th:field="*{ksiazka.id_ksiazki}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.id_ksiazki')}" th:errors="*{ksiazka.id_ksiazki}">NameError</td>
+                </tr>  
+                 <tr>
+                    <td>Cena zakupu:</td>
+                    <td><input type="text" th:field="*{cena_zakupu}" /></td>
+                    <td th:if="${#fields.hasErrors('cena_zakupu')}" th:errors="*{cena_zakupu}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Ilość zamówiona:</td>
+                    <td><input type="text" th:field="*{ilosc_zamowiona}" /></td>
+                    <td th:if="${#fields.hasErrors('ilosc_zamowiona')}" th:errors="*{ilosc_zamowiona}">NameError</td>
+                </tr>    
+                 <tr>
+                    <td>Wartość pozycji:</td>
+                    <td><input type="text" th:field="*{wartosc_pozycji}" /></td>
+                    <td th:if="${#fields.hasErrors('wartosc_pozycji')}" th:errors="*{wartosc_pozycji}">NameError</td>
+                </tr>                          
+                <tr>
+                    <td >
+                    	<button class = "btn btn-dark" type="submit">Zapisz</button>
+                    	<a href="/lista_detali_zamowienia" class="btn btn-dark">Cofnij</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
+	<p>Ksiegarnia Internetowa - BookStore </p>
+</div>
+</body>

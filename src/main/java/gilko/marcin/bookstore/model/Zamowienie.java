@@ -5,6 +5,8 @@ package gilko.marcin.bookstore.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -41,6 +44,9 @@ public class Zamowienie {
 			fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ID_KLIENTA", nullable = false)
 	private Klient klient;
+	
+	@OneToMany(mappedBy = "primaryKey.zamowienie", cascade = CascadeType.ALL)
+	private Set<DetalZamowienia> detaleZamowienia = new HashSet<DetalZamowienia>();
 	
 	public Zamowienie() {}
 	
@@ -97,5 +103,17 @@ public class Zamowienie {
 	
 	public void setKlient(Klient klient) {
 		this.klient = klient;
+	}
+	
+	public Set<DetalZamowienia> getDetalZamowienia(){
+		return detaleZamowienia;
+	}
+	
+	public void setDetalZamowienia(Set<DetalZamowienia> detalZamowienia) {
+		this.detaleZamowienia = detalZamowienia;
+	}
+	
+	public void addDetalZamowienia(DetalZamowienia detalZamowienia) {
+		this.detaleZamowienia.add(detalZamowienia);
 	}
 }

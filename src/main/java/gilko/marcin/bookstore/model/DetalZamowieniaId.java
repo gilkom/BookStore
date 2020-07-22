@@ -24,11 +24,11 @@ public class DetalZamowieniaId implements Serializable{
 		this.zamowienie = zamowienie;
 	}
 	
-	public Long getPozycjaZamowienia() {
+	public Long getPozycja_zamowienia() {
 		return pozycja_zamowienia;
 	}
 	
-	public void setPozycjaZamowienia(Long pozycja_zamowienia) {
+	public void setPozycja_zamowienia(Long pozycja_zamowienia) {
 		this.pozycja_zamowienia = pozycja_zamowienia;
 	}
 	
