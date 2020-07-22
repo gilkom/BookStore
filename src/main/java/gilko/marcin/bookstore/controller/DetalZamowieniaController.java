@@ -15,17 +15,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import gilko.marcin.bookstore.model.DetalZamowienia;
+import gilko.marcin.bookstore.model.DetalZamowieniaId;
 import gilko.marcin.bookstore.model.Ksiazka;
+import gilko.marcin.bookstore.model.Opinia;
+import gilko.marcin.bookstore.model.OpiniaId;
 import gilko.marcin.bookstore.service.DetalZamowieniaService;
 import gilko.marcin.bookstore.service.KlientService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 import gilko.marcin.bookstore.service.OpiniaService;
+import gilko.marcin.bookstore.service.ZamowienieService;
 
 
 @Controller
 public class DetalZamowieniaController {
 	
-	@Autowired DetalZamowieniaService service;
+	@Autowired 
+	DetalZamowieniaService service;
+	
+	@Autowired
+	ZamowienieService zamService;
+	
 	
 	@RequestMapping("/lista_detali_zamowienia")
 	public String listaDetaliZamowienia(Model model) {
@@ -50,6 +59,36 @@ public class DetalZamowieniaController {
 			service.save(detalZamowienia);
 			return "redirect:/lista_detali_zamowienia";
 		}
+	}
+	
+	@RequestMapping("/edytuj_detal_zamowienia/{id_zamowienia}/{pozycja_zamowienia}")
+	public ModelAndView edytujDetalZamowienia(@PathVariable(name="id_zamowienia") Long id_zamowienia, @PathVariable(name="pozycja_zamowienia") Long pozycja_zamowienia) {
+		ModelAndView mav = new ModelAndView("edytuj_detal_zamowienia");
+		DetalZamowieniaId detalZamowieniaId = new DetalZamowieniaId(pozycja_zamowienia, zamService.get(id_zamowienia));
+		DetalZamowienia detalZamowienia = service.get(detalZamowieniaId);
+		
+		mav.addObject("detalZamowienia", detalZamowienia);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/edytuj_detal_zamowienia/save", method=RequestMethod.POST)
+	public String zapiszEdytowanyDetalZamowienia(@Valid @ModelAttribute("detalZamowienia") DetalZamowienia detalZamowienia, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/edytuj_detal_zamowienia";
+		}else {
+			service.save(detalZamowienia);
+			return "redirect:/lista_detali_zamowienia";
+		}
+	}
+	
+	
+	@RequestMapping("usun_detal_zamowienia/{id_zamowienia}/{pozycja_zamowienia}")
+	public String usunDetalZamowienia(@PathVariable(name="id_zamowienia") Long id_zamowienia, @PathVariable(name="pozycja_zamowienia") Long pozycja_zamowienia) {
+		DetalZamowieniaId detalZamowieniaId = new DetalZamowieniaId(pozycja_zamowienia, zamService.get(id_zamowienia));
+		DetalZamowienia detalZamowienia = service.get(detalZamowieniaId);
+		
+		service.delete(detalZamowienia);
+		return "redirect:/lista_detali_zamowienia";		
 	}
 }
 

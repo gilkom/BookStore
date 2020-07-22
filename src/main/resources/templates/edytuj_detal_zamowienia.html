@@ -8,7 +8,7 @@
 	</style>
 <head>
 <meta charset="utf-8" />
-<title>Edytuj opinię</title>
+<title>Edytuj detal zamówienia</title>
 </head>
 <body>
 
@@ -68,42 +68,52 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_opinii">Lista opinii</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_opinii/edytuj_opinie">Edytuj opinię</li>
+		    <li class="breadcrumb-item"><a href="/lista_detali_zamowienia">Lista detali_zamowienia</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_detali_zamowienia/edytuj_detal_zamowienia">Edytuj detal zamówienia</li>
 		  </ol>
 		</nav>
-	<h3>Edytuj opinię</h3>
+	<h3>Edytuj detal zamówienia</h3>
 </div>
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/edytuj_opinie/save}" th:object="${opinia}" method="post">
+        <form action="#" th:action="@{/edytuj_detal_zamowienia/save}" th:object="${detalZamowienia}" method="post">
   
             <table class="table">
                 <tr>
-                    <td>Id klienta:</td>
-                    <td><input type="text" th:field="*{primaryKey.klient.id_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('primaryKey.klient.id_klienta')}" th:errors="*{primaryKey.klient.id_klienta}">NameError</td>
+                    <td>Id zamówienia:</td>
+                    <td><input type="text" th:field="*{primaryKey.zamowienie.id_zamowienia}" /></td>
+                    <td th:if="${#fields.hasErrors('primaryKey.zamowienie.id_zamowienia')}" th:errors="*{primaryKey.zamowienie.id_zamowienia}">NameError</td>
                 </tr>
                 <tr>
-                    <td>Id_ksiazki:</td>
-                    <td><input type="text" th:field="*{primaryKey.ksiazka.id_ksiazki}" /></td>
-                    <td th:if="${#fields.hasErrors('primaryKey.ksiazka.id_ksiazki')}" th:errors="*{primaryKey.ksiazka.id_ksiazki}">NameError</td>
+                    <td>Pozycja zamówienia:</td>
+                    <td><input type="text" th:field="*{primaryKey.pozycja_zamowienia}" /></td>
+                    <td th:if="${#fields.hasErrors('primaryKey.pozycja_zamowienia')}" th:errors="*{primaryKey.pozycja_zamowienia}">NameError</td>
                 </tr>
                 <tr>
-                    <td>Ocena:</td>
-                    <td><input type="text" th:field="*{ocena}" /></td>
-                    <td th:if="${#fields.hasErrors('ocena')}" th:errors="*{ocena}">NameError</td>
+                    <td>Id książki:</td>
+                    <td><input type="text" th:field="*{ksiazka.id_ksiazki}" /></td>
+                    <td th:if="${#fields.hasErrors('ksiazka.id_ksiazki')}" th:errors="*{ksiazka.id_ksiazki}">NameError</td>
                 </tr>  
                  <tr>
-                    <td>Komentarz:</td>
-                    <td><input type="text" th:field="*{komentarz}" /></td>
-                    <td th:if="${#fields.hasErrors('komentarz')}" th:errors="*{komentarz}">NameError</td>
-                </tr>                                          
+                    <td>Cena zakupu:</td>
+                    <td><input type="text" th:field="*{cena_zakupu}" /></td>
+                    <td th:if="${#fields.hasErrors('cena_zakupu')}" th:errors="*{cena_zakupu}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Ilość zamówiona:</td>
+                    <td><input type="text" th:field="*{ilosc_zamowiona}" /></td>
+                    <td th:if="${#fields.hasErrors('ilosc_zamowiona')}" th:errors="*{ilosc_zamowiona}">NameError</td>
+                </tr>    
+                 <tr>
+                    <td>Wartość pozycji:</td>
+                    <td><input type="text" th:field="*{wartosc_pozycji}" /></td>
+                    <td th:if="${#fields.hasErrors('wartosc_pozycji')}" th:errors="*{wartosc_pozycji}">NameError</td>
+                </tr>                                            
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/lista_opinii" class="btn btn-dark">Cofnij</a>
+                    	<a href="/lista_detali_zamowienia" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>
