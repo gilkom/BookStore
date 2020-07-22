@@ -101,7 +101,7 @@
                     <a th:href="@{'/edytuj_detal_zamowienia/' + ${detal.primaryKey.zamowienie.id_zamowienia}+ '/'+ ${detal.primaryKey.pozycja_zamowienia}}" class="btn btn-warning btn-sm">Edytuj</a>
 
                      <form method="get" action="@{/lista_detali_zamowienia/usun_detal_zamowienia/' + ${detal.primaryKey.zamowienie.id_zamowienia} +'/'+ ${detal.primaryKey.pozycja_zamowienia}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego autora?') ? true : false;">
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć ten detal zamówienia?') ? true : false;">
                     		
                     	<a th:href="@{'/usun_detal_zamowienia/' + ${detal.primaryKey.zamowienie.id_zamowienia} +'/'+ ${detal.primaryKey.pozycja_zamowienia}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
