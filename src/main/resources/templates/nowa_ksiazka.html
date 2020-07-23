@@ -75,6 +75,7 @@
 
     <div class="container" align="center">
         <br/>
+        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
         <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post">
   
             <table class="table">

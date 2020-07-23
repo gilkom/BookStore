@@ -1,5 +1,10 @@
 package gilko.marcin.bookstore.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Set;
 
@@ -8,13 +13,19 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.Kategoria;
@@ -36,6 +47,8 @@ public class KsiazkaController {
 	private AutorService autService;
 	@Autowired
 	private WydawnictwoService wydService;
+	
+
 	
 	@RequestMapping("/lista_ksiazek")
 	public String listaKsiazek(Model model) {
@@ -68,15 +81,18 @@ public class KsiazkaController {
 		return "nowa_ksiazka";
 	}
 	
-	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
+	//@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
+	@PostMapping("/nowa_ksiazka/save")
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
 									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow,
 									BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
+			System.out.println("-------------------jeden----------------------------");
 			return "nowa_ksiazka";
 		}else {
+
 			for(int i =0; i < listaIdKategorii.length; i++) {
 				ksiazka.addKategoria(katService.get(listaIdKategorii[i]));
 			}
@@ -87,6 +103,8 @@ public class KsiazkaController {
 			return "redirect:/lista_ksiazek";
 		}
 	}
+
+	
 	
 	//-------Edytuj Ksiazke----------------------
 	
@@ -132,6 +150,28 @@ public class KsiazkaController {
 		return mav;
 	}
 	
+	@RequestMapping("/wyswietl_ksiazke/{id}")
+	public ModelAndView wyswietlKsiazke(@PathVariable(name="id") Long id) {
+		ModelAndView mav = new ModelAndView("wyswietl_ksiazke");
+		Ksiazka ksiazka = service.get(id);
+		mav.addObject("ksiazka", ksiazka);
+		
+		Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
+		mav.addObject("zapisaneKategorie", zapisaneKategorie);
+		
+		Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
+		mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
+		
+		List<Kategoria> listKategoria = katService.list();
+		mav.addObject("listKategoria", listKategoria);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		mav.addObject("listWydawnictwo", listWydawnictwo);
+		
+		List<Autor> listAutor = autService.list();
+		mav.addObject("listAutor", listAutor);
+		return mav;
+	}
 	//------------Edytuj Kategorie Ksiazki----------------------
 	
 	@RequestMapping(value="/edytuj_ksiazke/edytuj_kategorie_ksiazki", method=RequestMethod.POST)

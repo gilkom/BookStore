@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
+<head>
+<meta charset="utf-8" />
+<title>Edytuj Książkę</title>
+</head>
+<body>
+
+<section>
+	<div class="container-sm">
+		<div class="jumbotron" th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
+				<h1 style="color:white;">Ksiegarnia internetowa</h1>
+		</div>
+	</div>
+		<div class="container">	
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Strona glowna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Koszyk</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Kontakt</a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
+
+</section>
+&nbsp;&nbsp;&nbsp;
+<div class="container">
+	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
+		    <li class="breadcrumb-item"><a href="/lista_ksiazek">Lista książek</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_ksiazek/wyswietl_ksiazke">Wyswietl książkę</li>
+		  </ol>
+		</nav>
+</div>
+    &nbsp;&nbsp;&nbsp;
+    
+    
+    
+<div class="container">
+
+	<img th:src="@{/images/okladka.png}" alt="okladka" 
+		style="width:250px; height:300px; float:left; border-right: 20px solid transparent; border-bottom: 20px solid transparent">
+	<h2 th:text="${ksiazka.tytul_ksiazki}"></h2>
+	<h4 th:text="${ksiazka.oryginalny_tytul_ksiazki}"></h4>
+	<p>
+		<th:block th:each="autor : ${zapisaniAutorzy}">
+              <label th:text="${autor.nazwisko_autora + ' ' + autor.imie_autora}"></label>
+        </th:block>
+	</p>
+	<table>
+		<tr>
+            <td>Wydawnictwo:</td>	
+        	<td th:text="${ksiazka.wydawnictwo.nazwa_wydawnictwa}"/></td>
+        </tr>
+		<tr>
+            <td>ISBN:</td>	
+        	<td th:text="${ksiazka.isbn}"/></td>
+        </tr>
+        <tr>
+            <td>Dostępność:	</td>	
+        	<td th:text="${ksiazka.ilosc_ksiazek}"/></td>
+        </tr>
+        <tr>
+            <td>Rok wydania:</td>	
+        	<td th:text="${ksiazka.rok_wydania_ksiazki}"/></td>
+        </tr>
+        <tr>
+            <td>Ilość stron:</td>	
+        	<td th:text="${ksiazka.liczba_stron_ksiazki}"/></td>
+        </tr>
+        <tr>
+            <td>Oprawa:</td>	
+        	<td th:text="${ksiazka.oprawa_ksiazki}"/></td>
+        </tr>
+       	<tr>
+            <td>Kategorie:</td>
+            <td>	
+            	<th:block th:each="kategoria : ${zapisaneKategorie}">
+              	<label th:text="${kategoria.nazwa_kategorii}"></label>
+        		</th:block>
+        	</td>
+        </tr>
+	</table>
+	
+	
+</div>
+
+
+
+    &nbsp;&nbsp;&nbsp;
+<div class="container" align="center">    
+        <br />
+        <p th:text="${ksiazka.opis_ksiazki}" />
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
+	<p>Ksiegarnia Internetowa - BookStore </p>
+</div>
+</body>
