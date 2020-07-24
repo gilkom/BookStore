@@ -30,10 +30,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.model.Ksiazka;
+import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.Wydawnictwo;
 import gilko.marcin.bookstore.service.AutorService;
 import gilko.marcin.bookstore.service.KategoriaService;
 import gilko.marcin.bookstore.service.KsiazkaService;
+import gilko.marcin.bookstore.service.OpiniaService;
 import gilko.marcin.bookstore.service.WydawnictwoService;
 
 @Controller
@@ -47,7 +49,8 @@ public class KsiazkaController {
 	private AutorService autService;
 	@Autowired
 	private WydawnictwoService wydService;
-	
+	@Autowired
+	private OpiniaService opService;
 
 	
 	@RequestMapping("/lista_ksiazek")
@@ -150,28 +153,6 @@ public class KsiazkaController {
 		return mav;
 	}
 	
-	@RequestMapping("/wyswietl_ksiazke/{id}")
-	public ModelAndView wyswietlKsiazke(@PathVariable(name="id") Long id) {
-		ModelAndView mav = new ModelAndView("wyswietl_ksiazke");
-		Ksiazka ksiazka = service.get(id);
-		mav.addObject("ksiazka", ksiazka);
-		
-		Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
-		mav.addObject("zapisaneKategorie", zapisaneKategorie);
-		
-		Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
-		mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
-		
-		List<Kategoria> listKategoria = katService.list();
-		mav.addObject("listKategoria", listKategoria);
-		
-		List<Wydawnictwo> listWydawnictwo = wydService.list();
-		mav.addObject("listWydawnictwo", listWydawnictwo);
-		
-		List<Autor> listAutor = autService.list();
-		mav.addObject("listAutor", listAutor);
-		return mav;
-	}
 	//------------Edytuj Kategorie Ksiazki----------------------
 	
 	@RequestMapping(value="/edytuj_ksiazke/edytuj_kategorie_ksiazki", method=RequestMethod.POST)
@@ -312,5 +293,45 @@ public class KsiazkaController {
 	public String usunKsiazke(@PathVariable(name="id")Long id) {
 		service.delete(id);
 		return "redirect:/lista_ksiazek";
+	}
+	
+	
+	@RequestMapping("/wyswietl_ksiazke/{id}")
+	public ModelAndView wyswietlKsiazke(@PathVariable(name="id") Long id) {
+		ModelAndView mav = new ModelAndView("wyswietl_ksiazke");
+		Ksiazka ksiazka = service.get(id);
+		mav.addObject("ksiazka", ksiazka);
+		
+		Opinia opinia = new Opinia();
+		mav.addObject("opinia", opinia);
+		
+		List<Opinia> listOpinia = opService.getBook(id);
+		mav.addObject("listOpinia", listOpinia);
+		
+		Set<Kategoria> zapisaneKategorie = ksiazka.getKategoria();
+		mav.addObject("zapisaneKategorie", zapisaneKategorie);
+		
+		Set<Autor> zapisaniAutorzy = ksiazka.getAutor();
+		mav.addObject("zapisaniAutorzy", zapisaniAutorzy);
+		
+		List<Kategoria> listKategoria = katService.list();
+		mav.addObject("listKategoria", listKategoria);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		mav.addObject("listWydawnictwo", listWydawnictwo);
+		
+		List<Autor> listAutor = autService.list();
+		mav.addObject("listAutor", listAutor);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/wyswietl_ksiazke/save_comment", method = RequestMethod.POST)
+	public String wyswietlKsiazkeZapiszOpinie(@Valid @ModelAttribute("opinia") Opinia opinia, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "wyswietl_ksiazke";
+		}else {
+			opService.save(opinia);
+			return "wyswietl_ksiazke";
+		}
 	}
 }

@@ -29,6 +29,10 @@ public class OpiniaService {
 		return repo.findByPrimaryKey(opiniaId);
 	}
 	
+	public List<Opinia> getBook(Long id) {
+		return repo.myQuery(id);
+	}
+	
 	public void delete(Opinia opinia) {
 		repo.delete(opinia);
 	}
