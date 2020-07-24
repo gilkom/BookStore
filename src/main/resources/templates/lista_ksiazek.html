@@ -100,7 +100,9 @@
                 <td>
                 	<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"  th:text="${ksiazka.id_ksiazki}">	</a>
                 </td>
-                <td th:text="${ksiazka.tytul_ksiazki}">Tytuł</td>
+                <td>
+                 	<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"   th:text="${ksiazka.tytul_ksiazki}"> </a>
+                 </td>
                 <td th:text="${ksiazka.oryginalny_tytul_ksiazki}">Oryginalny tytuł</td>
                 <td th:text="${ksiazka.isbn}">ISBN</td>
                 <td th:text="${ksiazka.ilosc_ksiazek}">Ilość książek</td>
