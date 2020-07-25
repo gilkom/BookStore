@@ -303,6 +303,7 @@ public class KsiazkaController {
 		mav.addObject("ksiazka", ksiazka);
 		
 		Opinia opinia = new Opinia();
+		opinia.setKsiazka(ksiazka);
 		mav.addObject("opinia", opinia);
 		
 		List<Opinia> listOpinia = opService.getBook(id);
@@ -331,7 +332,9 @@ public class KsiazkaController {
 			return "wyswietl_ksiazke";
 		}else {
 			opService.save(opinia);
-			return "wyswietl_ksiazke";
+			Long id = opinia.getKsiazka().getId_ksiazki();
+			
+			return "redirect:/wyswietl_ksiazke/" + id;
 		}
 	}
 }

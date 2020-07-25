@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "BK_OPINIA")
@@ -18,8 +20,9 @@ import javax.persistence.Transient;
 public class Opinia {
 	@EmbeddedId
 	private OpiniaId primaryKey = new OpiniaId();
-	
+	@NotBlank
 	private int ocena;
+	@NotBlank
 	private String komentarz;
 	
 	
