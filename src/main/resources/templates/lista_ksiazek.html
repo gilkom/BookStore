@@ -71,22 +71,42 @@
 </div>
 
 <div class="container" align="center">
-    <a href="/nowa_ksiazka" class="btn btn-dark">Dodaj książkę</a>
-    
+
+    <nav class = "navbar navbar-dark bg-dark" style="background-color: #e3f2fd;">
+		<form class="form-inline" th:action="@{/lista_ksiazek/page/1/}">
+			<input type ="hidden" name="sortField" value="tytul_ksiazki"/>
+		    <input type="hidden"  name="sortDir" value="asc"/>
+		    <div class="md-form mt-0">
+		    	<div class="col-xs-10">
+			    	<input class= "form-control" placeholder="Szukaj" aria-label="Search" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+			    	 <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Szukaj</button>
+			    	 <input  class="btn btn-outline-success my-2 my-sm-0" type="button" value="Wyczyść" onClick=clearSearch() id="btnClear"  />
+			    	 <a  style="text-align:right;" href="/nowa_ksiazka" class="btn btn-outline-success my-2 my-sm-0">Dodaj książkę</a>
+		    	</div>	
+		    </div>
+		</form>
+	</nav>
+	
     <br/><br/>
     <table class="table">
         <thead>
             <tr>
             	<th> </th>
-                <th>ID</th>
-                <th>Tytuł</th>
-                <th>Oryginalny tytuł</th>
-                <th>ISBN</th>
-                <th>Ilość książek</th>
-                <th>Rok wydania</th>
-                <th>Liczba stron</th>
-                <th>Oprawa</th>
-                <th>Nazwa wydawnictwa</th>
+                <th>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=tytul_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Tytuł</a>
+                </th>
+                <th>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=rok_wydania_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Rok wydania</a>
+                </th>
+                <th>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=liczba_stron_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Liczba stron</a>
+                </th>
+                <th>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=oprawa_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Oprawa</a>
+                </th>
+                <th>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=wydawnictwo.nazwa_wydawnictwa&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Nazwa wydawnictwa</a>
+                </th>
                 <th>Akcje</th>
             </tr>
         </thead>
@@ -94,22 +114,17 @@
             <tr th:each="ksiazka : ${listKsiazka}">
             	<td>
             		<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}" >
-            	 	<img src="images/okladka.png" alt="okladka" style="width:80px; height:100px">
+            	 	<img th:src="@{/images/okladka.png}" alt="okladka" style="width:80px; height:100px">
+            	 	
             	 	</a>
             	 </td>
                 <td>
-                	<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"  th:text="${ksiazka.id_ksiazki}">	</a>
-                </td>
-                <td>
                  	<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"   th:text="${ksiazka.tytul_ksiazki}"> </a>
                  </td>
-                <td th:text="${ksiazka.oryginalny_tytul_ksiazki}">Oryginalny tytuł</td>
-                <td th:text="${ksiazka.isbn}">ISBN</td>
-                <td th:text="${ksiazka.ilosc_ksiazek}">Ilość książek</td>
                 <td th:text="${ksiazka.rok_wydania_ksiazki}">Rok wydania</td>
                 <td th:text="${ksiazka.liczba_stron_ksiazki}">Liczba stron</td>
                 <td th:text="${ksiazka.oprawa_ksiazki}">Oprawa</td>
-                <td th:text="${ksiazka.wydawnictwo.nazwa_wydawnictwa}">Id wydawnictwa</td>
+                <td th:text="${ksiazka.wydawnictwo.nazwa_wydawnictwa}">Nazwa wydawnictwa</td>
                 <td>
                     <a th:href="@{'/edytuj_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 
@@ -123,9 +138,43 @@
         </tbody>
     </table>
 </div>  
+<div th:if="${totalPages > 1}" class="container">
+		Suma książek: [[${totalItems}]]
+		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Pierwsza</a>
+		<span th:unless="${currentPage > 1}">Pierwsza</span>
+		&nbsp;&nbsp;
+		
+		<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Poprzednia</a>
+		<span th:unless="${currentPage > 1}">Poprzednia</span>
+		
+		&nbsp;&nbsp;
+		
+		<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+			<a th:if="${currentPage != i}" th:href="@{'/lista_ksiazek/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">[[${i}]]</a>
+			<span th:unless="${currentPage != i}">[[${i}]]</span>
+			&nbsp;
+		</span>
+		
+		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Następna</a>
+		<span th:unless="${currentPage < totalPages}">Następna</span>
+		&nbsp;&nbsp;
+		
+		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Ostatnia</a>
+		<span th:unless="${currentPage < totalPages}">Ostatnia</span>
+		<br><br>
+	</div>
 &nbsp;&nbsp;&nbsp;
 <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
+
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/lista_ksiazek}]]";
+    }
+</script>
+
 </body>
 </html>
+

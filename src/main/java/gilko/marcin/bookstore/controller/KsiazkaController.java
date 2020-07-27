@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -55,7 +57,36 @@ public class KsiazkaController {
 	
 	@RequestMapping("/lista_ksiazek")
 	public String listaKsiazek(Model model) {
-		List<Ksiazka> listKsiazka = service.list();
+		/*List<Ksiazka> listKsiazka = service.list();
+		model.addAttribute("listKsiazka", listKsiazka);
+		
+		List<Wydawnictwo> listWydawnictwo = wydService.list();
+		model.addAttribute("listWydawnictwo", listWydawnictwo);
+		return "lista_ksiazek";
+		*/
+		return listaKsiazekSort(model, 1, "tytul_ksiazki", "asc", "");
+	}
+	
+	@RequestMapping("/lista_ksiazek/page/{pageNum}")
+	public String listaKsiazekSort(Model model,
+				@PathVariable(name="pageNum") int pageNum,
+				@Param("sortField") String sortField,
+				@Param("sortDir") String sortDir,
+				@Param("keyword") String keyword) {
+	
+		Page<Ksiazka> page = service.listAll(pageNum, sortField, sortDir, keyword);
+		Page<Ksiazka> page1 = service.listAllKategoria(pageNum, sortField, sortDir, keyword, "horror");
+		List<Ksiazka> listKsiazka = page.getContent();
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("listKsiazka", listKsiazka);
 		
 		List<Wydawnictwo> listWydawnictwo = wydService.list();
@@ -302,6 +333,8 @@ public class KsiazkaController {
 		Ksiazka ksiazka = service.get(id);
 		mav.addObject("ksiazka", ksiazka);
 		
+
+		
 		Opinia opinia = new Opinia();
 		opinia.setKsiazka(ksiazka);
 		mav.addObject("opinia", opinia);
@@ -325,11 +358,25 @@ public class KsiazkaController {
 		mav.addObject("listAutor", listAutor);
 		return mav;
 	}
+	@RequestMapping("/wyswietl_ksiazke/dodaj_opinie/{id}")
+	public ModelAndView wyswietlKsiazkeDodajOpinie(@PathVariable(name="id") Long id) {
+		ModelAndView mav = new ModelAndView("dodaj_opinie");
+		Ksiazka ksiazka = service.get(id);
+		mav.addObject("ksiazka", ksiazka);
+		
+
+		
+		Opinia opinia = new Opinia();
+		opinia.setKsiazka(ksiazka);
+		mav.addObject("opinia", opinia);
+
+		return mav;
+	}
 	
-	@RequestMapping(value = "/wyswietl_ksiazke/save_comment", method = RequestMethod.POST)
+	@RequestMapping(value = "/wyswietl_ksiazke/dodaj_opinie/save_comment", method = RequestMethod.POST)
 	public String wyswietlKsiazkeZapiszOpinie(@Valid @ModelAttribute("opinia") Opinia opinia, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			return "wyswietl_ksiazke";
+			return "dodaj_opinie";
 		}else {
 			opService.save(opinia);
 			Long id = opinia.getKsiazka().getId_ksiazki();

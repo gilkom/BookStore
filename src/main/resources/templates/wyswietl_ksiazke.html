@@ -136,54 +136,12 @@
 <div class="text-center">
     &nbsp;&nbsp;&nbsp;
 
- <div class="container" align="center">
-        <br/>
-        <form action="#" th:action="@{/wyswietl_ksiazke/save_comment}"  method="post">
-  			
-  		<input type="hidden" th:field="${opinia.primaryKey.ksiazka.id_ksiazki}"/>
-  			
-            <table class="table">
-                <tr>
-                    <td>Id klienta:</td>
-                    <td><input type="text" th:field="${opinia.primaryKey.klient.id_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('opinia.primaryKey.klient.id_klienta')}" th:errors="${opinia.primaryKey.klient.id_klienta}">NameError</td>
-                </tr>
-               
-                <tr>
-                    <td>Ocena:</td>
-                    <td>
-                    	<select class="form-control" th:field="${opinia.ocena}">
-                    		<option value="0">Wybierz ocenę</option>
-                    		<option value="1">1</option>
-                    		<option value="2">2</option>
-                    		<option value="3">3</option>
-                    		<option value="4">4</option>
-                    		<option value="5">5</option>
-                    	</select>
-                    </td>
-                     <td th:if="${#fields.hasErrors('opinia.ocena')}" th:errors="${opinia.ocena}">NameError</td>
-                   
-                    <td th:if="${#fields.hasErrors('opinia.ocena')}" th:errors="${opinia.ocena}">NameError</td>
-                </tr>  
-                 <tr>
-                    <td>Komentarz:</td>
-                    <td><input type="text" th:field="${opinia.komentarz}" style ="height:100px; width:100%;"/></td>
-                    <td th:if="${#fields.hasErrors('opinia.komentarz')}" th:errors="${opinia.komentarz}">NameError</td>
-                </tr>                      
-                <tr>
-                    <td >
-                    	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/wyswietl_ksiazke" class="btn btn-dark">Cofnij</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-
-
 <div class="container" align="left">
 <h4>Opinie:</h4>
-	<table style="border:1px solid; background-color: #f5f5f5; width: 100%">
+
+	<table style="border:1px solid; background-color: #f5f5f5; width: 100%; padding:20px">
+	
+	
 			<th:block th:each="opinia : ${listOpinia}">
 				<tr>
 					<td><b>Autor:</b></td>
@@ -202,8 +160,13 @@
 					<td><hr class="dotted"></td>
 				</tr>
 			</th:block>
-	</table>	
+	</table>
+	   &nbsp;&nbsp;&nbsp;
+		<a th:href="@{'/wyswietl_ksiazke/dodaj_opinie/' + ${opinia.primaryKey.ksiazka.id_ksiazki}}" class= "btn btn-dark">Dodaj opinię</a>	
 </div>
+
+    &nbsp;&nbsp;&nbsp;
+
 
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
