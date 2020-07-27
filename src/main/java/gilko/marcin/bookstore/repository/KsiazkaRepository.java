@@ -15,7 +15,7 @@ public interface KsiazkaRepository extends JpaRepository<Ksiazka, Long>{
 	@Query(value ="SELECT k FROM Ksiazka k WHERE CONCAT(k.tytul_ksiazki, k.oryginalny_tytul_ksiazki) LIKE %:keyword%")
 	public Page<Ksiazka> search(@Param("keyword") String keyword, Pageable pageable);
 	
-	@Query(value = "SELECT ks FROM Ksiazka ks JOIN ks.kategorie kat  WHERE  CONCAT(ks.tytul_ksiazki, ks.oryginalny_tytul_ksiazki) LIKE %:keyword% AND  :kategoria in k.kategorie.nazwa_kategorii")
+	@Query(value = "SELECT ks FROM Ksiazka ks JOIN ks.kategorie kat  WHERE  CONCAT(ks.tytul_ksiazki, ks.oryginalny_tytul_ksiazki) LIKE %:keyword% AND kat.nazwa_kategorii LIKE %:kategoria%")
 	public Page<Ksiazka> searchKategoria(@Param("keyword") String keyword, @Param("kategoria") String kategoria, Pageable pageable);
 	
 }

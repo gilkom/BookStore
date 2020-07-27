@@ -64,7 +64,7 @@ public class KsiazkaController {
 		model.addAttribute("listWydawnictwo", listWydawnictwo);
 		return "lista_ksiazek";
 		*/
-		return listaKsiazekSort(model, 1, "tytul_ksiazki", "asc", "");
+		return listaKsiazekSort(model, 1, "tytul_ksiazki", "asc", "", "");
 	}
 	
 	@RequestMapping("/lista_ksiazek/page/{pageNum}")
@@ -72,25 +72,30 @@ public class KsiazkaController {
 				@PathVariable(name="pageNum") int pageNum,
 				@Param("sortField") String sortField,
 				@Param("sortDir") String sortDir,
-				@Param("keyword") String keyword) {
+				@Param("keyword") String keyword,
+				@Param("nazwaKategorii") String nazwaKategorii) {
 	
-		Page<Ksiazka> page = service.listAll(pageNum, sortField, sortDir, keyword);
-		Page<Ksiazka> page1 = service.listAllKategoria(pageNum, sortField, sortDir, keyword, "horror");
-		List<Ksiazka> listKsiazka = page.getContent();
+		//Page<Ksiazka> page = service.listAll(pageNum, sortField, sortDir, keyword);
+		Page<Ksiazka> page1 = service.listAllKategoria(pageNum, sortField, sortDir, keyword, nazwaKategorii);
+		List<Ksiazka> listKsiazka = page1.getContent();
 		
 		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("totalPages", page1.getTotalPages());
+		model.addAttribute("totalItems", page1.getTotalElements());
 		
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("nazwaKategorii", nazwaKategorii);
 		model.addAttribute("listKsiazka", listKsiazka);
 		
 		List<Wydawnictwo> listWydawnictwo = wydService.list();
 		model.addAttribute("listWydawnictwo", listWydawnictwo);
+		
+		List<Kategoria> listKategoria = katService.list();
+		model.addAttribute("listKategoria", listKategoria);
 		
 		return "lista_ksiazek";
 	}

@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "BK_OPINIA")
@@ -20,9 +23,10 @@ import javax.validation.constraints.NotEmpty;
 public class Opinia {
 	@EmbeddedId
 	private OpiniaId primaryKey = new OpiniaId();
-	@NotBlank
+
+	@Min(value= 1, message="Wybierz ocenę!")
 	private int ocena;
-	@NotBlank
+	@Size(min= 3, max=50, message="Tekst musi zawierać maksymalnie 50 znaków!")
 	private String komentarz;
 	
 	

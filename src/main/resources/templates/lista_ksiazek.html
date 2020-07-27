@@ -72,13 +72,21 @@
 
 <div class="container" align="center">
 
+
     <nav class = "navbar navbar-dark bg-dark" style="background-color: #e3f2fd;">
 		<form class="form-inline" th:action="@{/lista_ksiazek/page/1/}">
 			<input type ="hidden" name="sortField" value="tytul_ksiazki"/>
 		    <input type="hidden"  name="sortDir" value="asc"/>
 		    <div class="md-form mt-0">
 		    	<div class="col-xs-10">
-			    	<input class= "form-control" placeholder="Szukaj" aria-label="Search" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+		    	
+				    <select class = "form-control" name = "nazwaKategorii">
+						<option value="">Wybierz kategorię</option>
+						<option th:each="kategoria : ${listKategoria}" th:value="${kategoria.nazwa_kategorii}"
+									th:text="${kategoria.nazwa_kategorii}"></option>
+					</select>
+		    	
+			    	<input class= "form-control" placeholder="Szukaj" aria-label="Search" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"  />
 			    	 <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Szukaj</button>
 			    	 <input  class="btn btn-outline-success my-2 my-sm-0" type="button" value="Wyczyść" onClick=clearSearch() id="btnClear"  />
 			    	 <a  style="text-align:right;" href="/nowa_ksiazka" class="btn btn-outline-success my-2 my-sm-0">Dodaj książkę</a>
@@ -93,20 +101,21 @@
             <tr>
             	<th> </th>
                 <th>
-                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=tytul_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Tytuł</a>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=tytul_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword} + '&nazwaKategorii=' + ${nazwaKategorii}}">Tytuł</a>
                 </th>
                 <th>
-                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=rok_wydania_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Rok wydania</a>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=rok_wydania_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Rok wydania</a>
                 </th>
                 <th>
-                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=liczba_stron_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Liczba stron</a>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=liczba_stron_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Liczba stron</a>
                 </th>
                 <th>
-                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=oprawa_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Oprawa</a>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=oprawa_ksiazki&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Oprawa</a>
                 </th>
                 <th>
-                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=wydawnictwo.nazwa_wydawnictwa&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}}">Nazwa wydawnictwa</a>
+                	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=wydawnictwo.nazwa_wydawnictwa&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Nazwa wydawnictwa</a>
                 </th>
+                
                 <th>Akcje</th>
             </tr>
         </thead>
