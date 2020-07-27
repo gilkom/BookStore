@@ -150,26 +150,26 @@
 <div th:if="${totalPages > 1}" class="container">
 		Suma książek: [[${totalItems}]]
 		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Pierwsza</a>
+<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Pierwsza</a>
 		<span th:unless="${currentPage > 1}">Pierwsza</span>
 		&nbsp;&nbsp;
 		
-		<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Poprzednia</a>
+		<a th:if="${currentPage > 1}" th:href="@{'/lista_ksiazek/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Poprzednia</a>
 		<span th:unless="${currentPage > 1}">Poprzednia</span>
 		
 		&nbsp;&nbsp;
 		
 		<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-			<a th:if="${currentPage != i}" th:href="@{'/lista_ksiazek/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">[[${i}]]</a>
+			<a th:if="${currentPage != i}" th:href="@{'/lista_ksiazek/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">[[${i}]]</a>
 			<span th:unless="${currentPage != i}">[[${i}]]</span>
 			&nbsp;
 		</span>
 		
-		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Następna</a>
+		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Następna</a>
 		<span th:unless="${currentPage < totalPages}">Następna</span>
 		&nbsp;&nbsp;
 		
-		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}}">Ostatnia</a>
+		<a th:if="${currentPage < totalPages}" th:href="@{'/lista_ksiazek/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Ostatnia</a>
 		<span th:unless="${currentPage < totalPages}">Ostatnia</span>
 		<br><br>
 	</div>
