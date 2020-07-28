@@ -26,7 +26,7 @@ public class Opinia {
 
 	@Min(value= 1, message="Wybierz ocenę!")
 	private int ocena;
-	@Size(min= 3, max=50, message="Tekst musi zawierać maksymalnie 50 znaków!")
+	@Size(min= 3, max=500)
 	private String komentarz;
 	
 	
