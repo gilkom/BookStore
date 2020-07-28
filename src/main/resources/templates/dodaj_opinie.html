@@ -84,15 +84,12 @@
 	<h4>Dodaj opinię:</h4>
         <br/>
         <form action="#" th:action="@{/wyswietl_ksiazke/dodaj_opinie/save_comment}"  method="post">
-		<input type="hidden" th:field="${opinia.primaryKey.ksiazka.id_ksiazki}"/>	
+		<input type="hidden" th:field="${opinia.primaryKey.ksiazka.id_ksiazki}"/>
+		<input type="hidden" th:field="${opinia.primaryKey.klient.id_klienta}"/>
+		
 	
             <table style="width:100%">
-                <tr>
-                    <td>Id klienta:</td>
-                    <td><input type="text" th:field="${opinia.primaryKey.klient.id_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('opinia.primaryKey.klient.id_klienta')}" th:errors="${opinia.primaryKey.klient.id_klienta}">NameError</td>
-                </tr>
-               
+                
                 <tr>
                     <td>Ocena:</td>
                     <td>
@@ -107,7 +104,6 @@
                     </td>
                      <td th:if="${#fields.hasErrors('opinia.ocena')}" th:errors="${opinia.ocena}">NameError</td>
                    
-                    <td th:if="${#fields.hasErrors('opinia.ocena')}" th:errors="${opinia.ocena}">NameError</td>
                 </tr>  
                  <tr>
                     <td>Komentarz:</td>
@@ -123,7 +119,9 @@
             </table>
         </form>
     </div>
-
+<div class="text-center">
+    &nbsp;&nbsp;&nbsp;
 	<p>Ksiegarnia Internetowa - BookStore </p>
+	    &nbsp;&nbsp;&nbsp;
 </div>
 </body>

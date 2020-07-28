@@ -34,6 +34,8 @@ public class KlientController {
 	@RequestMapping("/nowy_klient")
 	public String dodajKlienta(Model model) {
 		Klient klient = new Klient();
+		klient.setRola("USER_ROLA");
+		klient.setBlokada_konta(1);
 		model.addAttribute("klient", klient);
 		return "nowy_klient";
 	}

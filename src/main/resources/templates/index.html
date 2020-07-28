@@ -12,6 +12,27 @@
 </head>
 <body>
 <section>
+
+ <div class="container-fluid">
+	     <ul class="nav navbar-nav">
+  		  </ul>
+		 <ul class="nav navbar-nav navbar-right">
+		<li>
+			<span  class="navbar-text"  sec:authentication="name">Usernameasdfas</span>
+			<span  class="navbar-text" sec:authentication="principal.authorities">Roles</span>
+			<span th:text="${#authentication.getPrincipal().authorities}"></span>
+			
+			<span class="nav-item">
+				<a class="navbar-item" th:href="@{?lang=pl}"><img th:src="@{/images/pl_flag.png}"/></a>
+			</span>
+			<span class="nav-item">
+				<a class="navbar-item" th:href="@{?lang=eng}"><img th:src="@{/images/eng_flag.png}"/></a>
+			</span>
+		</li>
+		</ul>
+	</div>
+
+
 	<div class="container-sm">
 		<div class="jumbotron" style="background: url(images/bookcase-1869616_1920.jpg)">
 				<h1 style="color:white;">Ksiegarnia internetowa</h1>
@@ -62,6 +83,10 @@
 		</div>
 
 </section>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
 
 &nbsp;&nbsp;&nbsp;
 <div class="container">

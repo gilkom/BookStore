@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "BK_KLIENT")
@@ -12,17 +17,37 @@ public class Klient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_klienta;
+	@NotBlank
+	@Size(min=2, max=20)
 	private String imie_klienta;
+	@NotNull
+	@Size(min=2, max=20)
 	private String nazwisko_klienta;
+	@NotBlank
+	@Size(min=2, max=30)
 	private String nazwa_firmy;
+	@NotBlank
+	@Pattern(message="Wpisz poprawny NIP(10 cyfr)", regexp="^\\d{10}$")
 	private String nip_klienta;
+	@NotBlank
+	@Size(min=2, max=30)
 	private String ulica_klienta;
+	@NotBlank
+	@Size(min=2, max=20)
 	private String miasto_klienta;
+	@NotBlank
+	@Pattern(message="Wpisz poprawny kod(wzór = '01026'", regexp="^\\d{5}$")
 	private String kod_pocztowy_klienta;
+	@Pattern(message="Wpisz poprawny numer telefonu(10 cyfr)", regexp="^\\d{10}$")
 	private String telefon_klienta;
+	@NotBlank
+	@Email(message="Wpisz poprawny email")
 	private String email_klienta;
+	@NotBlank
 	private String password;
+	@NotNull
 	private int blokada_konta;
+	@NotBlank
 	private String rola;
 	
 	
