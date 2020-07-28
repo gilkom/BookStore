@@ -30,5 +30,9 @@ public class ZamowienieService {
 	public void delete(Long id) {
 		repo.deleteById(id);
 	}
+	
+	public Zamowienie getZamowienieKoszyk(Long id_klienta) {
+		return repo.searchZamowienieByKoszyk(id_klienta);
+	}
 
 }

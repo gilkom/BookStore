@@ -37,6 +37,7 @@ public class ZamowienieController {
 		model.addAttribute("listZamowienie", listZamowienie);
 		return "lista_zamowien";
 	}
+
 	
 	//-----------Nowe Zamowienie-------------
 	
@@ -47,6 +48,8 @@ public class ZamowienieController {
 
 		return "nowe_zamowienie";
 	}
+	
+	
 	
 	@RequestMapping(value="/nowe_zamowienie/save", method = RequestMethod.POST)
 	public String zapiszNoweZamowienie(@Valid @ModelAttribute("zamowienie") Zamowienie zamowienie,

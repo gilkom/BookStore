@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -36,12 +38,15 @@ import gilko.marcin.bookstore.model.Klient;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.Wydawnictwo;
+import gilko.marcin.bookstore.model.Zamowienie;
 import gilko.marcin.bookstore.service.AutorService;
 import gilko.marcin.bookstore.service.KategoriaService;
 import gilko.marcin.bookstore.service.KlientService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 import gilko.marcin.bookstore.service.OpiniaService;
+import gilko.marcin.bookstore.service.PracownikService;
 import gilko.marcin.bookstore.service.WydawnictwoService;
+import gilko.marcin.bookstore.service.ZamowienieService;
 
 @Controller
 public class KsiazkaController {
@@ -58,6 +63,10 @@ public class KsiazkaController {
 	private OpiniaService opService;
 	@Autowired
 	private KlientService klService;
+	@Autowired
+	private ZamowienieService zamService;
+	@Autowired
+	private PracownikService pracService;
 
 	
 	@RequestMapping("/lista_ksiazek")
@@ -396,5 +405,35 @@ public class KsiazkaController {
 			
 			return "redirect:/wyswietl_ksiazke/" + id;
 		}
+	}
+	
+	@RequestMapping(value= "/wyswietl_ksiazke/dodaj_do_koszyka", method= RequestMethod.POST)
+	public String dodajDoKoszyka(@RequestParam(value="idKsiazki") Long idKsiazki,
+								 @RequestParam(value="cenaZakupu") float cenaZakupu,
+								 @RequestParam(value="iloscZamowiona") int iloscZamowiona,
+								 Authentication auth) {
+		String email = auth.getName();
+		System.out.println("--------------------------- " + email + ", idKsiazki: " + idKsiazki + ", cenaZakupu: " +
+				cenaZakupu + ", iloscZamowiona: " + iloscZamowiona);
+		Long id_klienta = klService.getByEmail(email).getId_klienta();
+		Zamowienie zamowienie = new Zamowienie();
+		if(zamService.getZamowienieKoszyk(id_klienta) == null) {
+			//Date date = Calendar.getInstance().getTime();
+			
+			zamowienie.setData_zamowienia(Calendar.getInstance().getTime() );
+			zamowienie.setWartosc_zamowienia(cenaZakupu * iloscZamowiona);
+			zamowienie.setStatus_zamowienia("KOSZYK");
+			zamowienie.setPracownik(pracService.get((long) 21));
+			zamowienie.setKlient(klService.get(id_klienta));
+			System.out.println("______________________________________" + zamowienie.getData_zamowienia());
+		}else {
+			zamowienie = zamService.getZamowienieKoszyk(id_klienta);
+		}
+		zamService.save(zamowienie);
+			
+		
+		
+		
+		return "redirect:/wyswietl_ksiazke/" + idKsiazki;
 	}
 }

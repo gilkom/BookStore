@@ -1,4 +1,4 @@
-package gilko.marcin.bookstore.controller;
+/*package gilko.marcin.bookstore.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -38,3 +38,4 @@ public class CustomErrorController implements ErrorController{
 		return "/error";
 	}
 }
+*/

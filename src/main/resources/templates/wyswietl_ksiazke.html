@@ -88,6 +88,17 @@
               <label th:text="${autor.nazwisko_autora + ' ' + autor.imie_autora}"></label>
         </th:block>
 	</p>
+	
+	<div class ="col text-right">
+		<form action="#" th:action="@{/wyswietl_ksiazke/dodaj_do_koszyka}" method = "post">
+			Wpisz ilosc:<input type="number" name="iloscZamowiona" value = "1"/>
+						<input type="hidden" name="idKsiazki" th:value="${ksiazka.id_ksiazki}"/>
+						<input type="hidden" name="cenaZakupu" th:value="${ksiazka.cena_ksiazki}"/>
+						
+			<button type="submit" class= "btn btn-dark">Dodaj do koszyka</button>
+		</form>
+	</div>
+	
 	<table>
 		<tr>
             <td>Wydawnictwo:</td>	
