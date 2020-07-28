@@ -69,7 +69,10 @@
     <div class="container" align="center">
         <br/>
         <form action="#" th:action="@{/nowy_klient/save}" th:object="${klient}" method="post">
-  
+  			
+  			<input type="hidden" th:field="*{rola}" />
+  			<input type="hidden" th:field="*{blokada_konta}" />
+  			
             <table class="table">
                 <tr>
                     <td>Imię:</td>
@@ -121,16 +124,7 @@
                     <td><input type="text" th:field="*{password}" /></td>
                     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">NameError</td>
                 </tr>
-                 <tr>
-                    <td>Blokada konta:</td>
-                    <td><input type="text" th:field="*{blokada_konta}" /></td>
-                    <td th:if="${#fields.hasErrors('blokada_konta')}" th:errors="*{blokada_konta}">NameError</td>
-                </tr>
-                <tr>
-                    <td>Rola:</td>
-                    <td><input type="text" th:field="*{rola}" /></td>
-                    <td th:if="${#fields.hasErrors('rola')}" th:errors="*{rola}">NameError</td>
-                </tr>                    
+                      
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>

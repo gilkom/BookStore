@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,11 +32,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.Kategoria;
+import gilko.marcin.bookstore.model.Klient;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.Wydawnictwo;
 import gilko.marcin.bookstore.service.AutorService;
 import gilko.marcin.bookstore.service.KategoriaService;
+import gilko.marcin.bookstore.service.KlientService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 import gilko.marcin.bookstore.service.OpiniaService;
 import gilko.marcin.bookstore.service.WydawnictwoService;
@@ -53,6 +56,8 @@ public class KsiazkaController {
 	private WydawnictwoService wydService;
 	@Autowired
 	private OpiniaService opService;
+	@Autowired
+	private KlientService klService;
 
 	
 	@RequestMapping("/lista_ksiazek")
@@ -364,15 +369,18 @@ public class KsiazkaController {
 		return mav;
 	}
 	@RequestMapping("/wyswietl_ksiazke/dodaj_opinie/{id}")
-	public ModelAndView wyswietlKsiazkeDodajOpinie(@PathVariable(name="id") Long id) {
+	public ModelAndView wyswietlKsiazkeDodajOpinie(@PathVariable(name="id") Long id, Authentication auth) {
 		ModelAndView mav = new ModelAndView("dodaj_opinie");
+		
 		Ksiazka ksiazka = service.get(id);
-		mav.addObject("ksiazka", ksiazka);
 		
+		String email = auth.getName();
+		Klient klient = klService.getByEmail(email);
 
-		
 		Opinia opinia = new Opinia();
 		opinia.setKsiazka(ksiazka);
+		opinia.setKlient(klient);
+		
 		mav.addObject("opinia", opinia);
 
 		return mav;

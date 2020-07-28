@@ -2,6 +2,8 @@ package gilko.marcin.bookstore.service;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import gilko.marcin.bookstore.repository.KlientRepository;
 
 @Service
 @Transactional
-public class KlientService {
+public class KlientService{
 	@Autowired
 	private KlientRepository repo;
 	
@@ -30,5 +32,11 @@ public class KlientService {
 	public void delete(Long id) {
 		repo.deleteById(id);
 	}
+	
+	public Klient getByEmail(String email_klienta) {
+		return repo.searchKlientByEmail(email_klienta);
+	}
+	
+	
 
 }
