@@ -62,42 +62,53 @@
 
 </section>
 &nbsp;&nbsp;&nbsp;
-
 <div class="container">
-	<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii">Lista kategorii</li>
-		  </ol>
-		</nav>
-	<h3>Kategorie</h3>
+	
+	<ul class="nav nav-tabs">
+  		<li class="nav-item">
+    		<a class="nav-link active" href="/koszyk">Mój koszyk</a>
+  		</li>
+  		<li class="nav-item">
+    		<a class="nav-link" href="/moje_zamowienia">Moje zamówienia</a>
+	  	</li>
+  		<li class="nav-item">
+    		<a class="nav-link" href="/edytuj_dane_adresowe">Dane adresowe</a>
+  		</li> 
+	</ul>
+		
+  &nbsp;&nbsp;&nbsp;
+	<h3>Mój koszyk:</h3>
 </div>
 
 <div class="container" align="center">
-    <a href="/nowa_kategoria" class="btn btn-dark">Dodaj kategorię</a>
-    
+	<div class="text-right">
+    	<a href="/zloz_zamowienie" class="btn btn-dark">Złóż zamówienie</a>
+    </div>
     <br/><br/>
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nazwa kategorii</th>
-                <th>Opis kategorii</th>
+                <th>Pozycja zamówienia</th>
+                <th>Tytuł książki</th>
+                <th>Cena zakupu</th>
+                <th>Ilość zamówiona</th>
+                <th>Wartość pozycji</th>
                 <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="kategoria : ${listKategoria}">
-                <td th:text="${kategoria.id_kategorii}">ID</td>
-                <td th:text="${kategoria.nazwa_kategorii}">Nazwa</td>
-                <td th:text="${kategoria.opis_kategorii}">Opis</td>
+            <tr th:each="detal : ${listDetalZamowienia}">
+                <td th:text="${detal.primaryKey.pozycja_zamowienia}"></td>
+                <td th:text="${detal.ksiazka.tytul_ksiazki}"></td>
+                <td th:text="${detal.cena_zakupu}"></td>
+                <td th:text="${detal.ilosc_zamowiona}"></td>
+                <td th:text="${detal.wartosc_pozycji}"></td>
                 <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-warning btn-sm">Edytuj</a>
-
-                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id_kategorii}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
+                    <a th:href="@{'/edytuj_koszyk/' + ${detal.primaryKey.zamowienie.id_zamowienia}+ '/'+ ${detal.primaryKey.pozycja_zamowienia}}" class="btn btn-warning btn-sm">Edytuj</a>
+                     <form method="get" action="@{/koszyk/usun_z_koszyka/' + ${detal.primaryKey.zamowienie.id_zamowienia} +'/'+ ${detal.primaryKey.pozycja_zamowienia}}"
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć ten detal zamówienia?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_z_koszyka/' + ${detal.primaryKey.zamowienie.id_zamowienia} +'/'+ ${detal.primaryKey.pozycja_zamowienia}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

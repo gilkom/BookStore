@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<style>
-	h1 { text-shadow: 2px 2px black;}
-</style>
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
 <head>
-<meta charset="utf-8"/>
-<title>Book Store Application</title>
+<meta charset="utf-8" />
+<title>Edytuj detal zamówienia</title>
 </head>
 <body>
+
 <section>
 	<div class="container-sm">
 		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
@@ -62,51 +64,44 @@
 
 </section>
 &nbsp;&nbsp;&nbsp;
-
 <div class="container">
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii">Lista kategorii</li>
+		    <li class="breadcrumb-item"><a href="/lista_detali_zamowienia">Lista detali_zamowienia</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_detali_zamowienia/edytuj_detal_zamowienia">Edytuj detal zamówienia</li>
 		  </ol>
 		</nav>
-	<h3>Kategorie</h3>
+	<h3>Edytuj detal zamówienia</h3>
 </div>
 
-<div class="container" align="center">
-    <a href="/nowa_kategoria" class="btn btn-dark">Dodaj kategorię</a>
-    
-    <br/><br/>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nazwa kategorii</th>
-                <th>Opis kategorii</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="kategoria : ${listKategoria}">
-                <td th:text="${kategoria.id_kategorii}">ID</td>
-                <td th:text="${kategoria.nazwa_kategorii}">Nazwa</td>
-                <td th:text="${kategoria.opis_kategorii}">Opis</td>
-                <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-warning btn-sm">Edytuj</a>
+    <div class="container" align="center">
+        <br/>
+        <form action="#" th:action="@{/edytuj_koszyk/save}" th:object="${detalZamowienia}" method="post">
+  
+  		<input type="hidden" th:field="*{primaryKey.zamowienie.id_zamowienia}" />
 
-                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id_kategorii}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
-                    		
-                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-danger btn-sm">Usun</a>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>  
-&nbsp;&nbsp;&nbsp;
-<div class="text-center">
+  		<input type="hidden" th:field="*{ksiazka.id_ksiazki}" />
+  		<input type="hidden" th:field="*{primaryKey.pozycja_zamowienia}"/>
+  
+            <table class="table">
+
+                 <tr>
+                    <td>Ilość zamówiona:</td>
+                    <td><input type="text" th:field="*{ilosc_zamowiona}" /></td>
+                    <td th:if="${#fields.hasErrors('ilosc_zamowiona')}" th:errors="*{ilosc_zamowiona}">NameError</td>
+                </tr>                                           
+                <tr>
+                    <td >
+                    	<button class = "btn btn-dark" type="submit">Zapisz</button>
+                    	<a href="/koszyk" class="btn btn-dark">Cofnij</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
 </body>
-</html>

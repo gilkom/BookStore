@@ -65,25 +65,35 @@
 </section>
 &nbsp;&nbsp;&nbsp;
 <div class="container">
-	<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_klientow">Lista klientów</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_klientow/edytuj_klienta">Edytuj klienta</li>
-		  </ol>
-		</nav>
-	<h3>Edytuj klienta</h3>
+	
+	<ul class="nav nav-tabs">
+  		<li class="nav-item">
+    		<a class="nav-link" href="/koszyk">Mój koszyk</a>
+  		</li>
+  		<li class="nav-item">
+    		<a class="nav-link" href="/moje_zamowienia">Moje zamówienia</a>
+	  	</li>
+  		<li class="nav-item">
+    		<a class="nav-link active" href="/edytuj_dane_adresowe">Dane adresowe</a>
+  		</li> 
+	</ul>
+		
+  &nbsp;&nbsp;&nbsp;
+	<h3>Edytuj dane adresowe:</h3>
 </div>
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/edytuj_klienta/save}" th:object="${klient}" method="post">
+        <form action="#" th:action="@{/edytuj_dane_adresowe/save}" th:object="${klient}" method="post">
+  		
+  		<input type="hidden" th:field="*{id_klienta}"  readonly="readonly"/>
+  		<input type="hidden" th:field="*{email_klienta}" />
+  		<input type="hidden" th:field="*{password}" />
+  		<input type="hidden" th:field="*{blokada_konta}" />
+  		<input type="hidden" th:field="*{rola}" />
+  
   
             <table class="table">
-                <tr>
-                    <td>Id klienta:</td>
-                    <td><input type="text" th:field="*{id_klienta}"  readonly="readonly"/></td>
-                </tr>
                 <tr>
                     <td>Imię:</td>
                     <td><input type="text" th:field="*{imie_klienta}" /></td>
@@ -123,31 +133,11 @@
                     <td>Telefon:</td>
                     <td><input type="text" th:field="*{telefon_klienta}" /></td>
                     <td th:if="${#fields.hasErrors('telefon_klienta')}" th:errors="*{telefon_klienta}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Email:</td>
-                    <td><input type="text" th:field="*{email_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('email_klienta')}" th:errors="*{email_klienta}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Hasło:</td>
-                    <td><input type="" th:field="*{password}" /></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Blokada konta:</td>
-                    <td><input type="text" th:field="*{blokada_konta}" /></td>
-                    <td th:if="${#fields.hasErrors('blokada_konta')}" th:errors="*{blokada_konta}">NameError</td>
-                </tr>
-                <tr>
-                    <td>Rola:</td>
-                    <td><input type="text" th:field="*{rola}" /></td>
-                    <td th:if="${#fields.hasErrors('rola')}" th:errors="*{rola}">NameError</td>
-                </tr>                                     
+                </tr>          
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>
-                    	<a href="/lista_klientow" class="btn btn-dark">Cofnij</a>
+                    	<a href="/koszyk" class="btn btn-dark">Cofnij</a>
                     </td>
                 </tr>
             </table>

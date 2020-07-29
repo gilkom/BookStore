@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +70,25 @@ public class KlientController {
 		}else {
 			service.save(klient);
 			return "redirect:/lista_klientow";
+		}
+	}
+	
+	@RequestMapping("/edytuj_dane_adresowe")
+	public ModelAndView edytujDaneAdresowe(Authentication auth) {
+		ModelAndView mav = new ModelAndView("edytuj_dane_adresowe");
+		
+		Klient klient = service.getByEmail(auth.getName());
+		mav.addObject("klient", klient);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/edytuj_dane_adresowe/save", method = RequestMethod.POST)
+	public String zapiszDaneAdresowe(@Valid @ModelAttribute("klient") Klient klient, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/edytuj_dane_adresowe";
+		}else {
+			service.save(klient);
+			return "redirect:/koszyk";
 		}
 	}
 	

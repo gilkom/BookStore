@@ -36,4 +36,12 @@ public class DetalZamowieniaService {
 		repo.delete(detalZamowienia);
 	}
 	
+	public List<DetalZamowienia> listKoszyk(Long id_klienta){
+		return repo.searchDetalByKoszyk(id_klienta);
+	}
+	
+	public List<DetalZamowienia> listByIdZamowienia(Long id_zamowienia){
+		return repo.searchDetalByIdZamowienia(id_zamowienia);
+	}
+	
 }

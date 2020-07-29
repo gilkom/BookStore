@@ -15,7 +15,7 @@
  
 <section>
 	<div class="container-sm">
-		<div class="jumbotron" style="background: url(images/bookcase-1869616_1920.jpg)">
+		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
 				<h1 style="color:white;">Ksiegarnia internetowa</h1>
 		</div>
 	</div>
@@ -50,7 +50,10 @@
 						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Koszyk</a>
+						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/koszyk}">Koszyk</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/}">Kontakt</a>

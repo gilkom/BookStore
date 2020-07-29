@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<style>
-	h1 { text-shadow: 2px 2px black;}
-</style>
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
 <head>
-<meta charset="utf-8"/>
-<title>Book Store Application</title>
+<meta charset="utf-8" />
+<title>Edytuj zamówienie</title>
 </head>
 <body>
+
 <section>
 	<div class="container-sm">
 		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
@@ -62,51 +64,73 @@
 
 </section>
 &nbsp;&nbsp;&nbsp;
-
 <div class="container">
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_kategorii">Lista kategorii</li>
+		    <li class="breadcrumb-item"><a href="/lista_zamowien">Lista zamówień</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_zamowien/edytuj_zamowienie">Edytuj zamówienie</li>
 		  </ol>
 		</nav>
-	<h3>Kategorie</h3>
+	<h3>Szczegóły zamówienia:</h3>
 </div>
+<div class="container">
+    <div class="container" align="left">
+        <br />
+       	<div class="text-right">
+ 			<p>Data zamówienia:</p>
+			<h4 th:text="${zamowienie.data_zamowienia}"></h4>		
+		</div>
+		<div class="text-left">
+ 			<p>Numer zamówienia:</p>
+			<h2 class="display-3" th:text="${zamowienie.id_zamowienia}"></h2>		
+		</div>
+	
+            <table>
+                <tr>
+                    <td>Status zamówienia:</td>
+                    <td><h4 style="color:green;" th:text="${zamowienie.status_zamowienia}"></h4></td>
+                </tr>
 
-<div class="container" align="center">
-    <a href="/nowa_kategoria" class="btn btn-dark">Dodaj kategorię</a>
-    
-    <br/><br/>
+            </table>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="container">
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nazwa kategorii</th>
-                <th>Opis kategorii</th>
-                <th>Akcje</th>
+                <th>Pozycja zamówienia</th>
+                <th>Id książki</th>
+                <th>Cena zakupu</th>
+                <th>Ilość zamówiona</th>
+                <th>Wartość pozycji</th>
+
             </tr>
         </thead>
         <tbody>
-            <tr th:each="kategoria : ${listKategoria}">
-                <td th:text="${kategoria.id_kategorii}">ID</td>
-                <td th:text="${kategoria.nazwa_kategorii}">Nazwa</td>
-                <td th:text="${kategoria.opis_kategorii}">Opis</td>
-                <td>
-                    <a th:href="@{'/edytuj_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-warning btn-sm">Edytuj</a>
-
-                     <form method="get" action="@{/lista_kategorii/usun_kategorie/' + ${kategoria.id_kategorii}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tę kategorię?') ? true : false;">
-                    		
-                    	<a th:href="@{'/usun_kategorie/' + ${kategoria.id_kategorii}}" class="btn btn-danger btn-sm">Usun</a>
-                    </form>
-                </td>
+            <tr th:each="detal : ${listDetalZamowienia}">
+                <td th:text="${detal.primaryKey.pozycja_zamowienia}"></td>
+                <td th:text="${detal.ksiazka.tytul_ksiazki}"></td>
+                <td th:text="${detal.cena_zakupu}"></td>
+                <td th:text="${detal.ilosc_zamowiona}"></td>
+                <td th:text="${detal.wartosc_pozycji}"></td>
             </tr>
         </tbody>
     </table>
-</div>  
-&nbsp;&nbsp;&nbsp;
-<div class="text-center">
+    
+    <div class="text-right">
+ 			<p>Wartość zamówienia:</p>
+			<h4 th:text="${zamowienie.wartosc_zamowienia}"></h4>		
+		</div>
+    
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-left">
+    	<a href="/lista_zamowien" class="btn btn-dark">Cofnij</a>
+    </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
 	<p>Ksiegarnia Internetowa - BookStore </p>
 </div>
 </body>
-</html>

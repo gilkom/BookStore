@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,8 @@ public class DetalZamowieniaController {
 	
 	@Autowired
 	ZamowienieService zamService;
+	@Autowired
+	KlientService klService;
 	
 	
 	@RequestMapping("/lista_detali_zamowienia")
@@ -42,6 +45,44 @@ public class DetalZamowieniaController {
 		model.addAttribute("listDetalZamowienia", listDetalZamowienia);
 		return "lista_detali_zamowienia";
 	}
+	
+	@RequestMapping("/koszyk")
+	public String koszyk(Model model, Authentication auth) {
+		
+		List<DetalZamowienia> listDetalZamowienia = service.listKoszyk(klService.getByEmail(auth.getName()).getId_klienta());
+		model.addAttribute("listDetalZamowienia", listDetalZamowienia);
+		
+		return "koszyk";
+	}
+	
+	@RequestMapping("/edytuj_koszyk/{id_zamowienia}/{pozycja_zamowienia}")
+	public ModelAndView edytujKoszyk(@PathVariable(name="id_zamowienia") Long id_zamowienia, @PathVariable(name="pozycja_zamowienia") Long pozycja_zamowienia) {
+		ModelAndView mav = new ModelAndView("edytuj_koszyk");
+		DetalZamowieniaId detalZamowieniaId = new DetalZamowieniaId(pozycja_zamowienia, zamService.get(id_zamowienia));
+		DetalZamowienia detalZamowienia = service.get(detalZamowieniaId);
+		
+		mav.addObject("detalZamowienia", detalZamowienia);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/edytuj_koszyk/save", method=RequestMethod.POST)
+	public String zapiszEdytowanyKoszyk(@Valid @ModelAttribute("detalZamowienia") DetalZamowienia detalZamowienia, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/edytuj_koszyk";
+		}else {
+			service.save(detalZamowienia);
+			return "redirect:/koszyk";
+		}
+	}
+	@RequestMapping("usun_z_koszyka/{id_zamowienia}/{pozycja_zamowienia}")
+	public String usunZKoszyka(@PathVariable(name="id_zamowienia") Long id_zamowienia, @PathVariable(name="pozycja_zamowienia") Long pozycja_zamowienia) {
+		DetalZamowieniaId detalZamowieniaId = new DetalZamowieniaId(pozycja_zamowienia, zamService.get(id_zamowienia));
+		DetalZamowienia detalZamowienia = service.get(detalZamowieniaId);
+		
+		service.delete(detalZamowienia);
+		return "redirect:/koszyk";		
+	}
+	
 	
 	@RequestMapping("nowy_detal_zamowienia")
 	public String dodajDetalZamowienia(Model model) {
