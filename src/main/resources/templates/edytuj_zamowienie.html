@@ -92,11 +92,6 @@
                     <td><input type="text" th:field="${zamowienie.status_zamowienia}" /></td>
                     <td th:if="${#fields.hasErrors('zamowienie.status_zamowienia')}" th:errors="${zamowienie.status_zamowienia}">NameError</td>
                 </tr>
-                <tr>
-                    <td>Id pracownika:</td>
-                    <td><input type="text" th:field="${zamowienie.pracownik.id_pracownika}" /></td>
-                    <td th:if="${#fields.hasErrors('zamowienie.pracownik.id_pracownika')}" th:errors="${zamowienie.pracownik.id_pracownika}">NameError</td>
-                </tr>
                  <tr>
                     <td>Id klienta:</td>
                     <td><input type="text" th:field="${zamowienie.klient.id_klienta}" /></td>

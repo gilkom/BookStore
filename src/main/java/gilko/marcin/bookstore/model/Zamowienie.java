@@ -33,13 +33,7 @@ public class Zamowienie {
 	private Date data_zamowienia;
 	private float wartosc_zamowienia;
 	private String status_zamowienia;
-	
-	@ManyToOne(
-			fetch = FetchType.LAZY
-			)
-	@JoinColumn(name = "ID_PRACOWNIKA", nullable = false)
-	private Pracownik pracownik;
-	
+
 	@ManyToOne(
 			fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ID_KLIENTA", nullable = false)
@@ -87,14 +81,6 @@ public class Zamowienie {
 
 	public void setStatus_zamowienia(String status_zamowienia) {
 		this.status_zamowienia = status_zamowienia;
-	}
-	
-	public Pracownik getPracownik() {
-		return pracownik;
-	}
-	
-	public void setPracownik(Pracownik pracownik) {
-		this.pracownik = pracownik;
 	}
 	
 	public Klient getKlient() {

@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gilko.marcin.bookstore.model.Autor;
+import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.Kategoria;
 import gilko.marcin.bookstore.model.Klient;
 import gilko.marcin.bookstore.model.Ksiazka;
@@ -40,6 +41,7 @@ import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.Wydawnictwo;
 import gilko.marcin.bookstore.model.Zamowienie;
 import gilko.marcin.bookstore.service.AutorService;
+import gilko.marcin.bookstore.service.DetalZamowieniaService;
 import gilko.marcin.bookstore.service.KategoriaService;
 import gilko.marcin.bookstore.service.KlientService;
 import gilko.marcin.bookstore.service.KsiazkaService;
@@ -67,6 +69,8 @@ public class KsiazkaController {
 	private ZamowienieService zamService;
 	@Autowired
 	private PracownikService pracService;
+	@Autowired
+	private DetalZamowieniaService detZamService;
 
 	
 	@RequestMapping("/lista_ksiazek")
@@ -412,22 +416,27 @@ public class KsiazkaController {
 								 @RequestParam(value="cenaZakupu") float cenaZakupu,
 								 @RequestParam(value="iloscZamowiona") int iloscZamowiona,
 								 Authentication auth) {
+		
 		String email = auth.getName();
 		Long id_klienta = klService.getByEmail(email).getId_klienta();
 		Zamowienie zamowienie = new Zamowienie();
+		
+		
+		
 		if(zamService.getZamowienieKoszyk(id_klienta) == null) {
-			//Date date = Calendar.getInstance().getTime();
-			
-			zamowienie.setData_zamowienia(Calendar.getInstance().getTime() );
-			zamowienie.setWartosc_zamowienia(0);
-			zamowienie.setStatus_zamowienia("KOSZYK");
-			zamowienie.setPracownik(pracService.get((long) 21));
+
 			zamowienie.setKlient(klService.get(id_klienta));
+			zamService.save(zamowienie);
 		}else {
 			zamowienie = zamService.getZamowienieKoszyk(id_klienta);
 		}
-		zamService.save(zamowienie);
 		
+		DetalZamowienia detalZamowienia = new DetalZamowienia();
+		detalZamowienia.setZamowienie(zamowienie);
+		detalZamowienia.setIlosc_zamowiona(iloscZamowiona);
+		detalZamowienia.setKsiazka(service.get(idKsiazki));
+		
+		detZamService.save(detalZamowienia);
 		
 			
 		

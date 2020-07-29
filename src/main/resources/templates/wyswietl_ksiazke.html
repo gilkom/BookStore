@@ -81,7 +81,7 @@
 
 	<img th:src="@{/images/okladka.png}" alt="okladka" 
 		style="width:250px; height:300px; float:left; border-right: 20px solid transparent; border-bottom: 20px solid transparent">
-	<h2 th:text="${ksiazka.tytul_ksiazki}"></h2>
+	<h2 class="display-3" th:text="${ksiazka.tytul_ksiazki}"></h2>
 	<h4 th:text="${ksiazka.oryginalny_tytul_ksiazki}"></h4>
 	<p>
 		<th:block th:each="autor : ${zapisaniAutorzy}">
@@ -91,12 +91,13 @@
 	
 	<div class ="col text-right">
 		<form action="#" th:action="@{/wyswietl_ksiazke/dodaj_do_koszyka}" method = "post">
-			Cena:<h1 align="right" th:text="${ksiazka.cena_ksiazki}"></h1>
+			Cena:<h1 class="display-2" th:text="${ksiazka.cena_ksiazki}"></h1>
 			Wpisz ilosc:<input type="number" name="iloscZamowiona" value = "1"/>
 						<input type="hidden" name="idKsiazki" th:value="${ksiazka.id_ksiazki}"/>
 						<input type="hidden" name="cenaZakupu" th:value="${ksiazka.cena_ksiazki}"/>
 						
-			<button type="submit" class= "btn btn-success">Dodaj do koszyka</button>
+			<button type="submit" class= "btn btn-success"
+			onclick="return confirm('Czy chcesz dodać tę książkę do koszyka?') ? true : false;">>Dodaj do koszyka</button>
 		</form>
 	</div>
 	

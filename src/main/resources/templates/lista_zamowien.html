@@ -84,7 +84,6 @@
                 <th>Data zamówienia</th>
                 <th>Wartość</th>
                 <th>Status</th>
-                <th>Id pracownika</th>
                 <th>Id klienta</th>
                 <th>Akcje</th>
             </tr>
@@ -95,7 +94,6 @@
                 <td th:text="${zamowienie.data_zamowienia}"></td>
                 <td th:text="${zamowienie.wartosc_zamowienia}"></td>
                 <td th:text="${zamowienie.status_zamowienia}"></td>
-                <td th:text="${zamowienie.pracownik.id_pracownika}"></td>
                 <td th:text="${zamowienie.klient.id_klienta}"></td>
                 <td>
                     <a th:href="@{'/edytuj_zamowienie/' + ${zamowienie.id_zamowienia}}" class="btn btn-warning btn-sm">Edytuj</a>
