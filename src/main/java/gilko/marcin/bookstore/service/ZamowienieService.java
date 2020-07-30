@@ -38,8 +38,21 @@ public class ZamowienieService {
 	public List<Zamowienie> getZamowienieNotKoszykById(Long id_klienta) {
 		return repo.searchZamowienieByNotKoszykById(id_klienta);
 	}
-	public List<Zamowienie> getZamowienieByKoszyk(){
+	public List<Zamowienie> getZamowienieByNotKoszyk(){
 		return repo.searchZamowienieByNotKoszyk();
 	}
 
+	public List<Zamowienie> getZamowienieByZamowione(){
+		return repo.searchZamowienieByZamowione();
+	}
+	public List<Zamowienie> getZamowienieBySkompletowane(){
+		return repo.searchZamowienieBySkompletowane();
+	}
+	public List<Zamowienie> getZamowienieByWyslane(){
+		return repo.searchZamowienieByWyslane();
+	}
+	public List<Zamowienie> getZamowienieByZamkniete(){
+		return repo.searchZamowienieByZamkniete();
+	}
+	
 }
