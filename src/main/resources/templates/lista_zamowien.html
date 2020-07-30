@@ -91,7 +91,7 @@
             <tr th:each="zamowienie : ${listZamowienie}">
                 <td th:text="${zamowienie.id_zamowienia}"></td>
                 <td th:text="${zamowienie.data_zamowienia}"></td>
-                <td th:text="${zamowienie.wartosc_zamowienia}"></td>
+                <td th:text="${#numbers.formatDecimal(zamowienie.wartosc_zamowienia, 0 , 'DEFAULT', 2, 'DEFAULT')}"></td>
                 <td th:text="${zamowienie.status_zamowienia}"></td>
                 <td th:text="${zamowienie.klient.id_klienta}"></td>
                 <td>

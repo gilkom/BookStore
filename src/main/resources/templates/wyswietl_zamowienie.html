@@ -65,13 +65,20 @@
 </section>
 &nbsp;&nbsp;&nbsp;
 <div class="container">
-	<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_zamowien">Lista zamówień</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_zamowien/edytuj_zamowienie">Edytuj zamówienie</li>
-		  </ol>
-		</nav>
+
+	<ul class="nav nav-tabs">
+  		<li class="nav-item">
+    		<a class="nav-link" href="/koszyk">Mój koszyk</a>
+  		</li>
+  		<li class="nav-item">
+    		<a class="nav-link active" href="/moje_zamowienia">Moje zamówienia</a>
+	  	</li>
+  		<li class="nav-item">
+    		<a class="nav-link" href="/edytuj_dane_adresowe">Dane adresowe</a>
+  		</li> 
+	</ul>
+				
+  &nbsp;&nbsp;&nbsp;
 	<h3>Szczegóły zamówienia:</h3>
 </div>
 <div class="container">
@@ -113,20 +120,20 @@
                 <td th:text="${detal.ksiazka.tytul_ksiazki}"></td>
                 <td th:text="${detal.cena_zakupu}"></td>
                 <td th:text="${detal.ilosc_zamowiona}"></td>
-                <td th:text="${detal.wartosc_pozycji}"></td>
+                <td th:text="${#numbers.formatDecimal(detal.wartosc_pozycji, 0 , 'DEFAULT', 2, 'DEFAULT')}"></td>
             </tr>
         </tbody>
     </table>
     
     <div class="text-right">
  			<p>Wartość zamówienia:</p>
-			<h4 th:text="${zamowienie.wartosc_zamowienia}"></h4>		
+			<h4 th:text="${#numbers.formatDecimal(zamowienie.wartosc_zamowienia, 0 , 'DEFAULT', 2, 'DEFAULT')}"></h4>		
 		</div>
     
     </div>
     &nbsp;&nbsp;&nbsp;
     <div class="text-left">
-    	<a href="/lista_zamowien" class="btn btn-dark">Cofnij</a>
+    	<a href="/moje_zamowienia" class="btn btn-dark">Cofnij</a>
     </div>
     </div>
     &nbsp;&nbsp;&nbsp;

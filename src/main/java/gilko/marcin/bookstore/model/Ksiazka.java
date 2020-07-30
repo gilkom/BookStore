@@ -25,7 +25,7 @@ public class Ksiazka {
 	private Long id_ksiazki;
 	private String tytul_ksiazki;
 	private String oryginalny_tytul_ksiazki;
-	private float cena_ksiazki;
+	private Double cena_ksiazki;
 	private String isbn;
 	private int ilosc_ksiazek;
 	private int rok_wydania_ksiazki;
@@ -93,7 +93,7 @@ public class Ksiazka {
 	
 	public Ksiazka() {}
 	
-	public Ksiazka(Long id, String tytul, String org_tytul,float cena_ksiazki, String isbn, int ilosc, int rok, int strony,
+	public Ksiazka(Long id, String tytul, String org_tytul,Double cena_ksiazki, String isbn, int ilosc, int rok, int strony,
 					String oprawa, String opis) {
 		this.id_ksiazki = id;
 		this.tytul_ksiazki = tytul;
@@ -215,11 +215,11 @@ public class Ksiazka {
 		this.opinie.add(opinia);
 	}
 
-	public float getCena_ksiazki() {
+	public Double getCena_ksiazki() {
 		return cena_ksiazki;
 	}
 
-	public void setCena_ksiazki(float cena_ksiazki) {
+	public void setCena_ksiazki(Double cena_ksiazki) {
 		this.cena_ksiazki = cena_ksiazki;
 	}
 	

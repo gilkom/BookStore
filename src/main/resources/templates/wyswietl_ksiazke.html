@@ -91,7 +91,7 @@
 	
 	<div class ="col text-right">
 		<form action="#" th:action="@{/wyswietl_ksiazke/dodaj_do_koszyka}" method = "post">
-			Cena:<h1 class="display-2" th:text="${ksiazka.cena_ksiazki}"></h1>
+			Cena:<h1 class="display-2" th:text="${#numbers.formatDecimal(ksiazka.cena_ksiazki, 0 , 'DEFAULT', 2, 'DEFAULT')}"></h1>
 			Wpisz ilosc:<input type="number" name="iloscZamowiona" value = "1"/>
 						<input type="hidden" name="idKsiazki" th:value="${ksiazka.id_ksiazki}"/>
 						<input type="hidden" name="cenaZakupu" th:value="${ksiazka.cena_ksiazki}"/>

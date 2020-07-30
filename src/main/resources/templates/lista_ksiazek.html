@@ -136,7 +136,7 @@
                 <td>
                  	<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"   th:text="${ksiazka.tytul_ksiazki}"> </a>
                  </td>
-                 <td th:text="${ksiazka.cena_ksiazki}">Cena książki</td>
+                 <td th:text="${#numbers.formatDecimal(ksiazka.cena_ksiazki, 0 , 'DEFAULT', 2, 'DEFAULT')}">Cena książki</td>
                 <td th:text="${ksiazka.rok_wydania_ksiazki}">Rok wydania</td>
                 <td th:text="${ksiazka.liczba_stron_ksiazki}">Liczba stron</td>
                 <td th:text="${ksiazka.oprawa_ksiazki}">Oprawa</td>

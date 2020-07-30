@@ -93,9 +93,9 @@
                 <td th:text="${detal.primaryKey.zamowienie.id_zamowienia}"></td>
                 <td th:text="${detal.primaryKey.pozycja_zamowienia}"></td>
                 <td th:text="${detal.ksiazka.id_ksiazki}"></td>
-                <td th:text="${detal.cena_zakupu}"></td>
+                <td th:text="${#numbers.formatDecimal(detal.cena_zakupu, 0 , 'DEFAULT', 2, 'DEFAULT')}"></td>
                 <td th:text="${detal.ilosc_zamowiona}"></td>
-                <td th:text="${detal.wartosc_pozycji}"></td>
+                <td th:text="${#numbers.formatDecimal(detal.wartosc_pozycji, 0 , 'DEFAULT', 2, 'DEFAULT')}"></td>
                 <td>
                     <a th:href="@{'/edytuj_detal_zamowienia/' + ${detal.primaryKey.zamowienie.id_zamowienia}+ '/'+ ${detal.primaryKey.pozycja_zamowienia}}" class="btn btn-warning btn-sm">Edytuj</a>
 
