@@ -35,8 +35,11 @@ public class ZamowienieService {
 		return repo.searchZamowienieByKoszyk(id_klienta);
 	}
 	
-	public List<Zamowienie> getZamowienieNotKoszyk(Long id_klienta) {
-		return repo.searchZamowienieByNotKoszyk(id_klienta);
+	public List<Zamowienie> getZamowienieNotKoszykById(Long id_klienta) {
+		return repo.searchZamowienieByNotKoszykById(id_klienta);
+	}
+	public List<Zamowienie> getZamowienieByKoszyk(){
+		return repo.searchZamowienieByNotKoszyk();
 	}
 
 }

@@ -16,5 +16,20 @@ public interface ZamowienieRepository extends JpaRepository<Zamowienie, Long>{
 	public Zamowienie searchZamowienieByKoszyk(@Param("id_klienta")Long id_klienta);
 	
 	@Query(value = "SELECT z FROM Zamowienie z WHERE z.klient.id_klienta = :id_klienta AND z.status_zamowienia != 'KOSZYK'")
-	public List<Zamowienie> searchZamowienieByNotKoszyk(@Param("id_klienta")Long id_klienta);
+	public List<Zamowienie> searchZamowienieByNotKoszykById(@Param("id_klienta")Long id_klienta);
+	
+	@Query(value = "SELECT z FROM Zamowienie z WHERE z.status_zamowienia != 'KOSZYK'")
+	public List<Zamowienie> searchZamowienieByNotKoszyk();
+	
+	@Query(value = "SELECT z FROM Zamowienie z WHERE z.status_zamowienia = 'ZAMÓWIONE'")
+	public List<Zamowienie> searchZamowienieByZamowione();
+	
+	@Query(value = "SELECT z FROM Zamowienie z WHERE z.status_zamowienia = 'SKOMPLETOWANE'")
+	public List<Zamowienie> searchZamowienieBySkompletowane();
+	
+	@Query(value = "SELECT z FROM Zamowienie z WHERE z.status_zamowienia = 'WYSŁANE'")
+	public List<Zamowienie> searchZamowienieByWyslane();
+	
+	@Query(value = "SELECT z FROM Zamowienie z WHERE z.status_zamowienia = 'ZAMKNIĘTE'")
+	public List<Zamowienie> searchZamowienieByZamkniete();
 }

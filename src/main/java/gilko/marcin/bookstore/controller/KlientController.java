@@ -73,25 +73,7 @@ public class KlientController {
 		}
 	}
 	
-	@RequestMapping("/edytuj_dane_adresowe")
-	public ModelAndView edytujDaneAdresowe(Authentication auth) {
-		ModelAndView mav = new ModelAndView("edytuj_dane_adresowe");
-		
-		Klient klient = service.getByEmail(auth.getName());
-		mav.addObject("klient", klient);
-		return mav;
-	}
-	
-	@RequestMapping(value = "/edytuj_dane_adresowe/save", method = RequestMethod.POST)
-	public String zapiszDaneAdresowe(@Valid @ModelAttribute("klient") Klient klient, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			return "/edytuj_dane_adresowe";
-		}else {
-			service.save(klient);
-			return "redirect:/koszyk";
-		}
-	}
-	
+
 	@RequestMapping("/usun_klienta/{id}")
 	public String usunKlienta(@PathVariable(name="id") Long id) {
 		service.delete(id);

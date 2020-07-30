@@ -45,30 +45,6 @@ public class ZamowienieController {
 		return "lista_zamowien";
 	}
 	
-	@RequestMapping("/moje_zamowienia")
-	public String listaZamowienKlienta(Model model, Authentication auth) {
-		
-		List<Zamowienie> listZamowienie = service.getZamowienieNotKoszyk( klService.getByEmail(auth.getName()).getId_klienta());
-		model.addAttribute("listZamowienie", listZamowienie);
-		return "moje_zamowienia";
-	}
-	
-	@RequestMapping(value = "/zloz_zamowienie", method= RequestMethod.GET)
-	public  String zlozZamowienie(Authentication auth) {
-		Zamowienie zamowienie = service.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_klienta());
-		
-		
-		if(zamowienie == null || zamowienie.getWartosc_zamowienia() == 0) {
-			return "/koszyk";
-		}else {
-		//Zamowienie zamowienie = service.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_klienta());
-		
-		zamowienie.setStatus_zamowienia("ZAMÓWIONE");
-		service.save(zamowienie);
-		
-		return "redirect:/moje_zamowienia";
-		}
-	}
 
 	
 	//-----------Nowe Zamowienie-------------
@@ -94,18 +70,7 @@ public class ZamowienieController {
 			return "redirect:/lista_zamowien";
 		}
 	}
-	@RequestMapping("/wyswietl_zamowienie/{id}")
-	public ModelAndView wyswietlZamowienie(@PathVariable(name = "id") Long id) {
-		ModelAndView mav = new ModelAndView("wyswietl_zamowienie");
-		
-		Zamowienie zamowienie = service.get(id);
-		
-		List<DetalZamowienia> listDetalZamowienia = detZamService.listByIdZamowienia(id);
-		mav.addObject("listDetalZamowienia",listDetalZamowienia);
-		mav.addObject("zamowienie", zamowienie);
-		
-		return mav;
-	}
+
 	
 	
 	
