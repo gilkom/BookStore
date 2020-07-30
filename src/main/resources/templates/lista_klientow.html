@@ -84,15 +84,12 @@
                 <th>Imię</th>
                 <th>Nazwisko</th>
                 <th>Nazwa firmy</th>
-                <th>Nip</th>
                 <th>Ulica</th>
                 <th>Miasto</th>
                 <th>Kod pocztowy</th>
                 <th>Telefon</th>
                 <th>Email</th>
-                <th>Hasło</th>
                 <th>Blokada konta</th>
-                <th>Rola</th>
                 <th>Akcje</th>
             </tr>
         </thead>
@@ -102,15 +99,12 @@
                 <td th:text="${klient.imie_klienta}">Imię</td>
                 <td th:text="${klient.nazwisko_klienta}">Nazwisko</td>
                 <td th:text="${klient.nazwa_firmy}">Nazwa firmy</td>
-                <td th:text="${klient.nip_klienta}"></td>
                 <td th:text="${klient.ulica_klienta}"></td>
                 <td th:text="${klient.miasto_klienta}"></td>
                 <td th:text="${klient.kod_pocztowy_klienta}"></td>
                 <td th:text="${klient.telefon_klienta}"></td>
                 <td th:text="${klient.email_klienta}"></td>
-                <td th:text="${klient.password}"></td>
                 <td th:text="${klient.blokada_konta}"></td>
-                <td th:text="${klient.rola}"></td>
                 <td>
                     <a th:href="@{'/edytuj_klienta/' + ${klient.id_klienta}}" class="btn btn-warning btn-sm">Edytuj</a>
 
