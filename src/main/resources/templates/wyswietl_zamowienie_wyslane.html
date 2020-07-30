@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
+<head>
+<meta charset="utf-8" />
+<title>Edytuj zamówienie</title>
+</head>
+<body>
+
+<section>
+	<div class="container-sm">
+		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
+				<h1 style="color:white;">Ksiegarnia internetowa</h1>
+		</div>
+	</div>
+		<div class="container">	
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Strona glowna</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/koszyk}">Koszyk</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}">Kontakt</a>
+					</li>
+				</ul>
+			</nav>
+			
+		</div>
+
+</section>
+&nbsp;&nbsp;&nbsp;
+<div class="container">
+	
+	<ul class="nav nav-tabs">
+  		<li class="nav-item">
+    		<a class="nav-link" href="/lista_zamowien_obsluga">Wszystkie zamówienia</a>
+  		</li>
+  		<li class="nav-item">
+    		<a class="nav-link" href="/lista_zamowien_zamowione">Złożone zamówienia</a>
+	  	</li>
+	  	<li class="nav-item">
+    		<a class="nav-link" href="/lista_zamowien_skompletowane">Skompletowane zamówienia</a>
+	  	</li>
+  		<li class="nav-item">
+    		<a class="nav-link active" href="/lista_zamowien_wyslane">Wyslane zamówienia</a>
+  		</li> 
+  		  		<li class="nav-item">
+    		<a class="nav-link" href="/lista_zamowien_zamkniete">Zamknięte zamówienia</a>
+  		</li> 
+	</ul>
+		
+  &nbsp;&nbsp;&nbsp;
+	<h3>Szczegóły zamówienia:</h3>
+</div>
+<div class="container">
+    <div class="container" align="left">
+        <br />
+       	<div class="text-right">
+ 			<p>Data zamówienia:</p>
+			<h4 th:text="${zamowienie.data_zamowienia}"></h4>		
+		</div>
+		<div class="text-left">
+ 			<p>Numer zamówienia:</p>
+			<h2 class="display-3" th:text="${zamowienie.id_zamowienia}"></h2>		
+		</div>
+	
+            <table>
+                <tr>
+                    <td>Status zamówienia:</td>
+                    <td><h4 style="color:green;" th:text="${zamowienie.status_zamowienia}"></h4></td>
+                </tr>
+
+            </table>
+        <div class="text-right">
+    		<form action="#" th:action="@{/wyswietl_zamowienie_wyslane/zamknij}" method = "post">
+    			<input type="hidden" name ="id_zamowienia" th:value="${zamowienie.id_zamowienia}"/>
+    			<button type="submit" class ="btn btn-dark">Zamknij zamówienie</button>
+    		</form>
+    	</div>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pozycja zamówienia</th>
+                <th>Id książki</th>
+                <th>Cena zakupu</th>
+                <th>Ilość zamówiona</th>
+                <th>Wartość pozycji</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="detal : ${listDetalZamowienia}">
+                <td th:text="${detal.primaryKey.pozycja_zamowienia}"></td>
+                <td th:text="${detal.ksiazka.tytul_ksiazki}"></td>
+                <td th:text="${detal.cena_zakupu}"></td>
+                <td th:text="${detal.ilosc_zamowiona}"></td>
+                <td th:text="${#numbers.formatDecimal(detal.wartosc_pozycji, 0 , 'DEFAULT', 2, 'DEFAULT')}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="text-right">
+ 			<p>Wartość zamówienia:</p>
+			<h4 th:text="${#numbers.formatDecimal(zamowienie.wartosc_zamowienia, 0 , 'DEFAULT', 2, 'DEFAULT')}"></h4>		
+		</div>
+    
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-left">
+    	<a href="/lista_zamowien_wyslane" class="btn btn-dark">Cofnij</a>
+    </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+    <div class="text-center">
+	<p>Ksiegarnia Internetowa - BookStore </p>
+</div>
+</body>
