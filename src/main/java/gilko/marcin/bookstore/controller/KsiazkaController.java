@@ -1,12 +1,5 @@
 package gilko.marcin.bookstore.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -18,24 +11,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.Kategoria;
-import gilko.marcin.bookstore.model.Klient;
+import gilko.marcin.bookstore.model.Uzytkownik;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.Wydawnictwo;
@@ -43,10 +31,9 @@ import gilko.marcin.bookstore.model.Zamowienie;
 import gilko.marcin.bookstore.service.AutorService;
 import gilko.marcin.bookstore.service.DetalZamowieniaService;
 import gilko.marcin.bookstore.service.KategoriaService;
-import gilko.marcin.bookstore.service.KlientService;
+import gilko.marcin.bookstore.service.UzytkownikService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 import gilko.marcin.bookstore.service.OpiniaService;
-import gilko.marcin.bookstore.service.PracownikService;
 import gilko.marcin.bookstore.service.WydawnictwoService;
 import gilko.marcin.bookstore.service.ZamowienieService;
 
@@ -64,11 +51,9 @@ public class KsiazkaController {
 	@Autowired
 	private OpiniaService opService;
 	@Autowired
-	private KlientService klService;
+	private UzytkownikService klService;
 	@Autowired
 	private ZamowienieService zamService;
-	@Autowired
-	private PracownikService pracService;
 	@Autowired
 	private DetalZamowieniaService detZamService;
 
@@ -388,11 +373,11 @@ public class KsiazkaController {
 		Ksiazka ksiazka = service.get(id);
 		
 		String email = auth.getName();
-		Klient klient = klService.getByEmail(email);
+		Uzytkownik uzytkownik = klService.getByEmail(email);
 
 		Opinia opinia = new Opinia();
 		opinia.setKsiazka(ksiazka);
-		opinia.setKlient(klient);
+		opinia.setUzytkownik(uzytkownik);
 		
 		mav.addObject("opinia", opinia);
 
@@ -418,17 +403,17 @@ public class KsiazkaController {
 								 Authentication auth) {
 		
 		String email = auth.getName();
-		Long id_klienta = klService.getByEmail(email).getId_klienta();
+		Long id_uzytkownika = klService.getByEmail(email).getId_uzytkownika();
 		Zamowienie zamowienie = new Zamowienie();
 		
 		
 		
-		if(zamService.getZamowienieKoszyk(id_klienta) == null) {
+		if(zamService.getZamowienieKoszyk(id_uzytkownika) == null) {
 
-			zamowienie.setKlient(klService.get(id_klienta));
+			zamowienie.setUzytkownik(klService.get(id_uzytkownika));
 			zamService.save(zamowienie);
 		}else {
-			zamowienie = zamService.getZamowienieKoszyk(id_klienta);
+			zamowienie = zamService.getZamowienieKoszyk(id_uzytkownika);
 		}
 		
 		DetalZamowienia detalZamowienia = new DetalZamowienia();

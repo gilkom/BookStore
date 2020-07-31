@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.DetalZamowieniaId;
-import gilko.marcin.bookstore.model.Opinia;
-import gilko.marcin.bookstore.model.OpiniaId;
 import gilko.marcin.bookstore.repository.DetalZamowieniaRepository;
-import gilko.marcin.bookstore.repository.OpiniaRepository;
+
 
 @Service
 @Transactional
@@ -36,8 +34,8 @@ public class DetalZamowieniaService {
 		repo.delete(detalZamowienia);
 	}
 	
-	public List<DetalZamowienia> listKoszyk(Long id_klienta){
-		return repo.searchDetalByKoszyk(id_klienta);
+	public List<DetalZamowienia> listKoszyk(Long id_uzytkownika){
+		return repo.searchDetalByKoszyk(id_uzytkownika);
 	}
 	
 	public List<DetalZamowienia> listByIdZamowienia(Long id_zamowienia){

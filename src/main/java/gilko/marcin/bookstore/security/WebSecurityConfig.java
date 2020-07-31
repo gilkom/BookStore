@@ -21,28 +21,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
             .dataSource(dataSource)
-            .usersByUsernameQuery("select email_klienta as username, password as password,blokada_konta as enabled from bk_klient where email_klienta=?")
-            .authoritiesByUsernameQuery("select email_klienta as username, rola as role from bk_klient where email_klienta=?")
+            .usersByUsernameQuery("select email_uzytkownika as username, password as password,blokada_konta as enabled from bk_uzytkownik where email_uzytkownika=?")
+            .authoritiesByUsernameQuery("select email_uzytkownika as username, rola as role from bk_uzytkownik where email_uzytkownika=?")
         ;
     }
-/*@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	
-	@Autowired
-	private DataSource dataSource;
-	
-	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-		auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-		.dataSource(dataSource)
-		//.usersByUsernameQuery("select bk_klient.email_klienta as username, bk_klient.password  as password, 1 as enabled from bk_klient where bk_klient.email_klienta=?")
-		.usersByUsernameQuery("select username, password, 1 as enabled from userss where username=?")
-		//.authoritiesByUsernameQuery("select bk_klient.email_klienta, bk_klient.rola from bk_klient where bk_klient.email_klienta=?")
-		.authoritiesByUsernameQuery("select username, rola from userss where username =?")
-				;
-	}
-	*/
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

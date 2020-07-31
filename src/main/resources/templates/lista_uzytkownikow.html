@@ -38,7 +38,7 @@
 						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
+						<a class="nav-link" th:href="@{/lista_uzytkownikow}">Użytkownicy</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
@@ -67,14 +67,14 @@
 	<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_klientow">Lista klientów</li>
+		    <li class="breadcrumb-item active" aria-current="/lista_uzytkownikow">Lista uzytkowników</li>
 		  </ol>
 		</nav>
 	<h3>Klienci</h3>
 </div>
 
 <div class="container" align="center">
-    <a href="/nowy_klient" class="btn btn-dark">Dodaj klienta</a>
+    <a href="/nowy_uzytkownik" class="btn btn-dark">Dodaj uzytkownika</a>
     
     <br/><br/>
     <table class="table">
@@ -94,24 +94,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="klient : ${listKlient}">
-                <td th:text="${klient.id_klienta}">ID</td>
-                <td th:text="${klient.imie_klienta}">Imię</td>
-                <td th:text="${klient.nazwisko_klienta}">Nazwisko</td>
-                <td th:text="${klient.nazwa_firmy}">Nazwa firmy</td>
-                <td th:text="${klient.ulica_klienta}"></td>
-                <td th:text="${klient.miasto_klienta}"></td>
-                <td th:text="${klient.kod_pocztowy_klienta}"></td>
-                <td th:text="${klient.telefon_klienta}"></td>
-                <td th:text="${klient.email_klienta}"></td>
-                <td th:text="${klient.blokada_konta}"></td>
+            <tr th:each="uzytkownik : ${listUzytkownik}">
+                <td th:text="${uzytkownik.id_uzytkownika}">ID</td>
+                <td th:text="${uzytkownik.imie_uzytkownika}">Imię</td>
+                <td th:text="${uzytkownik.nazwisko_uzytkownika}">Nazwisko</td>
+                <td th:text="${uzytkownik.nazwa_firmy}">Nazwa firmy</td>
+                <td th:text="${uzytkownik.ulica_uzytkownika}"></td>
+                <td th:text="${uzytkownik.miasto_uzytkownika}"></td>
+                <td th:text="${uzytkownik.kod_pocztowy_uzytkownika}"></td>
+                <td th:text="${uzytkownik.telefon_uzytkownika}"></td>
+                <td th:text="${uzytkownik.email_uzytkownika}"></td>
+                <td th:text="${uzytkownik.blokada_konta}"></td>
                 <td>
-                    <a th:href="@{'/edytuj_klienta/' + ${klient.id_klienta}}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a th:href="@{'/edytuj_uzytkownika/' + ${uzytkownik.id_uzytkownika}}" class="btn btn-warning btn-sm">Edytuj</a>
 
-                     <form method="get" action="@{/lista_klientow/usun_klienta/' + ${klient.id_klienta}}"
-                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego klienta?') ? true : false;">
+                     <form method="get" action="@{/lista_uzytkownikow/usun_uzytkownika/' + ${uzytkownik.id_uzytkownika}}"
+                    		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego uzytkownika?') ? true : false;">
                     		
-                    	<a th:href="@{'/usun_klienta/' + ${klient.id_klienta}}" class="btn btn-danger btn-sm">Usun</a>
+                    	<a th:href="@{'/usun_uzytkownika/' + ${uzytkownik.id_uzytkownika}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
                 </td>
             </tr>

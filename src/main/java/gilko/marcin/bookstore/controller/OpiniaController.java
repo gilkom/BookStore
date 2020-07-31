@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import gilko.marcin.bookstore.model.Ksiazka;
 import gilko.marcin.bookstore.model.Opinia;
 import gilko.marcin.bookstore.model.OpiniaId;
-import gilko.marcin.bookstore.service.KlientService;
+import gilko.marcin.bookstore.service.UzytkownikService;
 import gilko.marcin.bookstore.service.KsiazkaService;
 import gilko.marcin.bookstore.service.OpiniaService;
 
@@ -26,7 +26,7 @@ public class OpiniaController {
 	@Autowired
 	private OpiniaService opService;
 	@Autowired
-	private KlientService klService;
+	private UzytkownikService klService;
 	@Autowired
 	private KsiazkaService ksService;
 	
@@ -55,10 +55,10 @@ public class OpiniaController {
 		}
 	}
 	
-	@RequestMapping("/edytuj_opinie/{id_klienta}/{id_ksiazki}")
-	public ModelAndView edytujOpinie(@PathVariable(name="id_klienta") Long id_klienta, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
+	@RequestMapping("/edytuj_opinie/{id_uzytkownika}/{id_ksiazki}")
+	public ModelAndView edytujOpinie(@PathVariable(name="id_uzytkownika") Long id_uzytkownika, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
 		ModelAndView mav = new ModelAndView("edytuj_opinie");
-		OpiniaId opiniaId= new OpiniaId(klService.get(id_klienta), ksService.get(id_ksiazki));
+		OpiniaId opiniaId= new OpiniaId(klService.get(id_uzytkownika), ksService.get(id_ksiazki));
 		Opinia opinia = opService.get(opiniaId);
 		
 		mav.addObject("opinia", opinia);
@@ -76,9 +76,9 @@ public class OpiniaController {
 	}
 	
 	
-	@RequestMapping("usun_opinie/{id_klienta}/{id_ksiazki}")
-	public String usunOpinie(@PathVariable(name="id_klienta") Long id_klienta, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
-		OpiniaId opiniaId= new OpiniaId(klService.get(id_klienta), ksService.get(id_ksiazki));
+	@RequestMapping("usun_opinie/{id_uzytkownika}/{id_ksiazki}")
+	public String usunOpinie(@PathVariable(name="id_uzytkownika") Long id_uzytkownika, @PathVariable(name="id_ksiazki") Long id_ksiazki) {
+		OpiniaId opiniaId= new OpiniaId(klService.get(id_uzytkownika), ksService.get(id_ksiazki));
 		Opinia opinia = opService.get(opiniaId);
 		
 		opService.delete(opinia);

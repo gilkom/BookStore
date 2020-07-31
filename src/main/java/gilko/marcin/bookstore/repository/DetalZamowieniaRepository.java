@@ -14,8 +14,8 @@ import gilko.marcin.bookstore.model.DetalZamowieniaId;
 public interface DetalZamowieniaRepository  extends JpaRepository<DetalZamowienia, DetalZamowieniaId>{
 	DetalZamowienia findByPrimaryKey(DetalZamowieniaId detalZamowieniaId);
 	
-	@Query(value = "SELECT d FROM DetalZamowienia d WHERE d.primaryKey.zamowienie.klient.id_klienta = :id_klienta AND d.primaryKey.zamowienie.status_zamowienia = 'KOSZYK'")
-	public List<DetalZamowienia> searchDetalByKoszyk(@Param("id_klienta") Long id_klienta);
+	@Query(value = "SELECT d FROM DetalZamowienia d WHERE d.primaryKey.zamowienie.uzytkownik.id_uzytkownika = :id_uzytkownika AND d.primaryKey.zamowienie.status_zamowienia = 'KOSZYK'")
+	public List<DetalZamowienia> searchDetalByKoszyk(@Param("id_uzytkownika") Long id_uzytkownika);
 	
 	@Query(value = "SELECT d FROM DetalZamowienia d WHERE d.primaryKey.zamowienie.id_zamowienia = :id_zamowienia")
 	public List<DetalZamowienia> searchDetalByIdZamowienia(@Param("id_zamowienia") Long id_zamowienia);

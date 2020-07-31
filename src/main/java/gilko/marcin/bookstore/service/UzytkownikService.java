@@ -2,30 +2,28 @@ package gilko.marcin.bookstore.service;
 
 import java.util.List;
 
-import javax.persistence.NoResultException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gilko.marcin.bookstore.model.Klient;
-import gilko.marcin.bookstore.repository.KlientRepository;
+import gilko.marcin.bookstore.model.Uzytkownik;
+import gilko.marcin.bookstore.repository.UzytkownikRepository;
 
 @Service
 @Transactional
-public class KlientService{
+public class UzytkownikService{
 	@Autowired
-	private KlientRepository repo;
+	private UzytkownikRepository repo;
 	
-	public List<Klient> list(){
+	public List<Uzytkownik> list(){
 		return repo.findAll();
 	}
 	
-	public void save(Klient klient) {
-		repo.save(klient);
+	public void save(Uzytkownik uzytkownik) {
+		repo.save(uzytkownik);
 	}
 	
-	public Klient get(Long id) {
+	public Uzytkownik get(Long id) {
 		return repo.findById(id).get();
 	}
 	
@@ -33,8 +31,8 @@ public class KlientService{
 		repo.deleteById(id);
 	}
 	
-	public Klient getByEmail(String email_klienta) {
-		return repo.searchKlientByEmail(email_klienta);
+	public Uzytkownik getByEmail(String email_uzytkownika) {
+		return repo.searchUzytkownikByEmail(email_uzytkownika);
 	}
 	
 	

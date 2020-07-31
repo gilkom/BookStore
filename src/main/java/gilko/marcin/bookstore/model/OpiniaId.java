@@ -13,24 +13,24 @@ public class OpiniaId implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@ManyToOne(cascade = CascadeType.ALL)	
-	private Klient klient;
+	private Uzytkownik uzytkownik;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Ksiazka ksiazka;
 	
 	public OpiniaId() {
 		
 	}
-	public OpiniaId(Klient klient, Ksiazka ksiazka) {
-		this.klient = klient;
+	public OpiniaId(Uzytkownik uzytkownik, Ksiazka ksiazka) {
+		this.uzytkownik = uzytkownik;
 		this.ksiazka = ksiazka;
 	}
 	
-	public Klient getKlient() {
-		return klient;
+	public Uzytkownik getUzytkownik() {
+		return uzytkownik;
 	}
 	
-	public void setKlient(Klient klient) {
-		this.klient = klient;
+	public void setUzytkownik(Uzytkownik uzytkownik) {
+		this.uzytkownik = uzytkownik;
 	}
 	
 	public Ksiazka getKsiazka() {

@@ -36,8 +36,8 @@ public class Zamowienie {
 
 	@ManyToOne(
 			fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "ID_KLIENTA", nullable = false)
-	private Klient klient;
+	@JoinColumn(name = "ID_uzytkownika", nullable = false)
+	private Uzytkownik uzytkownik;
 	
 	@OneToMany(mappedBy = "primaryKey.zamowienie", cascade = CascadeType.ALL)
 	private Set<DetalZamowienia> detaleZamowienia = new HashSet<DetalZamowienia>();
@@ -83,12 +83,12 @@ public class Zamowienie {
 		this.status_zamowienia = status_zamowienia;
 	}
 	
-	public Klient getKlient() {
-		return klient;
+	public Uzytkownik getUzytkownik() {
+		return uzytkownik;
 	}
 	
-	public void setKlient(Klient klient) {
-		this.klient = klient;
+	public void setUzytkownik(Uzytkownik uzytkownik) {
+		this.uzytkownik = uzytkownik;
 	}
 	
 	public Set<DetalZamowienia> getDetalZamowienia(){

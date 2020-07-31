@@ -1,12 +1,10 @@
 package gilko.marcin.bookstore.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import gilko.marcin.bookstore.model.DetalZamowienia;
-import gilko.marcin.bookstore.model.Pracownik;
 import gilko.marcin.bookstore.model.Zamowienie;
-import gilko.marcin.bookstore.service.DetalZamowieniaService;
-import gilko.marcin.bookstore.service.KlientService;
-import gilko.marcin.bookstore.service.PracownikService;
 import gilko.marcin.bookstore.service.ZamowienieService;
 
 @Controller
@@ -29,13 +22,6 @@ public class ZamowienieController {
 	
 	@Autowired
 	private ZamowienieService service;
-	
-	@Autowired
-	private PracownikService prService;
-	@Autowired
-	private KlientService klService;
-	@Autowired
-	private DetalZamowieniaService detZamService;
 
 	
 	@RequestMapping("/lista_zamowien")

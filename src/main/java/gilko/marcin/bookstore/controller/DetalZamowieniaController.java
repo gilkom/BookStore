@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,13 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.DetalZamowieniaId;
-import gilko.marcin.bookstore.model.Ksiazka;
-import gilko.marcin.bookstore.model.Opinia;
-import gilko.marcin.bookstore.model.OpiniaId;
 import gilko.marcin.bookstore.service.DetalZamowieniaService;
-import gilko.marcin.bookstore.service.KlientService;
-import gilko.marcin.bookstore.service.KsiazkaService;
-import gilko.marcin.bookstore.service.OpiniaService;
+import gilko.marcin.bookstore.service.UzytkownikService;
 import gilko.marcin.bookstore.service.ZamowienieService;
 
 
@@ -36,7 +30,7 @@ public class DetalZamowieniaController {
 	@Autowired
 	ZamowienieService zamService;
 	@Autowired
-	KlientService klService;
+	UzytkownikService klService;
 	
 	
 	@RequestMapping("/lista_detali_zamowienia")

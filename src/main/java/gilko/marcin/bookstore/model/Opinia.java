@@ -8,16 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "BK_OPINIA")
 @AssociationOverrides({
-	@AssociationOverride(name = "primaryKey.klient",
-			joinColumns = @JoinColumn(name = "ID_KLIENTA")),
+	@AssociationOverride(name = "primaryKey.uzytkownik",
+			joinColumns = @JoinColumn(name = "ID_UZYTKOWNIKA")),
 	@AssociationOverride(name = "primaryKey.ksiazka",
 			joinColumns = @JoinColumn(name = "ID_KSIAZKI"))})
 public class Opinia {
@@ -47,12 +44,12 @@ public class Opinia {
 	}
 	
 	@Transient
-	public Klient getKlient() {
-		return getPrimaryKey().getKlient();
+	public Uzytkownik getUzytkownik() {
+		return getPrimaryKey().getUzytkownik();
 	}
 	
-	public void setKlient(Klient klient) {
-		getPrimaryKey().setKlient(klient);
+	public void setUzytkownik(Uzytkownik uzytkownik) {
+		getPrimaryKey().setUzytkownik(uzytkownik);
 	}
 	
 	@Transient

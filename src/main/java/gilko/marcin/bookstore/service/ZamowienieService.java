@@ -31,12 +31,12 @@ public class ZamowienieService {
 		repo.deleteById(id);
 	}
 	
-	public Zamowienie getZamowienieKoszyk(Long id_klienta) {
-		return repo.searchZamowienieByKoszyk(id_klienta);
+	public Zamowienie getZamowienieKoszyk(Long id_uzytkownika) {
+		return repo.searchZamowienieByKoszyk(id_uzytkownika);
 	}
 	
-	public List<Zamowienie> getZamowienieNotKoszykById(Long id_klienta) {
-		return repo.searchZamowienieByNotKoszykById(id_klienta);
+	public List<Zamowienie> getZamowienieNotKoszykById(Long id_uzytkownika) {
+		return repo.searchZamowienieByNotKoszykById(id_uzytkownika);
 	}
 	public List<Zamowienie> getZamowienieByNotKoszyk(){
 		return repo.searchZamowienieByNotKoszyk();

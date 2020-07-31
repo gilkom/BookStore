@@ -17,10 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.DetalZamowieniaId;
-import gilko.marcin.bookstore.model.Klient;
+import gilko.marcin.bookstore.model.Uzytkownik;
 import gilko.marcin.bookstore.model.Zamowienie;
 import gilko.marcin.bookstore.service.DetalZamowieniaService;
-import gilko.marcin.bookstore.service.KlientService;
+import gilko.marcin.bookstore.service.UzytkownikService;
 import gilko.marcin.bookstore.service.ZamowienieService;
 
 @Controller
@@ -29,14 +29,14 @@ public class KoszykController {
 	@Autowired
 	private ZamowienieService zamService;
 	@Autowired
-	private KlientService klService;
+	private UzytkownikService klService;
 	@Autowired 
 	DetalZamowieniaService detZamService;
 
 	@RequestMapping("/koszyk")
 	public String koszyk(Model model, Authentication auth) {
 		
-		List<DetalZamowienia> listDetalZamowienia = detZamService.listKoszyk(klService.getByEmail(auth.getName()).getId_klienta());
+		List<DetalZamowienia> listDetalZamowienia = detZamService.listKoszyk(klService.getByEmail(auth.getName()).getId_uzytkownika());
 		model.addAttribute("listDetalZamowienia", listDetalZamowienia);
 		
 		return "koszyk";
@@ -88,22 +88,22 @@ public class KoszykController {
 	
 
 	@RequestMapping("/moje_zamowienia")
-	public String listaZamowienKlienta(Model model, Authentication auth) {
+	public String listaZamowienuzytkownika(Model model, Authentication auth) {
 		
-		List<Zamowienie> listZamowienie = zamService.getZamowienieNotKoszykById( klService.getByEmail(auth.getName()).getId_klienta());
+		List<Zamowienie> listZamowienie = zamService.getZamowienieNotKoszykById( klService.getByEmail(auth.getName()).getId_uzytkownika());
 		model.addAttribute("listZamowienie", listZamowienie);
 		return "moje_zamowienia";
 	}
 	
 	@RequestMapping(value = "/zloz_zamowienie", method= RequestMethod.GET)
 	public  String zlozZamowienie(Authentication auth) {
-		Zamowienie zamowienie = zamService.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_klienta());
+		Zamowienie zamowienie = zamService.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_uzytkownika());
 		
 		
 		if(zamowienie == null || zamowienie.getWartosc_zamowienia() == 0) {
 			return "/koszyk";
 		}else {
-		//Zamowienie zamowienie = service.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_klienta());
+		//Zamowienie zamowienie = service.getZamowienieKoszyk( klService.getByEmail(auth.getName()).getId_uzytkownika());
 		
 		zamowienie.setStatus_zamowienia("ZAMÓWIONE");
 		zamService.save(zamowienie);
@@ -117,17 +117,17 @@ public class KoszykController {
 	public ModelAndView edytujDaneAdresowe(Authentication auth) {
 		ModelAndView mav = new ModelAndView("edytuj_dane_adresowe");
 		
-		Klient klient = klService.getByEmail(auth.getName());
-		mav.addObject("klient", klient);
+		Uzytkownik Uzytkownik = klService.getByEmail(auth.getName());
+		mav.addObject("Uzytkownik", Uzytkownik);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/edytuj_dane_adresowe/save", method = RequestMethod.POST)
-	public String zapiszDaneAdresowe(@Valid @ModelAttribute("klient") Klient klient, BindingResult bindingResult) {
+	public String zapiszDaneAdresowe(@Valid @ModelAttribute("Uzytkownik") Uzytkownik Uzytkownik, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_dane_adresowe";
 		}else {
-			klService.save(klient);
+			klService.save(Uzytkownik);
 			return "redirect:/koszyk";
 		}
 	}
