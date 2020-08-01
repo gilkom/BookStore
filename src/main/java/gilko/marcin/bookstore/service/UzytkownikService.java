@@ -19,6 +19,7 @@ public class UzytkownikService{
 		return repo.findAll();
 	}
 	
+	
 	public void save(Uzytkownik uzytkownik) {
 		repo.save(uzytkownik);
 	}
@@ -35,6 +36,8 @@ public class UzytkownikService{
 		return repo.searchUzytkownikByEmail(email_uzytkownika);
 	}
 	
-	
+	public List<Uzytkownik> getByRoleUser(){
+		return repo.searchByRoleUser();
+	}
 
 }

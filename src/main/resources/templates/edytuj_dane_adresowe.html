@@ -12,57 +12,13 @@
 </head>
 <body>
 
-<section>
-	<div class="container-sm">
-		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
-				<h1 style="color:white;">Ksiegarnia internetowa</h1>
-		</div>
-	</div>
-		<div class="container">	
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Strona glowna</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/koszyk}">Koszyk</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Kontakt</a>
-					</li>
-				</ul>
-			</nav>
-			
-		</div>
 
-</section>
+<!-- Header -->
+<header id="header" class="alt"  th:include="naglowek.html :: naglowek"></header>
+
+
+
+
 &nbsp;&nbsp;&nbsp;
 <div class="container">
 	
@@ -84,10 +40,10 @@
 
     <div class="container" align="center">
         <br/>
-        <form action="#" th:action="@{/edytuj_dane_adresowe/save}" th:object="${klient}" method="post">
+        <form action="#" th:action="@{/edytuj_dane_adresowe/save}" th:object="${uzytkownik}" method="post">
   		
-  		<input type="hidden" th:field="*{id_klienta}"  readonly="readonly"/>
-  		<input type="hidden" th:field="*{email_klienta}" />
+  		<input type="hidden" th:field="*{id_uzytkownika}"  readonly="readonly"/>
+  		<input type="hidden" th:field="*{email_uzytkownika}" />
   		<input type="hidden" th:field="*{password}" />
   		<input type="hidden" th:field="*{blokada_konta}" />
   		<input type="hidden" th:field="*{rola}" />
@@ -96,13 +52,13 @@
             <table class="table">
                 <tr>
                     <td>Imię:</td>
-                    <td><input type="text" th:field="*{imie_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('imie_klienta')}" th:errors="*{imie_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{imie_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('imie_uzytkownika')}" th:errors="*{imie_uzytkownika}">NameError</td>
                 </tr>
                 <tr>
                     <td>Nazwisko:</td>
-                    <td><input type="text" th:field="*{nazwisko_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('nazwisko_klienta')}" th:errors="*{nazwisko_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{nazwisko_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwisko_uzytkownika')}" th:errors="*{nazwisko_uzytkownika}">NameError</td>
                 </tr>
                 <tr>
                     <td>Nazwa firmy:</td>
@@ -111,28 +67,28 @@
                 </tr>  
                  <tr>
                     <td>Nip:</td>
-                    <td><input type="text" th:field="*{nip_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('nip_klienta')}" th:errors="*{nip_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{nip_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('nip_uzytkownika')}" th:errors="*{nip_uzytkownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Ulica:</td>
-                    <td><input type="text" th:field="*{ulica_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('ulica_klienta')}" th:errors="*{ulica_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{ulica_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('ulica_uzytkownika')}" th:errors="*{ulica_uzytkownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Miasto:</td>
-                    <td><input type="text" th:field="*{miasto_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('miasto_klienta')}" th:errors="*{miasto_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{miasto_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('miasto_uzytkownika')}" th:errors="*{miasto_uzytkownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Kod pocztowy:</td>
-                    <td><input type="text" th:field="*{kod_pocztowy_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('kod_pocztowy_klienta')}" th:errors="*{kod_pocztowy_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{kod_pocztowy_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('kod_pocztowy_uzytkownika')}" th:errors="*{kod_pocztowy_uzytkownika}">NameError</td>
                 </tr>
                  <tr>
                     <td>Telefon:</td>
-                    <td><input type="text" th:field="*{telefon_klienta}" /></td>
-                    <td th:if="${#fields.hasErrors('telefon_klienta')}" th:errors="*{telefon_klienta}">NameError</td>
+                    <td><input type="text" th:field="*{telefon_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('telefon_uzytkownika')}" th:errors="*{telefon_uzytkownika}">NameError</td>
                 </tr>          
                 <tr>
                     <td >
@@ -144,7 +100,8 @@
         </form>
     </div>
     &nbsp;&nbsp;&nbsp;
-    <div class="text-center">
-	<p>Ksiegarnia Internetowa - BookStore </p>
-</div>
+
+<!-- Footer -->
+<header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+
 </body>

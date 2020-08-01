@@ -12,54 +12,10 @@
 </head>
 <body>
 
-<section>
-	<div class="container-sm">
-		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
-				<h1 style="color:white;">Ksiegarnia internetowa</h1>
-		</div>
-	</div>
-		<div class="container">	
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Strona glowna</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_uzytkownikow}">Uzytkownikow</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/koszyk}">Koszyk</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/zaloguj}">Zaloguj</a>
-					</li>
-				</ul>
-			</nav>
-			
-		</div>
+<!-- Header -->
+<header id="header" class="alt"  th:include="naglowek.html :: naglowek"></header>
 
-</section>
+
 &nbsp;&nbsp;&nbsp;
 <div class="container">
 	<nav aria-label="breadcrumb">
@@ -82,7 +38,7 @@
         <br/>
         <form action="#" th:action="@{/wyswietl_ksiazke/dodaj_opinie/save_comment}"  method="post">
 		<input type="hidden" th:field="${opinia.primaryKey.ksiazka.id_ksiazki}"/>
-		<input type="hidden" th:field="${opinia.primaryKey.klient.id_klienta}"/>
+		<input type="hidden" th:field="${opinia.primaryKey.uzytkownik.id_uzytkownika}"/>
 		
 	
             <table style="width:100%">
@@ -116,9 +72,9 @@
             </table>
         </form>
     </div>
-<div class="text-center">
-    &nbsp;&nbsp;&nbsp;
-	<p>Ksiegarnia Internetowa - BookStore </p>
-	    &nbsp;&nbsp;&nbsp;
-</div>
+
+<!-- Footer -->
+<header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+
+
 </body>

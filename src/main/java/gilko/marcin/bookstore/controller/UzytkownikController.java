@@ -31,6 +31,13 @@ public class UzytkownikController {
 		return "lista_uzytkownikow";
 	}
 	
+	@RequestMapping("/lista_klientow")
+	public String listaKlientow(Model model) {
+		List<Uzytkownik> listKlient = service.getByRoleUser();
+		model.addAttribute("listKlient", listKlient);
+		return "lista_klientow";
+	}
+	
 	@RequestMapping("/nowy_uzytkownik")
 	public String dodajUzytkownika(Model model) {
 		Uzytkownik uzytkownik = new Uzytkownik();

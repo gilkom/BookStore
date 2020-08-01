@@ -12,57 +12,12 @@
 </head>
 <body>
 
-<section>
-	<div class="container-sm">
-		<div class="jumbotron"  th:style="'background: url('+ @{/images/bookcase-1869616_1920.jpg} +');'">
-				<h1 style="color:white;">Ksiegarnia internetowa</h1>
-		</div>
-	</div>
-		<div class="container">	
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Strona glowna</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_ksiazek}">Ksiazki</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_kategorii}">Kategorie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_wydawnictw}">Wydawnictwa</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_autorow}">Autorzy</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_pracownikow}">Pracownicy</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_klientow}">Klienci</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_opinii}">Opinie</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_zamowien}">Zamówienia</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/lista_detali_zamowienia}">Detale zamówień</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/koszyk}">Koszyk</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/}">Kontakt</a>
-					</li>
-				</ul>
-			</nav>
-			
-		</div>
 
-</section>
+<!-- Header -->
+<header id="header" class="alt"  th:include="naglowek.html :: naglowek"></header>
+
+
+
 &nbsp;&nbsp;&nbsp;
 <div class="container">
 	<nav aria-label="breadcrumb">
@@ -83,16 +38,16 @@
             <table class="table">
                 <tr>
                     <td>Id Kategorii:</td>
-                    <td><input type="text" th:field="*{id}" readonly="readonly" /></td>
+                    <td><input type="text" th:field="*{id_kategorii}" readonly="readonly" /></td>
                 </tr>
                 <tr>
                     <td>Nazwa Kategorii:</td>
-                    <td><input type="text" th:field="*{name}" /></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">NameError</td>
+                    <td><input type="text" th:field="*{nazwa_kategorii}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwa_kategorii')}" th:errors="*{nazwa_kategorii}">NameError</td>
                 </tr>
                 <tr>
                     <td>Opis Kategorii:</td>
-                    <td><input type="text" th:field="*{description}" /></td>
+                    <td><input type="text" th:field="*{opis_kategorii}" /></td>
                 </tr>
                 <tr>
                     <td>
@@ -104,7 +59,10 @@
         </form>
     </div>
     &nbsp;&nbsp;&nbsp;
-    <div class="text-center">
-	<p>Ksiegarnia Internetowa - BookStore </p>
-</div>
+
+<!-- Footer -->
+<header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+
+
+
 </body>

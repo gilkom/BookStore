@@ -1,5 +1,6 @@
 package gilko.marcin.bookstore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -422,11 +423,22 @@ public class KsiazkaController {
 		detalZamowienia.setKsiazka(service.get(idKsiazki));
 		
 		detZamService.save(detalZamowienia);
-		
-			
-		
-		
-		
+
 		return "redirect:/wyswietl_ksiazke/" + idKsiazki;
+	}
+	
+	@RequestMapping("/index")
+	public String listaBestsellerow(Model model) {
+		List<Long> idBestsellerow = detZamService.listIdBestsellers();
+		List<Ksiazka> listKsiazka = new ArrayList<>();
+		
+		for(int i = 0; i < idBestsellerow.size(); i++) {
+			
+			Ksiazka ksiazka = service.get(idBestsellerow.get(i));
+			listKsiazka.add(ksiazka);
+			
+		}
+		model.addAttribute("listKsiazka", listKsiazka);
+		return "/index";
 	}
 }

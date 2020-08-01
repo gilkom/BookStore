@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.DetalZamowieniaId;
 import gilko.marcin.bookstore.repository.DetalZamowieniaRepository;
+import gilko.marcin.bookstore.repository.KsiazkaRepository;
 
 
 @Service
@@ -40,6 +41,10 @@ public class DetalZamowieniaService {
 	
 	public List<DetalZamowienia> listByIdZamowienia(Long id_zamowienia){
 		return repo.searchDetalByIdZamowienia(id_zamowienia);
+	}
+	
+	public List<Long> listIdBestsellers(){
+		return repo.searchBestsellers();
 	}
 	
 }
