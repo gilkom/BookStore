@@ -27,6 +27,26 @@
 	<h4>Strona glowna</h4>
 </div>
 
+<section class="container">
+	<div class="row">
+		<th:block th:each ="ksiazka : ${listKsiazka}">
+			<div class="col-sm-6 col-md-3" style="padding: 15px; border-style:ridge; margin: 40px">
+				<div class="thumbnail">
+					<img th:src="@{/images/okladka.png}" alt="okladka" style="width:250px; height:300px">
+						<div class="caption">
+							<h3 th:text="${ksiazka.tytul_ksiazki}"></h3>
+							<p th:text="${ksiazka.oprawa_ksiazki}"></p>
+							<p class="display-4" th:text="${#numbers.formatDecimal(ksiazka.cena_ksiazki, 0 , 'DEFAULT', 2, 'DEFAULT')} + ' zł'"></p>
+							<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}"   class="btn btn-primary">
+								<span class="glyphicon-info-sign glyphicon"></span> Wyświetl
+							 </a>
+						</div>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</section>
+
 
 
 <!-- Footer -->

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+     
+     <style>
+		h1 { text-shadow: 2px 2px black;}
+	</style>
+<head>
+<meta charset="utf-8" />
+<title>Rejestracja</title>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header" class="alt"  th:include="naglowek.html :: naglowek"></header>
+
+
+&nbsp;&nbsp;&nbsp;
+<div class="container">
+	<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
+		    <li class="breadcrumb-item"><a href="/lista_uzytkownikow">Lista uzytkowników</a></li>
+		    <li class="breadcrumb-item active" aria-current="/lista_uzytkownikow/dodaj_uzytkownika">Dodaj uzytkownika</li>
+		  </ol>
+		</nav>
+	<h3>Dodaj nowego uzytkownika</h3>
+</div>
+
+<!-- Footer -->
+<header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+
+
+</body>

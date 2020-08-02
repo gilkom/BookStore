@@ -61,6 +61,8 @@ public class UzytkownikController {
 		}
 	}
 	
+	
+	
 	@RequestMapping("/edytuj_uzytkownika/{id}")
 	public ModelAndView edytujUzytkownika(@PathVariable(name="id") Long id) {
 		ModelAndView mav = new ModelAndView("edytuj_uzytkownika");

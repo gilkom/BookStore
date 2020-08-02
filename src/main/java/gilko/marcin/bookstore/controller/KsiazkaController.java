@@ -427,7 +427,7 @@ public class KsiazkaController {
 		return "redirect:/wyswietl_ksiazke/" + idKsiazki;
 	}
 	
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String listaBestsellerow(Model model) {
 		List<Long> idBestsellerow = detZamService.listIdBestsellers();
 		List<Ksiazka> listKsiazka = new ArrayList<>();
@@ -439,6 +439,6 @@ public class KsiazkaController {
 			
 		}
 		model.addAttribute("listKsiazka", listKsiazka);
-		return "/index";
+		return "index";
 	}
 }

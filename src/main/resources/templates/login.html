@@ -22,27 +22,33 @@
 </form>
 
 &nbsp;&nbsp;&nbsp;
-<div class="container">
-	<h4>Strona glowna</h4>
+<div class="container" align="center">
+	<h4>Logowanie</h4>
+</div>
+<div class="container" align="center">
+	<div class="col-sm-9 col-md-5" style="padding: 15px; border-style:ridge; margin:40px">
+		<div class="thumbnail">
+			<form th:action="@{/login}" method="post" style="max-width: 400px; margin: 0 auto;">
+			    <p>
+			        E-mail: <input type="email" name="username" required />  
+			    </p>
+			    <p>
+			        Hasło: <input type="password" name="password" required />
+			    </p>
+			    <p>
+			        <input type="submit" value="Zaloguj się"  class="btn btn-dark"/>
+			    </p>
+			 </form>
+			    <p>Nie masz konta? Zarejestruj się:</p>
+			 <a  th:href="@{/rejestrajca}" class="btn btn-dark" >Rejestracja</a>
+			<a href="/rejestrajca" class="btn btn-dark" >Rejestracja</a>
+		</div>
+	</div>
 </div>
 
-<div>
-<form th:action="@{/login}" method="post" style="max-width: 400px; margin: 0 auto;">
-    <p>
-        E-mail: <input type="email" name="username" required />  
-    </p>
-    <p>
-        Password: <input type="password" name="password" required />
-    </p>
-    <p>
-        <input type="submit" value="Login" />
-    </p>
-</form>
-</div>
 
-
-
-
+			 <a  th:href="@{/rejestrajca}" class="btn btn-dark" >Rejestracja</a>
+			<a href="/rejestrajca" class="btn btn-dark" >Rejestracja</a>
 <!-- Footer -->
 <header id="header" class="alt" th:include="stopka.html :: stopka"></header>
 
