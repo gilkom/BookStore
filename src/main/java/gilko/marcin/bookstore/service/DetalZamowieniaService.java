@@ -44,7 +44,11 @@ public class DetalZamowieniaService {
 	}
 	
 	public List<Long> listIdBestsellers(){
-		return repo.searchBestsellers();
+		System.out.println("rozmiar:--------------------" + repo.searchBestsellers().size());
+		int rozmiar = repo.searchBestsellers().size();
+		if(rozmiar > 9) {
+			rozmiar = 9;}
+		return repo.searchBestsellers().subList(0, rozmiar);
 	}
 	
 }

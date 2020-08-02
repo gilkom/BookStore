@@ -21,6 +21,6 @@ public interface DetalZamowieniaRepository  extends JpaRepository<DetalZamowieni
 	public List<DetalZamowienia> searchDetalByIdZamowienia(@Param("id_zamowienia") Long id_zamowienia);
 
 	//@Query(value = "SELECT d FROM Ksiazka ks WHERE ks.id_ksiazki IN (SELECT d.id_ksiazki FROM (SELECT d.id_ksiazki, SUM(d.ilosc_zamowiona) FROM DetalZamowienia d GROUP BY d.id_ksiazki ORDER BY SUM(d.ilosc_zamowiona)DESC) WHERE ROWNUM <=10)")
-	@Query(value = "SELECT d.ksiazka.id_ksiazki FROM DetalZamowienia d")
+	@Query(value = "SELECT d.ksiazka.id_ksiazki , SUM(d.ilosc_zamowiona) FROM DetalZamowienia d GROUP BY d.ksiazka.id_ksiazki ORDER BY SUM(d.ilosc_zamowiona)DESC")
 	public List<Long> searchBestsellers();
 }
