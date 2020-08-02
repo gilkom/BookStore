@@ -49,9 +49,17 @@
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/lista_zamowien_obsluga}">Obsługa zamówień</a>
 					</li>
+										<li class="nav-item">
+					<form th:action="@{/logout}" method="post">
+					 	<input type="submit" value="Wyloguj" class="nav-link btn btn-dark"/>
+
+					</form>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/login}">Zaloguj</a>
 					</li>
+
+
 				</ul>
 			</nav>
 			

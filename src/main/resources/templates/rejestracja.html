@@ -18,15 +18,79 @@
 
 &nbsp;&nbsp;&nbsp;
 <div class="container">
-	<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="/">Strona główna</a></li>
-		    <li class="breadcrumb-item"><a href="/lista_uzytkownikow">Lista uzytkowników</a></li>
-		    <li class="breadcrumb-item active" aria-current="/lista_uzytkownikow/dodaj_uzytkownika">Dodaj uzytkownika</li>
-		  </ol>
-		</nav>
-	<h3>Dodaj nowego uzytkownika</h3>
+	<h3>Zarejestruj się:</h3>
 </div>
+
+ <div class="container" align="center">
+        <br/>
+        <form action="#" th:action="@{/rejestracja/save}" th:object="${uzytkownik}" method="post">
+  			
+  			<input type="hidden" th:field="*{rola}" />
+  			<input type="hidden" th:field="*{blokada_konta}" />
+  			
+            <table class="table">
+                <tr>
+                    <td>Imię:</td>
+                    <td><input type="text" th:field="*{imie_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('imie_uzytkownika')}" th:errors="*{imie_uzytkownika}">NameError</td>
+                </tr>
+                <tr>
+                    <td>Nazwisko:</td>
+                    <td><input type="text" th:field="*{nazwisko_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwisko_uzytkownika')}" th:errors="*{nazwisko_uzytkownika}">NameError</td>
+                </tr>
+                <tr>
+                    <td>Nazwa firmy:</td>
+                    <td><input type="text" th:field="*{nazwa_firmy}" /></td>
+                    <td th:if="${#fields.hasErrors('nazwa_firmy')}" th:errors="*{nazwa_firmy}">NameError</td>
+                </tr>  
+                 <tr>
+                    <td>Nip:</td>
+                    <td><input type="text" th:field="*{nip_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('nip_uzytkownika')}" th:errors="*{nip_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Ulica:</td>
+                    <td><input type="text" th:field="*{ulica_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('ulica_uzytkownika')}" th:errors="*{ulica_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Miasto:</td>
+                    <td><input type="text" th:field="*{miasto_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('miasto_uzytkownika')}" th:errors="*{miasto_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Kod pocztowy:</td>
+                    <td><input type="text" th:field="*{kod_pocztowy_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('kod_pocztowy_uzytkownika')}" th:errors="*{kod_pocztowy_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Telefon:</td>
+                    <td><input type="text" th:field="*{telefon_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('telefon_uzytkownika')}" th:errors="*{telefon_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Email:</td>
+                    <td><input type="text" th:field="*{email_uzytkownika}" /></td>
+                    <td th:if="${#fields.hasErrors('email_uzytkownika')}" th:errors="*{email_uzytkownika}">NameError</td>
+                </tr>
+                 <tr>
+                    <td>Hasło:</td>
+                    <td><input type="text" th:field="*{password}" /></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">NameError</td>
+                </tr>
+                      
+                <tr>
+                    <td >
+                    	<button class = "btn btn-dark" type="submit">Zapisz</button>
+                    	<a href="/login" class="btn btn-dark">Cofnij</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+
 
 <!-- Footer -->
 <header id="header" class="alt" th:include="stopka.html :: stopka"></header>
