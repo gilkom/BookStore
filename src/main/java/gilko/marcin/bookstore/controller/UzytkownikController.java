@@ -34,14 +34,14 @@ public class UzytkownikController {
 	@RequestMapping("/lista_klientow")
 	public String listaKlientow(Model model) {
 		List<Uzytkownik> listKlient = service.getByRoleUser();
-		model.addAttribute("listKlient", listKlient);
+		model.addAttribute("listUzytkownik", listKlient);
 		return "lista_klientow";
 	}
 	
 	@RequestMapping("/nowy_uzytkownik")
 	public String dodajUzytkownika(Model model) {
 		Uzytkownik uzytkownik = new Uzytkownik();
-		uzytkownik.setRola("USER_ROLA");
+		uzytkownik.setRola("ROLE_USER");
 		uzytkownik.setBlokada_konta(1);
 		model.addAttribute("uzytkownik", uzytkownik);
 		return "nowy_uzytkownik";
@@ -61,7 +61,28 @@ public class UzytkownikController {
 		}
 	}
 	
+	@RequestMapping("/rejestracja")
+	public String zarejestruj(Model model) {
+		Uzytkownik uzytkownik = new Uzytkownik();
+		uzytkownik.setRola("ROLE_USER");
+		uzytkownik.setBlokada_konta(1);
+		model.addAttribute("uzytkownik", uzytkownik);
+		return "rejestracja";
+	}
 	
+	@RequestMapping(value = "/rejestracja/save", method = RequestMethod.POST)
+	public String zapiszZarejestrowanegoKlienta(@Valid @ModelAttribute("uzytkownik") Uzytkownik uzytkownik, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "rejestracja";
+		}else {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String rawPass = uzytkownik.getPassword();
+			String encodedPass = encoder.encode(rawPass);
+			uzytkownik.setPassword(encodedPass);
+			service.save(uzytkownik);
+			return "redirect:/login";
+		}
+	}
 	
 	@RequestMapping("/edytuj_uzytkownika/{id}")
 	public ModelAndView edytujUzytkownika(@PathVariable(name="id") Long id) {
