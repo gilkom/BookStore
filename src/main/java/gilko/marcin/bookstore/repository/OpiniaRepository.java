@@ -18,4 +18,7 @@ public interface OpiniaRepository extends JpaRepository<Opinia, OpiniaId>{
 	@Query("Select o from Opinia o where o.primaryKey.ksiazka.id_ksiazki = :id_ksiazki")
 	List<Opinia> myQuery(Long id_ksiazki);
 	
+	@Query("SELECT AVG(o.ocena) FROM Opinia o WHERE o.primaryKey.ksiazka.id_ksiazki = :id_ksiazki")
+	Double sredniaOpinia(Long id_ksiazki);
+	
 }

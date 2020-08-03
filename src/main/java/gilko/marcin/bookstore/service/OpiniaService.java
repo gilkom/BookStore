@@ -36,4 +36,13 @@ public class OpiniaService {
 	public void delete(Opinia opinia) {
 		repo.delete(opinia);
 	}
+	
+	public Double getAverageOpinia(Long id) {
+		if(repo.sredniaOpinia(id) == null) {
+			
+			return 0.00;
+		}else {
+		return repo.sredniaOpinia(id);
+	}
+		}
 }
