@@ -117,17 +117,17 @@ public class KoszykController {
 	public ModelAndView edytujDaneAdresowe(Authentication auth) {
 		ModelAndView mav = new ModelAndView("edytuj_dane_adresowe");
 		
-		Uzytkownik Uzytkownik = klService.getByEmail(auth.getName());
-		mav.addObject("Uzytkownik", Uzytkownik);
+		Uzytkownik uzytkownik = klService.getByEmail(auth.getName());
+		mav.addObject("uzytkownik", uzytkownik);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/edytuj_dane_adresowe/save", method = RequestMethod.POST)
-	public String zapiszDaneAdresowe(@Valid @ModelAttribute("Uzytkownik") Uzytkownik Uzytkownik, BindingResult bindingResult) {
+	public String zapiszDaneAdresowe(@Valid @ModelAttribute("Uzytkownik") Uzytkownik uzytkownik, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_dane_adresowe";
 		}else {
-			klService.save(Uzytkownik);
+			klService.save(uzytkownik);
 			return "redirect:/koszyk";
 		}
 	}

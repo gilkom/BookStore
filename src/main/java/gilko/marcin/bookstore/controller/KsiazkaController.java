@@ -343,6 +343,8 @@ public class KsiazkaController {
 		mav.addObject("ksiazka", ksiazka);
 		
 
+		double srednia = opService.getAverageOpinia(id);
+		mav.addObject("srednia", srednia);
 		
 		Opinia opinia = new Opinia();
 		opinia.setKsiazka(ksiazka);
@@ -431,6 +433,8 @@ public class KsiazkaController {
 	public String listaBestsellerow(Model model) {
 		List<Long> idBestsellerow = detZamService.listIdBestsellers();
 		List<Ksiazka> listKsiazka = new ArrayList<>();
+		List<Float> listSredniaOpinia = new ArrayList<>();
+		
 		
 		for(int i = 0; i < idBestsellerow.size(); i++) {
 			
