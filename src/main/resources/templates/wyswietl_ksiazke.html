@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-     
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link th:href="@{/js/main.js}" rel="stylesheet" />
+     <link th:href="@{/css/main.css}" rel="stylesheet" />
      <style>
 		h1 { text-shadow: 2px 2px black;}
 	</style>
@@ -41,6 +43,10 @@
               <label th:text="${autor.nazwisko_autora + ' ' + autor.imie_autora}"></label>
         </th:block>
 	</p>
+	<h5 style="display:inline;">Średnia ocena:</h5>
+	<h2 style="display:inline;" th:text="${srednia}"></h2>
+	
+
 	
 	<div class ="col text-right">
 		<form action="#" th:action="@{/wyswietl_ksiazke/dodaj_do_koszyka}" method = "post">
@@ -141,5 +147,6 @@
 
 <!-- Footer -->
 <header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+
 
 </body>
