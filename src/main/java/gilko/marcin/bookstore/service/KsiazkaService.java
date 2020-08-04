@@ -35,7 +35,11 @@ public class KsiazkaService {
 				sortDir.equals("asc") ? Sort.by(sortField).ascending()
 										: Sort.by(sortField).descending()
 		);
-		return repo.searchKategoria(keyword, kategoria, pageable);
+		if(kategoria == "") {
+			return repo.search(keyword, pageable);
+		}else {		
+			return repo.searchKategoria(keyword, kategoria, pageable);
+		}
 	}
 	
 	
