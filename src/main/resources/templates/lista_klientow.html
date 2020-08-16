@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
 	h1 { text-shadow: 2px 2px black;}
@@ -28,7 +29,8 @@
 </div>
 
 <div class="container" align="center">
-    <a href="/nowy_uzytkownik" class="btn btn-dark">Dodaj uzytkownika</a>
+
+    <a sec:authorize="hasRole('ADMIN')" href="/nowy_uzytkownik" class="btn btn-dark">Dodaj uzytkownika</a>
     
     <br/><br/>
     <table class="table">
@@ -44,7 +46,7 @@
                 <th>Telefon</th>
                 <th>Email</th>
                 <th>Blokada konta</th>
-                <th>Akcje</th>
+                <th sec:authorize="hasRole('ADMIN')">Akcje</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +61,7 @@
                 <td th:text="${uzytkownik.telefon_uzytkownika}"></td>
                 <td th:text="${uzytkownik.email_uzytkownika}"></td>
                 <td th:text="${uzytkownik.blokada_konta}"></td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a th:href="@{'/edytuj_uzytkownika/' + ${uzytkownik.id_uzytkownika}}" class="btn btn-warning btn-sm">Edytuj</a>
 
                      <form method="get" action="@{/lista_uzytkownikow/usun_uzytkownika/' + ${uzytkownik.id_uzytkownika}}"

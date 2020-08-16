@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gilko.marcin.bookstore.model.Ksiazka;
-import gilko.marcin.bookstore.repository.DetalZamowieniaRepository;
 import gilko.marcin.bookstore.repository.KsiazkaRepository;
 
 @Service
@@ -19,8 +18,6 @@ import gilko.marcin.bookstore.repository.KsiazkaRepository;
 public class KsiazkaService {
 	@Autowired
 	private KsiazkaRepository repo;
-	@Autowired
-	private DetalZamowieniaRepository detZamRepo;
 	
 	public Page<Ksiazka> listAll(int pageNum, String sortField, String sortDir, String keyword){
 		Pageable pageable = PageRequest.of(pageNum - 1,  5,

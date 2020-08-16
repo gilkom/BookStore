@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
 	h1 { text-shadow: 2px 2px black;}
@@ -46,7 +47,8 @@
 			    	<input class= "form-control" placeholder="Szukaj" aria-label="Search" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"  />
 			    	 <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Szukaj</button>
 			    	 <input  class="btn btn-outline-success my-2 my-sm-0" type="button" value="Wyczyść" onClick=clearSearch() id="btnClear"  />
-			    	 	<a  href="/nowa_ksiazka" class="btn btn-outline-success my-2 my-sm-0">Dodaj książkę</a>
+			    	 <a  sec:authorize="hasRole('OPERATOR')" href="/nowa_ksiazka" class="btn btn-outline-success my-2 my-sm-0">Dodaj książkę</a>
+			    	 	
 		    	</div>	
 		    </div>
 		</form>
@@ -75,8 +77,11 @@
                 <th>
                 	<a th:href="@{'/lista_ksiazek/page/' + ${currentPage} + '?sortField=wydawnictwo.nazwa_wydawnictwa&sortDir=' + ${reverseSortDir} +'&keyword=' + ${keyword}+ '&nazwaKategorii=' + ${nazwaKategorii}}">Nazwa wydawnictwa</a>
                 </th>
-                
-                <th>Akcje</th>
+                <th>
+                <div sec:authorize="hasRole('OPERATOR')">
+                	Akcje
+                </div>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -96,6 +101,7 @@
                 <td th:text="${ksiazka.oprawa_ksiazki}">Oprawa</td>
                 <td th:text="${ksiazka.wydawnictwo.nazwa_wydawnictwa}">Nazwa wydawnictwa</td>
                 <td>
+                <div sec:authorize="hasRole('OPERATOR')">
                     <a th:href="@{'/edytuj_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 
                      <form method="get" action="@{/lista_ksiazek/usun_ksiazke/' + ${ksiazka.id_ksiazki}}"
@@ -103,6 +109,7 @@
                     		
                     	<a th:href="@{'/usun_ksiazke/' + ${ksiazka.id_ksiazki}}" class="btn btn-danger btn-sm">Usun</a>
                     </form>
+                </div>
                 </td>
             </tr>
         </tbody>

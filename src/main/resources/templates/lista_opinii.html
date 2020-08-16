@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <style>
 	h1 { text-shadow: 2px 2px black;}
@@ -28,7 +29,7 @@
 </div>
 
 <div class="container" align="center">
-    <a href="/nowa_opinia" class="btn btn-dark">Dodaj opinię</a>
+    
     
     <br/><br/>
     <table class="table">
@@ -48,7 +49,6 @@
                 <td th:text="${opinia.ocena}">Ocena</td>
                 <td th:text="${opinia.komentarz}">Komentarz</td>
                 <td>
-                    <a th:href="@{'/edytuj_opinie/' + ${opinia.primaryKey.uzytkownik.id_uzytkownika}+ '/'+ ${opinia.primaryKey.ksiazka.id_ksiazki}}" class="btn btn-warning btn-sm">Edytuj</a>
 
                      <form method="get" action="@{/lista_opinii/usun_opinie/' + ${opinia.primaryKey.uzytkownik.id_uzytkownika} +'/'+ ${opinia.primaryKey.ksiazka.id_ksiazki}}"
                     		onclick="return confirm('Jesteś pewien, że chcesz usunąć tego autora?') ? true : false;">
