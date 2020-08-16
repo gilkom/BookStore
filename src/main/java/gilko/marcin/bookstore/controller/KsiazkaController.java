@@ -124,15 +124,12 @@ public class KsiazkaController {
 		return "nowa_ksiazka";
 	}
 	
-	//@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
-	@PostMapping("/nowa_ksiazka/save")
+	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+									BindingResult bindingResult,
 									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
-									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow,
-									BindingResult bindingResult) {
-		
+									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow) {
 		if(bindingResult.hasErrors()) {
-			System.out.println("-------------------jeden----------------------------");
 			return "nowa_ksiazka";
 		}else {
 
@@ -153,9 +150,9 @@ public class KsiazkaController {
 	
 	@RequestMapping(value="/edytuj_ksiazke/save", method=RequestMethod.POST)
 	public String zapiszEdytowanaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
+										BindingResult bindingResult,
 										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
-										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy,
-										BindingResult bindingResult) {
+										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy) {
 		if(bindingResult.hasErrors()) {
 			return "edytuj_ksiazke";
 		}else {
@@ -433,7 +430,6 @@ public class KsiazkaController {
 	public String listaBestsellerow(Model model) {
 		List<Long> idBestsellerow = detZamService.listIdBestsellers();
 		List<Ksiazka> listKsiazka = new ArrayList<>();
-		List<Float> listSredniaOpinia = new ArrayList<>();
 		
 		
 		for(int i = 0; i < idBestsellerow.size(); i++) {

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.DetalZamowieniaId;
 import gilko.marcin.bookstore.repository.DetalZamowieniaRepository;
-import gilko.marcin.bookstore.repository.KsiazkaRepository;
 
 
 @Service

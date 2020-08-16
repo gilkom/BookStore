@@ -15,6 +15,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -23,14 +31,34 @@ public class Ksiazka {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_ksiazki;
+	@NotBlank
+	@Size(min=2, max=20)
 	private String tytul_ksiazki;
+	@NotNull
+	@Size(min=2, max=20)
 	private String oryginalny_tytul_ksiazki;
+	@NotNull
+	@DecimalMin("0.01")
+	@Digits(integer=5, fraction=2)
 	private Double cena_ksiazki;
+	@NotBlank
+	@Pattern(message="Wpisz poprawny ISBN(13 cyfr)", regexp="^\\d{13}$")
 	private String isbn;
+	@NotNull
+	@Max(value=99999, message="Ilosc musi być większa od 0 lub mniejsza niż 99999!")
 	private int ilosc_ksiazek;
+	@NotNull
+    @Min(value=1700, message="Rok musi być większy niż 1700")  
+    @Max(value=2030, message="Rok musi być mniejszy niż 2030")  
 	private int rok_wydania_ksiazki;
+	@NotNull
+    @Min(value=1, message="Liczba stron musi wynosić conajmniej 1")  
+    @Max(value=3000, message="Liczba stron musi wynosić maksymalnie 3000")  
 	private int liczba_stron_ksiazki;
+	@NotNull
 	private String oprawa_ksiazki;
+	@NotNull
+	@Size(min=2, max=3000)
 	private String opis_ksiazki;
 	//private Long id_wydawnictwa;
 	

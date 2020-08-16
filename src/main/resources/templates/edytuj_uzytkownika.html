@@ -33,6 +33,15 @@
         <br/>
         <form action="#" th:action="@{/edytuj_uzytkownika/save}" th:object="${uzytkownik}" method="post">
   
+  			<input type="hidden" th:field="*{password}" />
+  			<input type="hidden" th:field="*{telefon_uzytkownika}" />
+  			<input type="hidden" th:field="*{kod_pocztowy_uzytkownika}" />
+  			<input type="hidden" th:field="*{miasto_uzytkownika}" />
+  			<input type="hidden" th:field="*{ulica_uzytkownika}" />
+  			<input type="hidden" th:field="*{nip_uzytkownika}" />
+  			<input type="hidden" th:field="*{nazwa_firmy}" />
+  			
+  
             <table class="table">
                 <tr>
                     <td>Id uzytkownika:</td>
@@ -40,62 +49,39 @@
                 </tr>
                 <tr>
                     <td>Imię:</td>
-                    <td><input type="text" th:field="*{imie_uzytkownika}" /></td>
+                    <td><input type="text" th:field="*{imie_uzytkownika}" readonly="readonly"/></td>
                     <td th:if="${#fields.hasErrors('imie_uzytkownika')}" th:errors="*{imie_uzytkownika}">NameError</td>
                 </tr>
                 <tr>
                     <td>Nazwisko:</td>
-                    <td><input type="text" th:field="*{nazwisko_uzytkownika}" /></td>
+                    <td><input type="text" th:field="*{nazwisko_uzytkownika}" readonly="readonly"/></td>
                     <td th:if="${#fields.hasErrors('nazwisko_uzytkownika')}" th:errors="*{nazwisko_uzytkownika}">NameError</td>
                 </tr>
                 <tr>
-                    <td>Nazwa firmy:</td>
-                    <td><input type="text" th:field="*{nazwa_firmy}" /></td>
-                    <td th:if="${#fields.hasErrors('nazwa_firmy')}" th:errors="*{nazwa_firmy}">NameError</td>
-                </tr>  
-                 <tr>
-                    <td>Nip:</td>
-                    <td><input type="text" th:field="*{nip_uzytkownika}" /></td>
-                    <td th:if="${#fields.hasErrors('nip_uzytkownika')}" th:errors="*{nip_uzytkownika}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Ulica:</td>
-                    <td><input type="text" th:field="*{ulica_uzytkownika}" /></td>
-                    <td th:if="${#fields.hasErrors('ulica_uzytkownika')}" th:errors="*{ulica_uzytkownika}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Miasto:</td>
-                    <td><input type="text" th:field="*{miasto_uzytkownika}" /></td>
-                    <td th:if="${#fields.hasErrors('miasto_uzytkownika')}" th:errors="*{miasto_uzytkownika}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Kod pocztowy:</td>
-                    <td><input type="text" th:field="*{kod_pocztowy_uzytkownika}" /></td>
-                    <td th:if="${#fields.hasErrors('kod_pocztowy_uzytkownika')}" th:errors="*{kod_pocztowy_uzytkownika}">NameError</td>
-                </tr>
-                 <tr>
-                    <td>Telefon:</td>
-                    <td><input type="text" th:field="*{telefon_uzytkownika}" /></td>
-                    <td th:if="${#fields.hasErrors('telefon_uzytkownika')}" th:errors="*{telefon_uzytkownika}">NameError</td>
-                </tr>
-                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" th:field="*{email_uzytkownika}" /></td>
+                    <td><input type="text" th:field="*{email_uzytkownika}" readonly="readonly"/></td>
                     <td th:if="${#fields.hasErrors('email_uzytkownika')}" th:errors="*{email_uzytkownika}">NameError</td>
                 </tr>
-                 <tr>
-                    <td>Hasło:</td>
-                    <td><input type="text" th:field="*{password}" /></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">NameError</td>
-                </tr>
+
                  <tr>
                     <td>Blokada konta:</td>
-                    <td><input type="text" th:field="*{blokada_konta}" /></td>
+                    <td>
+                    	<select class="form-control" th:field="*{blokada_konta}">
+                    		<option value="1">Odblokowany</option>
+                    		<option value="0">Zablokowany</option>
+                    	</select>
+                    </td>
                     <td th:if="${#fields.hasErrors('blokada_konta')}" th:errors="*{blokada_konta}">NameError</td>
                 </tr>
                 <tr>
                     <td>Rola:</td>
-                    <td><input type="text" th:field="*{rola}" /></td>
+                    <td>
+                    <select class="form-control" th:field="*{rola}">
+                    		<option value="ROLE_USER">Klient</option>
+                    		<option value="ROLE_ADMIN">Administrator</option>
+                    		<option value="ROLE_OPERATOR">Operator</option>
+                    	</select>
+                    </td>
                     <td th:if="${#fields.hasErrors('rola')}" th:errors="*{rola}">NameError</td>
                 </tr>                                     
                 <tr>
