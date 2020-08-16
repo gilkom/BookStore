@@ -52,7 +52,7 @@ public class Uzytkownik {
 	
 	
 	@OneToMany(mappedBy = "primaryKey.uzytkownik",
-			cascade = CascadeType.ALL)
+			cascade = CascadeType.PERSIST)
 	private Set<Opinia> opinie = new HashSet<Opinia>();
 	
 	
