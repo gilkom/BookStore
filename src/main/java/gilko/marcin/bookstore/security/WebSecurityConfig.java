@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,8 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
         	.antMatchers("/","/lista_ksiazek","/wyswietl_ksiazke/*",
-        			"/lista_ksiazek/page/{\\d+}/?sortField=[\\w+]&sortDir=[\\w+]&keyword=[\\w*]&nazwaKategorii=[\\w*]",
-        			"/login", "/images/*", "/rejestracja", "/rejestracja/save").permitAll()
+        			"/login", "/images/*", "/rejestracja", "/rejestracja/save", "/lista_ksiazek/page/{pageNum}/**").permitAll()
         	.antMatchers("/lista_kategorii", "/nowa_kategoria", "/nowa_kategoria/save", "/edytuj_kategorie/save", "/edytuj_kategorie/{\\d+}", "/usun_kategorie/{\\d+}").hasRole("ADMIN")
         	.antMatchers("/lista_wydawnictw","/nowe_wydawnictwo", "/nowe_wydawnictwo/save", "/edytuj_wydawnictwo/save").hasRole("ADMIN")
         	.antMatchers("/lista_autorow", "/nowy_autor", "/nowy_autor/save", "/edytuj_autora/save", "/usun_autora/save").hasRole("ADMIN")

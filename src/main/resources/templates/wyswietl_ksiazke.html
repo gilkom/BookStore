@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+    xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <link th:href="@{/js/main.js}" rel="stylesheet" />
@@ -50,13 +51,15 @@
 	
 	<div class ="col text-right">
 		<form action="#" th:action="@{/wyswietl_ksiazke/dodaj_do_koszyka}" method = "post">
-			Cena:<h1 class="display-2" th:text="${#numbers.formatDecimal(ksiazka.cena_ksiazki, 0 , 'DEFAULT', 2, 'DEFAULT')}"></h1>
+			Cena:<h1 class="display-2" th:text="${#numbers.formatDecimal(ksiazka.cena_ksiazki, 0 , 'DEFAULT', 2, 'DEFAULT')} + ' zł'"></h1>
+			<div sec:authorize="hasRole('USER')">
 			Wpisz ilosc:<input type="number" name="iloscZamowiona" value = "1"/>
 						<input type="hidden" name="idKsiazki" th:value="${ksiazka.id_ksiazki}"/>
 						<input type="hidden" name="cenaZakupu" th:value="${ksiazka.cena_ksiazki}"/>
 						
 			<button type="submit" class= "btn btn-success"
 			onclick="return confirm('Czy chcesz dodać tę książkę do koszyka?') ? true : false;">Dodaj do koszyka</button>
+			</div>
 		</form>
 	</div>
 	
@@ -135,8 +138,10 @@
 	</table>
 	   &nbsp;&nbsp;&nbsp;
 
-	   	   <br>
-		<a th:href="@{'/wyswietl_ksiazke/dodaj_opinie/' + ${opinia.primaryKey.ksiazka.id_ksiazki}}" class= "btn btn-dark">Dodaj opinię</a>	
+	 <br>
+	 <div sec:authorize="hasRole('USER')">
+		<a th:href="@{'/wyswietl_ksiazke/dodaj_opinie/' + ${opinia.primaryKey.ksiazka.id_ksiazki}}" class= "btn btn-dark">Dodaj opinię</a>
+	</div>	
 </div>
 
     &nbsp;&nbsp;&nbsp;

@@ -97,6 +97,7 @@ public class UzytkownikController {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_uzytkownika";
 		}else {
+
 			service.save(uzytkownik);
 			return "redirect:/lista_uzytkownikow";
 		}
