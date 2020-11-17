@@ -88,8 +88,7 @@
             <tr th:each="ksiazka : ${listKsiazka}">
             	<td>
             		<a th:href="@{'/wyswietl_ksiazke/' + ${ksiazka.id_ksiazki}}" >
-            	 	<img th:src="@{/images/okladka.png}" alt="okladka" style="width:80px; height:100px">
-            	 	
+            	 	<img th:src="${ksiazka.zdjecie_ksiazkiImagePath}" style="width:100px; height: 130px"/>
             	 	</a>
             	 </td>
                 <td>

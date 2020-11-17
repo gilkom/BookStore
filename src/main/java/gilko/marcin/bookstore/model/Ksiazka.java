@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -60,7 +61,7 @@ public class Ksiazka {
 	@NotNull
 	@Size(min=2, max=3000)
 	private String opis_ksiazki;
-	//private Long id_wydawnictwa;
+	private String  zdjecie_ksiazki;
 	
 	
 	
@@ -122,7 +123,7 @@ public class Ksiazka {
 	public Ksiazka() {}
 	
 	public Ksiazka(Long id, String tytul, String org_tytul,Double cena_ksiazki, String isbn, int ilosc, int rok, int strony,
-					String oprawa, String opis) {
+					String oprawa, String opis, String zdjecie) {
 		this.id_ksiazki = id;
 		this.tytul_ksiazki = tytul;
 		this.oryginalny_tytul_ksiazki = tytul;
@@ -133,6 +134,16 @@ public class Ksiazka {
 		this.liczba_stron_ksiazki = strony;
 		this.oprawa_ksiazki = oprawa;
 		this.opis_ksiazki = opis;
+		this.zdjecie_ksiazki = zdjecie;
+	}
+	
+	@Transient
+	public String getZdjecie_ksiazkiImagePath() {
+		if(zdjecie_ksiazki == null || zdjecie_ksiazki.isEmpty()) {
+			return "/zdjecia-ksiazek/okladka.png";
+		}else {
+		return "/zdjecia-ksiazek/" + id_ksiazki + "/" + zdjecie_ksiazki;
+		}
 	}
 	
 	public Long getId_ksiazki() {
@@ -205,6 +216,13 @@ public class Ksiazka {
 
 	public void setOpis_ksiazki(String opis) {
 		this.opis_ksiazki = opis;
+	}
+	
+	public String getZdjecie_ksiazki() {
+		return zdjecie_ksiazki;
+	}
+	public void setZdjecie_ksiazki(String zdjecie) {
+		this.zdjecie_ksiazki = zdjecie;
 	}
 
 	

@@ -35,8 +35,8 @@
     
 <div class="container">
 
-	<img th:src="@{/images/okladka.png}" alt="okladka" 
-		style="width:250px; height:300px; float:left; border-right: 20px solid transparent; border-bottom: 20px solid transparent">
+	<img th:src="${ksiazka.zdjecie_ksiazkiImagePath}" alt="okladka" 
+		style="width:320px; height:400px; float:left; border-right: 20px solid transparent; border-bottom: 20px solid transparent">
 	<h2 class="display-3" th:text="${ksiazka.tytul_ksiazki}"></h2>
 	<h4 th:text="${ksiazka.oryginalny_tytul_ksiazki}"></h4>
 	<p>
@@ -45,7 +45,7 @@
         </th:block>
 	</p>
 	<h5 style="display:inline;">Średnia ocena:</h5>
-	<h2 style="display:inline;" th:text="${srednia}"></h2>
+	<h2 style="display:inline;" th:text="${#numbers.formatDecimal(srednia, 0, 'DEFAULT',2, 'DEFAULT')}"></h2>
 	
 
 	

@@ -32,7 +32,7 @@
     <div class="container" align="center">
         <br/>
        
-        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post">
+        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post" enctype = "multipart/form-data">
   
             <table class="table">
                 <tr>
@@ -120,6 +120,12 @@
                 		</select>
                 	</td>
                 </tr> 
+                <tr>
+                	<td>Zdjecie:</td>
+                	<td>
+                		<input type="file" name="image" accept="image/png, image/jpeg"/>
+                	</td>
+                </tr>
                 <tr>
                     <td >
                     	<button class = "btn btn-dark" type="submit">Zapisz</button>

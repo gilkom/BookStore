@@ -1,5 +1,6 @@
 package gilko.marcin.bookstore.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import gilko.marcin.bookstore.FileUploadUtil;
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.Kategoria;
@@ -127,19 +131,38 @@ public class KsiazkaController {
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 									BindingResult bindingResult,
+									@RequestParam("image") MultipartFile multipartFile,
 									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
 									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow) {
 		if(bindingResult.hasErrors()) {
 			return "nowa_ksiazka";
 		}else {
-
+			//saving chosen categories and authors
 			for(int i =0; i < listaIdKategorii.length; i++) {
 				ksiazka.addKategoria(katService.get(listaIdKategorii[i]));
 			}
 			for(int j = 0; j < listaIdAutorow.length; j++) {
 				ksiazka.addAutor(autService.get(listaIdAutorow[j]));
 			}
+			//getting image
+			 String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			if(!fileName.isEmpty()) {
+				ksiazka.setZdjecie_ksiazki(fileName);
+			}
+			
+			
 			service.save(ksiazka);
+			
+			String uploadDir = "zdjecia-ksiazek/" + ksiazka.getId_ksiazki();
+			if(fileName.isEmpty()) {
+				return "redirect:/customer_list";
+			}
+			try {
+				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			
 			return "redirect:/lista_ksiazek";
 		}
 	}
@@ -151,6 +174,7 @@ public class KsiazkaController {
 	@RequestMapping(value="/edytuj_ksiazke/save", method=RequestMethod.POST)
 	public String zapiszEdytowanaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 										BindingResult bindingResult,
+										@RequestParam("image") MultipartFile multipartFile,
 										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
 										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy) {
 		if(bindingResult.hasErrors()) {
@@ -162,7 +186,24 @@ public class KsiazkaController {
 			for(int j= 0; j < zapisaniAutorzy.length; j++) {
 				ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
 			}
+			//getting image
+			 String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			if(!fileName.isEmpty()) {
+				ksiazka.setZdjecie_ksiazki(fileName);
+			}
+			
+			
 			service.save(ksiazka);
+			
+			String uploadDir = "zdjecia-ksiazek/" + ksiazka.getId_ksiazki();
+			if(fileName.isEmpty()) {
+				return "redirect:/customer_list";
+			}
+			try {
+				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 			return "redirect:/lista_ksiazek";
 		}
 	}
@@ -340,7 +381,7 @@ public class KsiazkaController {
 		mav.addObject("ksiazka", ksiazka);
 		
 
-		double srednia = opService.getAverageOpinia(id);
+		Double srednia = opService.getAverageOpinia(id);
 		mav.addObject("srednia", srednia);
 		
 		Opinia opinia = new Opinia();
