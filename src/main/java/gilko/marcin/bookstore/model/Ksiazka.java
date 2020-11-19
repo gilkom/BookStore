@@ -140,11 +140,12 @@ public class Ksiazka {
 	@Transient
 	public String getZdjecie_ksiazkiImagePath() {
 		if(zdjecie_ksiazki == null || zdjecie_ksiazki.isEmpty()) {
-			return "/zdjecia-ksiazek/okladka.png";
+			return "/images/okladka.png";
 		}else {
-		return "/zdjecia-ksiazek/" + id_ksiazki + "/" + zdjecie_ksiazki;
+			return zdjecie_ksiazki;
 		}
 	}
+	
 	
 	public Long getId_ksiazki() {
 		return id_ksiazki;

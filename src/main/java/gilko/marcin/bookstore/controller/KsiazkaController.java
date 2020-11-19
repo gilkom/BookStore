@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import gilko.marcin.bookstore.FileUploadUtil;
 import gilko.marcin.bookstore.model.Autor;
 import gilko.marcin.bookstore.model.DetalZamowienia;
 import gilko.marcin.bookstore.model.Kategoria;
@@ -131,7 +130,6 @@ public class KsiazkaController {
 	@RequestMapping(value="/nowa_ksiazka/save", method = RequestMethod.POST)
 	public String zapiszNowaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 									BindingResult bindingResult,
-									@RequestParam("image") MultipartFile multipartFile,
 									@RequestParam(value= "listaIdKategorii", required = false) Long[] listaIdKategorii, 
 									@RequestParam(value= "listaIdAutorow", required = false) Long[] listaIdAutorow) {
 		if(bindingResult.hasErrors()) {
@@ -144,24 +142,9 @@ public class KsiazkaController {
 			for(int j = 0; j < listaIdAutorow.length; j++) {
 				ksiazka.addAutor(autService.get(listaIdAutorow[j]));
 			}
-			//getting image
-			 String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			if(!fileName.isEmpty()) {
-				ksiazka.setZdjecie_ksiazki(fileName);
-			}
 			
 			
 			service.save(ksiazka);
-			
-			String uploadDir = "zdjecia-ksiazek/" + ksiazka.getId_ksiazki();
-			if(fileName.isEmpty()) {
-				return "redirect:/customer_list";
-			}
-			try {
-				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
 			
 			return "redirect:/lista_ksiazek";
 		}
@@ -174,7 +157,6 @@ public class KsiazkaController {
 	@RequestMapping(value="/edytuj_ksiazke/save", method=RequestMethod.POST)
 	public String zapiszEdytowanaKsiazke(@Valid @ModelAttribute("ksiazka") Ksiazka ksiazka,
 										BindingResult bindingResult,
-										@RequestParam("image") MultipartFile multipartFile,
 										@RequestParam(value="zapisaneKategorie", required = false) Long[] zapisaneKategorie,
 										@RequestParam(value="zapisaniAutorzy", required = false) Long[] zapisaniAutorzy) {
 		if(bindingResult.hasErrors()) {
@@ -186,24 +168,10 @@ public class KsiazkaController {
 			for(int j= 0; j < zapisaniAutorzy.length; j++) {
 				ksiazka.addAutor(autService.get(zapisaniAutorzy[j]));
 			}
-			//getting image
-			 String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			if(!fileName.isEmpty()) {
-				ksiazka.setZdjecie_ksiazki(fileName);
-			}
-			
+
 			
 			service.save(ksiazka);
-			
-			String uploadDir = "zdjecia-ksiazek/" + ksiazka.getId_ksiazki();
-			if(fileName.isEmpty()) {
-				return "redirect:/customer_list";
-			}
-			try {
-				FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
+
 			return "redirect:/lista_ksiazek";
 		}
 	}

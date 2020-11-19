@@ -14,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
 
 @Configuration
 @EnableWebSecurity
@@ -59,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .logout().logoutSuccessUrl("/").permitAll() ;   
     }
+
 
 
 }

@@ -32,7 +32,7 @@
     <div class="container" align="center">
         <br/>
        
-        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post" enctype = "multipart/form-data">
+        <form action="#" th:action="@{/nowa_ksiazka/save}"  method="post">
   
             <table class="table">
                 <tr>
@@ -123,7 +123,7 @@
                 <tr>
                 	<td>Zdjecie:</td>
                 	<td>
-                		<input type="file" name="image" accept="image/png, image/jpeg"/>
+                		<input type="text" th:field="${ksiazka.zdjecie_ksiazki}" />
                 	</td>
                 </tr>
                 <tr>

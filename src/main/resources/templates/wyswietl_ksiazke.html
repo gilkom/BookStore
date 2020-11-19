@@ -35,7 +35,7 @@
     
 <div class="container">
 
-	<img th:src="${ksiazka.zdjecie_ksiazkiImagePath}" alt="okladka" 
+	<img th:src="${ksiazka.zdjecie_ksiazkiImagePath}" alt="@{/images/okladka.png}" 
 		style="width:320px; height:400px; float:left; border-right: 20px solid transparent; border-bottom: 20px solid transparent">
 	<h2 class="display-3" th:text="${ksiazka.tytul_ksiazki}"></h2>
 	<h4 th:text="${ksiazka.oryginalny_tytul_ksiazki}"></h4>
