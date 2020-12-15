@@ -4,12 +4,26 @@
      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <link th:href="@{/js/main.js}" rel="stylesheet" />
-     <link th:href="@{/css/main.css}" rel="stylesheet" />
+     
      <style>
 		h1 { text-shadow: 2px 2px black;}
 	</style>
+	<style id="books-css">
+span.stars, span.stars>* {
+    display: inline-block;
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+span.stars>*{
+    max-width:80px;
+    background-position: 0 0;
+}
+</style>
+	
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
 <meta charset="utf-8" />
 <title>Wyświetl Książkę</title>
 </head>
@@ -46,7 +60,7 @@
 	</p>
 	<h5 style="display:inline;">Średnia ocena:</h5>
 	<h2 style="display:inline;" th:text="${#numbers.formatDecimal(srednia, 0, 'DEFAULT',2, 'DEFAULT')}"></h2>
-	
+	<span class="stars" th:text="${#numbers.formatDecimal(srednia, 0, 'DEFAULT',2, 'DEFAULT')}"></span>
 
 	
 	<div class ="col text-right">
@@ -152,6 +166,15 @@
 
 <!-- Footer -->
 <header id="header" class="alt" th:include="stopka.html :: stopka"></header>
+<script id="books-javascript">
+$.fn.stars = function() {
+    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+};
+
+
+
+$('.stars').stars();
+</script>
 
 
 </body>
