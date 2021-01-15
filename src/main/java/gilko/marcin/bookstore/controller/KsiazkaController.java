@@ -446,6 +446,7 @@ public class KsiazkaController {
 			Ksiazka ksiazka = service.get(idBestsellerow.get(i));
 			listKsiazka.add(ksiazka);
 			
+			
 		}
 		model.addAttribute("listKsiazka", listKsiazka);
 		return "index";
