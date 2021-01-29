@@ -23,11 +23,11 @@ public class Uzytkownik {
 	@NotNull
 	@Size(min=2, max=20)
 	private String nazwisko_uzytkownika;
-	@NotBlank
-	@Size(min=2, max=30)
+	//@NotBlank
+	@Size(min=0, max=30)
 	private String nazwa_firmy;
-	@NotBlank
-	@Pattern(message="Wpisz poprawny NIP(10 cyfr)", regexp="^\\d{10}$")
+	//@NotBlank
+	@Pattern(message="Wpisz poprawny NIP(10 cyfr)", regexp="^\\d{10}$|^$")
 	private String nip_uzytkownika;
 	@NotBlank
 	@Size(min=2, max=30)
@@ -38,7 +38,7 @@ public class Uzytkownik {
 	@NotBlank
 	@Pattern(message="Wpisz poprawny kod(wzór = '01026'", regexp="^\\d{5}$")
 	private String kod_pocztowy_uzytkownika;
-	@Pattern(message="Wpisz poprawny numer telefonu(10 cyfr)", regexp="^\\d{10}$")
+	@Pattern(message="Wpisz poprawny numer telefonu(10 cyfr)", regexp="^\\d{10}$|^$")
 	private String telefon_uzytkownika;
 	@NotBlank
 	@Email(message="Wpisz poprawny email")

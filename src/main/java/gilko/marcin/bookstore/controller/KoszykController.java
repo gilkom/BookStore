@@ -123,7 +123,7 @@ public class KoszykController {
 	}
 	
 	@RequestMapping(value = "/edytuj_dane_adresowe/save", method = RequestMethod.POST)
-	public String zapiszDaneAdresowe(@Valid @ModelAttribute("Uzytkownik") Uzytkownik uzytkownik, BindingResult bindingResult) {
+	public String zapiszDaneAdresowe(@Valid @ModelAttribute("uzytkownik") Uzytkownik uzytkownik, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "/edytuj_dane_adresowe";
 		}else {
